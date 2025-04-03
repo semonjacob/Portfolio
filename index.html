@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semon jacob | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Semon jacob</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="custom-cursor"></div>
+    <script>
+        document.addEventListener("mousemove", function(e) {
+            let cursor = document.querySelector(".custom-cursor");
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+    </script>
+
+    <!-- Loader -->
+<div class="loader-wrapper">
+    <div class="loader"></div>
+</div>
+
+<div class="parallax-element">Floating Text</div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero fade-in">
+        <div class="content">
+            <h1>Semon jacob</h1>
+            <p>Results-driven Multimedia Creator</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+        <img src="profile.jpg" alt="Profile Photo" class="profile-img">
+    </section>
+
+    <script>
+        document.addEventListener("mousemove", function(e) {
+            let elements = document.querySelectorAll(".parallax-element");
+            elements.forEach(el => {
+                let speed = 5; // Adjust speed for more effect
+                let x = (window.innerWidth - e.clientX * speed) / 100;
+                let y = (window.innerHeight - e.clientY * speed) / 100;
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+        </script>        
+
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="profile.jpg" alt="Profile Photo" class="about-img">
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        Results-driven Multimedia Creator with hands-on experience in photo/video editing, graphic design, and AI-driven media tools. Proficient in Adobe Creative Suite and skilled in creating engaging content for social media, events, and promotional campaigns. Currently contributing to Jesus Redeems Ministry-Media, where I produce high-quality multimedia content, manage videography, and handle photography for outreach initiatives.
+                    </p>
+                    <p>Languages: Tamil, English</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience fade-in">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Multimedia Creator & Content Specialist</h3>
+                        <span>Jesus Redeems Ministry-Media | 6 Months (Present)</span>
+                        <ul>
+                            <li>Create engaging multimedia content for ministry outreach.</li>
+                            <li>Edit photos/videos using Adobe Premiere Pro, After Effects, Photoshop.</li>
+                            <li>Utilize AI tools to reduce production time by 30%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects fade-in">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-card">
+                <h3>Social Media Graphics</h3>
+                <p>Designed banners/posters for church events, boosting attendance by 15%.</p>
+            </div>
+            <div class="project-card">
+                <h3>AI-Generated Content</h3>
+                <p>Used AI tools to generate explainer videos for online Bible studies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills fade-in">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skill-list">
+                <div class="skill-item">
+                    <i class="fab fa-adobe"></i>
+                    <h4>Adobe Creative Suite</h4>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-video"></i>
+                    <h4>Videography & Photography</h4>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-brain"></i>
+                    <h4>AI Tools</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education fade-in">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="edu-item">
+                <h3>Bachelor of Commerce (B.Com)</h3>
+                <span>Indo Asian Academy Institute of Management | 2019</span>
+            </div>
+            <div class="edu-item">
+                <h3>Multimedia Studies</h3>
+                <span>Institution Name | Expected Completion: 2024</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications fade-in">
+        <div class="container">
+            <h2>Certifications</h2>
+            <div class="cert-item">
+                <h3>Adobe Creative Suite Mastery</h3>
+                <span>Not Specified</span>
+            </div>
+            <div class="cert-item">
+                <h3>AI Video Generation & Media Tools Training</h3>
+                <span>Not Specified</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact fade-in">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form action="#" method="post">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="www.linkedin.com/in/j-semon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/semon_jacob/"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/semonjacob"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2025 semon jacob. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        window.addEventListener("load", function () {
+            document.querySelector(".loader-wrapper").style.display = "none";
+        });
+      </script>
+      
+</body>
+</html>
