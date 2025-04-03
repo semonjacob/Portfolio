@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semon jacob | Portfolio</title>
+    <title>Semon Jacob | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 15px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
 
+        .social-icons a:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">Semon jacob</div>
+        <div class="logo">Semon Jacob</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -30,28 +46,122 @@
     </nav>
 
     <div class="custom-cursor"></div>
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            background-color: #fff;
+            color: #333;
+            border-color: #fff;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+        }
+
+        .custom-cursor {
+            width: 15px;
+            height: 15px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .burger {
+                display: flex;
+            }
+        }
+    </style>
     <script>
         document.addEventListener("mousemove", function(e) {
             let cursor = document.querySelector(".custom-cursor");
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
         });
+
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
     </script>
 
     <!-- Loader -->
-<div class="loader-wrapper">
-    <div class="loader"></div>
-</div>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
 
-<div class="parallax-element">Floating Text</div>
+    <div class="parallax-element">Floating Text</div>
 
     <!-- Hero Section -->
     <section id="home" class="hero fade-in">
         <div class="content">
-            <h1>Semon jacob</h1>
+            <h1>Semon Jacob</h1>
             <p>Results-driven Multimedia Creator</p>
-            <!-- Add this CTA button -->
-  <a href="#projects" class="cta-button">View My Work</a>
-</div>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
         <img src="profile.jpg" alt="Profile Photo" class="profile-img">
     </section>
 
@@ -59,13 +169,13 @@
         document.addEventListener("mousemove", function(e) {
             let elements = document.querySelectorAll(".parallax-element");
             elements.forEach(el => {
-                let speed = 5; // Adjust speed for more effect
+                let speed = 5;
                 let x = (window.innerWidth - e.clientX * speed) / 100;
                 let y = (window.innerHeight - e.clientY * speed) / 100;
                 el.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
-        </script>        
+    </script>
 
     <!-- About Section -->
     <section id="about" class="about fade-in">
@@ -76,10 +186,12 @@
                     <img src="profile.jpg" alt="Profile Photo" class="about-img">
                 </div>
                 <div class="col-md-6">
-                    <p>
-                        Results-driven Multimedia Creator with hands-on experience in photo/video editing, graphic design, and AI-driven media tools. Proficient in Adobe Creative Suite and skilled in creating engaging content for social media, events, and promotional campaigns. Currently contributing to Jesus Redeems Ministry-Media, where I produce high-quality multimedia content, manage videography, and handle photography for outreach initiatives.
+                    <p class="about-text">
+                        <span class="highlight">Results-driven Multimedia Creator</span> with hands-on experience in <strong>photo/video editing</strong>, <strong>graphic design</strong>, and <strong>AI-driven media tools</strong>. Proficient in <span class="highlight">Adobe Creative Suite</span> and skilled in creating engaging content for <em>social media</em>, <em>events</em>, and <em>promotional campaigns</em>. Currently contributing to <strong>Jesus Redeems Ministry-Media</strong>, where I produce high-quality multimedia content, manage videography, and handle photography for outreach initiatives.
                     </p>
-                    <p>Languages: Tamil, English</p>
+                    <p class="languages">
+                        <strong>Languages:</strong> <span class="highlight">Tamil</span>, <span class="highlight">English</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -95,9 +207,21 @@
                         <h3>Multimedia Creator & Content Specialist</h3>
                         <span>Jesus Redeems Ministry-Media | 6 Months (Present)</span>
                         <ul>
-                            <li>Create engaging multimedia content for ministry outreach.</li>
-                            <li>Edit photos/videos using Adobe Premiere Pro, After Effects, Photoshop.</li>
-                            <li>Utilize AI tools to reduce production time by 30%.</li>
+                            <li>Developed engaging multimedia content for ministry outreach, increasing audience engagement by 20%.</li>
+                            <li>Edited photos and videos using Adobe Premiere Pro, After Effects, and Photoshop to produce high-quality visuals.</li>
+                            <li>Implemented AI tools to streamline production workflows, reducing production time by 30%.</li>
+                            <li>Collaborated with cross-functional teams to align content with organizational goals.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Freelance Multimedia Designer</h3>
+                        <span>Self-Employed | 1 Year</span>
+                        <ul>
+                            <li>Designed custom graphics and promotional materials for clients, enhancing brand visibility.</li>
+                            <li>Produced explainer videos and motion graphics for online campaigns.</li>
+                            <li>Provided end-to-end multimedia solutions, from concept to delivery.</li>
                         </ul>
                     </div>
                 </div>
@@ -111,11 +235,19 @@
             <h2>Projects</h2>
             <div class="project-card">
                 <h3>Social Media Graphics</h3>
-                <p>Designed banners/posters for church events, boosting attendance by 15%.</p>
+                <span>Jesus Redeems Ministry-Media • Not Specified</span>
+                <p>• Designed banners, posters, and social media posts for weekly church events, boosting attendance by 15%.</p>
             </div>
             <div class="project-card">
                 <h3>AI-Generated Content</h3>
-                <p>Used AI tools to generate explainer videos for online Bible studies.</p>
+                <span>Freelance Project • Not Specified</span>
+                <p>• Used AI tools to generate explainer videos for online Bible studies, reducing production time by 30%.</p>
+            </div>
+            <div class="project-card">
+                <h3>Ministry Outreach Video Campaign</h3>
+                <span>Jesus Redeems Ministry-Media • Not Specified</span>
+                <p>• Created a series of promotional videos for Jesus Redeems Ministry, increasing social media engagement by 20%.</p>
+                <p>• Edited footage from live events and added motion graphics using After Effects.</p>
             </div>
         </div>
     </section>
@@ -126,7 +258,7 @@
             <h2>Skills</h2>
             <div class="skill-list">
                 <div class="skill-item">
-                    <i class="fab fa-adobe"></i>
+                    <i class="fas fa-paint-brush"></i>
                     <h4>Adobe Creative Suite</h4>
                 </div>
                 <div class="skill-item">
@@ -187,11 +319,14 @@
     <!-- Footer -->
     <footer>
         <div class="social-icons">
-            <a href="www.linkedin.com/in/j-semon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/j-semon"><i class="fab fa-linkedin"></i></a>
             <a href="https://www.instagram.com/semon_jacob/"><i class="fab fa-instagram"></i></a>
             <a href="https://github.com/semonjacob"><i class="fab fa-github"></i></a>
+            <a href="mailto:semonjeyakumar@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.facebook.com/semon.jacob"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.youtube.com/@semonjacob"><i class="fab fa-youtube"></i></a>
         </div>
-        <p>&copy; 2025 semon jacob. All rights reserved.</p>
+        <p>&copy; 2025 Semon Jacob. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
@@ -200,7 +335,6 @@
         window.addEventListener("load", function () {
             document.querySelector(".loader-wrapper").style.display = "none";
         });
-      </script>
-      
+    </script>
 </body>
 </html>

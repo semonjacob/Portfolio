@@ -1,13 +1,15 @@
 // Hamburger Menu Toggle
-const burger = document.querySelector('.burger');
-const navLinks = document.querySelector('.nav-links');
+document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
 
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+    if (burger && navLinks) {
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
 
-// script.js
-document.addEventListener("DOMContentLoaded", function() {
+    // Intersection Observer for Fade-in Animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -19,38 +21,33 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.fade-in').forEach(element => {
         observer.observe(element);
     });
-});
 
-// script.js
-const cursor = document.createElement('div');
-cursor.className = 'cursor';
-document.body.appendChild(cursor);
+    // Custom Cursor
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    document.body.appendChild(cursor);
 
-document.addEventListener('mousemove', e => {
-    cursor.style.left = `${e.pageX}px`;
-    cursor.style.top = `${e.pageY}px`;
-});
+    document.addEventListener('mousemove', e => {
+        cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
+    });
 
-document.addEventListener('mouseover', () => {
-    cursor.classList.add('hover');
-});
+    document.addEventListener('mouseover', () => {
+        cursor.classList.add('hover');
+    });
 
-document.addEventListener('mouseout', () => {
-    cursor.classList.remove('hover');
-});
+    document.addEventListener('mouseout', () => {
+        cursor.classList.remove('hover');
+    });
 
+    // Scroll to Top Button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.style.display = (window.scrollY > 20) ? "block" : "none";
+        });
 
-
-// Scroll to Top Button
-window.onscroll = function() {
-    const btn = document.querySelector('.scroll-top');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     }
-};
-
-document.querySelector('.scroll-top').addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 });

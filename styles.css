@@ -34,13 +34,13 @@ body {
     padding: 2rem;
 }
 
-/* Global Colors */
+/* Updated Color Theme */
 :root {
-    --primary-color: #ff0000; /* Teal */
-    --secondary-color: #00A5A5; /* Bright Teal */
-    --accent-color: #FFD700; /* Gold */
-    --text-color: #000000; /* black */
-    --background-color: #75a5ff; /* Dark Cyan */
+    --primary-color: #005f73; /* Deep Teal */
+    --secondary-color: #0a9396; /* Soft Teal */
+    --accent-color: #94d2bd; /* Light Mint */
+    --text-color: #001219; /* Dark Navy */
+    --background-color: #e9d8a6; /* Soft Beige */
 }
 
 body {
@@ -273,9 +273,16 @@ body {
 }
 
 /* Experience Section */
+.experience {
+    background: var(--background-color);
+    padding: 4rem 0;
+}
+
 .timeline {
     position: relative;
     padding: 2rem 0;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 .timeline::before {
@@ -284,21 +291,34 @@ body {
     left: 50%;
     transform: translateX(-50%);
     height: 100%;
-    width: 2px;
-    background: #ccc;
+    width: 4px;
+    background: var(--primary-color);
+    z-index: 1;
 }
 
 .timeline-item {
     position: relative;
     margin: 2rem 0;
-    padding-left: 2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    background: var(--accent-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 2rem);
+    color: var(--text-color);
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
 }
 
 .timeline-item:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
+    z-index: 2;
 }
 
 .timeline-content {
@@ -307,11 +327,65 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content span {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.timeline-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    color: var(--text-color);
+}
+
+.timeline-content ul li {
+    margin-bottom: 0.5rem;
 }
 
 .timeline-content:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
+}
+
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -12px; /* Adjusted for better alignment */
+    transform: translateY(-50%);
+    width: 24px; /* Slightly larger for better visibility */
+    height: 24px;
+    background: var(--accent-color); /* Accent color for timeline markers */
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+@media screen and (max-width: 768px) {
+    .timeline-item {
+        width: 100%;
+        left: 0;
+    }
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-content::after {
+        left: -30px;
+    }
 }
 
 /* Projects Section */
