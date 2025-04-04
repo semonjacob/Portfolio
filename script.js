@@ -133,4 +133,38 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         retina_detect: true,
     });
+
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            formMessage.textContent = ""; // Clear previous messages
+            formMessage.className = "form-message";
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch("contact.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    formMessage.textContent = "Your message has been sent successfully!";
+                    formMessage.classList.add("success");
+                    contactForm.reset();
+                } else {
+                    formMessage.textContent = result.error || "An error occurred. Please try again.";
+                    formMessage.classList.add("error");
+                }
+            } catch (error) {
+                formMessage.textContent = "Failed to send the message. Please try again later.";
+                formMessage.classList.add("error");
+            }
+        });
+    }
 });
