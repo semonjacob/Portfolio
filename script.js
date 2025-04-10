@@ -2,12 +2,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
+    const cursor = document.querySelector('.custom-cursor');
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    const treasureBox = document.querySelector('.treasure-box');
+    const boxSound = document.getElementById('boxSound');
+    const popupText = document.querySelector('.popup-text');
 
     if (burger && navLinks) {
         burger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
     }
+
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            navLinks.classList.remove('active');
+        });
+    });
 
     // Intersection Observer for Fade-in Animations
     const observer = new IntersectionObserver((entries) => {
@@ -23,10 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Custom Cursor
-    const cursor = document.createElement('div');
-    cursor.className = 'cursor';
-    document.body.appendChild(cursor);
-
     document.addEventListener('mousemove', e => {
         cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
     });
@@ -40,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Scroll to Top Button
-    const scrollTopBtn = document.querySelector('.scroll-top');
     if (scrollTopBtn) {
         window.addEventListener('scroll', () => {
             scrollTopBtn.style.display = (window.scrollY > 20) ? "block" : "none";
@@ -167,4 +175,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    document.getElementById('readAbout')?.addEventListener('click', () => {
+        responsiveVoice.speak(document.querySelector('.about-text').textContent, "UK English Male");
+    });
+
+    treasureBox?.addEventListener('mouseenter', () => {
+        boxSound?.play();
+        popupText.style.opacity = '1';
+        popupText.style.transform = 'translateX(-50%) translateY(-30px)';
+    });
+
+    treasureBox?.addEventListener('mouseleave', () => {
+        popupText.style.opacity = '0';
+        popupText.style.transform = 'translateX(-50%) translateY(0)';
+    });
 });

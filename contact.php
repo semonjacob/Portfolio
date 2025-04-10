@@ -22,27 +22,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
 
     try {
+        $mail->SMTPDebug = 2; // Enable debug output (remove in production)
+        $mail->Debugoutput = 'echo';
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; 
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'semonjeyakumar@gmail.com'; // 🔹 Replace with your Gmail
-        $mail->Password = 'ctmx gahw jeya wcgf'; // 🔹 Use an **App Password**, not your main password
+        $mail->Username = 'semonjeyakumar@gmail.com';
+        $mail->Password = 'ctmx gahw jeya wcgf';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('semonjeyakumar@gmail.com', 'Your Name');
-        $mail->addAddress('semonjeyakumar@gmail.com'); // 🔹 Receiver's email (your own)
-
+        $mail->setFrom('semonjeyakumar@gmail.com', 'Semon Jacob');
+        $mail->addAddress('semonjeyakumar@gmail.com');
         $mail->Subject = "New Contact Form Submission from $name";
         $mail->Body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
 
         if ($mail->send()) {
             echo json_encode(['success' => true]);
         } else {
-            echo json_encode(['success' => false, 'error' => 'Email sending failed.']);
+            echo json_encode(['success' => false, 'error' => 'Email sending failed: ' . $mail->ErrorInfo]);
         }
     } catch (Exception $e) {
-        echo json_encode(['success' => false, 'error' => 'Mail Error: ' . $mail->ErrorInfo]);
+        echo json_encode(['success' => false, 'error' => 'Mail Error: ' . $e->getMessage()]);
     }
 }
 ?>

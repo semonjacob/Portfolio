@@ -788,7 +788,7 @@ footer {
 .box-lid {
     width: 100%;
     position: absolute;
-    top: 0;
+    top: 0; /* Changed from -100px to 0 */
     transform-origin: bottom center;
     transition: transform 0.5s ease;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
@@ -803,7 +803,7 @@ footer {
     top: -80px; /* Adjusted for larger size */
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem; /* Increased size */
+    font-size: 3rem; /* Make text larger */
     font-weight: bold;
     color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
@@ -813,9 +813,9 @@ footer {
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.treasure-box:hover + .popup-text {
+.treasure-box:hover .popup-text {
     opacity: 1;
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateX(-50%) translateY(-30px); /* Adjust hover effect */
 }
 
 @keyframes float {
@@ -825,4 +825,46 @@ footer {
     50% {
         transform: rotateX(10deg) rotateY(-10deg) translateY(-20px);
     }
+}
+
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+}
+.scroll-top:hover {
+    background: var(--secondary-color);
+}
+
+.treasure-box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+.box-base, .box-lid {
+    width: 100%;
+    position: absolute;
+}
+.box-base {
+    bottom: 0;
+    z-index: 1;
+}
+.box-lid {
+    top: 0; /* Changed from -100px to 0 */
+    z-index: 2;
+    transform-origin: bottom center;
+    transition: transform 0.5s ease;
+}
+.treasure-box:hover .box-lid {
+    transform: rotateX(-90deg);
 }

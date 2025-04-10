@@ -212,7 +212,7 @@
                 View My Work
             </a>
         </div>
-        <img src="profile.jpg" alt="Profile Photo" class="profile-img" style="border: 5px solid #ffcc00; box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);">
+        <img src="profile.jpg" alt="Profile Photo" class="profile-img" style="border: 5px solid #ffcc00; box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);" loading="lazy" onerror="this.src='https://via.placeholder.com/200';">
     </section>
 
     <script>
@@ -234,7 +234,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="profile-image-container">
-                        <img src="profile.jpg" alt="Profile Photo" class="profile-image">
+                        <img src="profile.jpg" alt="Profile Photo" class="profile-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200';">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -247,6 +247,7 @@
                     <p class="languages">
                         <strong>Languages:</strong> <span class="highlight">Tamil</span>, <span class="highlight">English</span>
                     </p>
+                    <button id="readAbout" class="cta-button">Read About Me</button>
                 </div>
             </div>
         </div>
@@ -312,12 +313,20 @@
     <section id="treasure-box" class="treasure-box-section">
         <div class="treasure-box-container">
             <div class="treasure-box">
-                <img src="treasure-box-base.png" alt="Treasure Box Base" class="box-base">
-                <img src="treasure-box-lid.png" alt="Treasure Box Lid" class="box-lid">
+                <img src="treasure-box-base.png" alt="Treasure Box Base" class="box-base" onerror="this.src='https://via.placeholder.com/300';">
+                <img src="treasure-box-lid.png" alt="Treasure Box Lid" class="box-lid" onerror="this.src='https://via.placeholder.com/300';">
             </div>
             <p class="popup-text">JESUS LOVES YOU</p>
         </div>
     </section>
+    <script>
+        document.querySelector('.treasure-box').addEventListener('mouseenter', () => {
+            document.querySelector('.popup-text').style.opacity = '1';
+        });
+        document.querySelector('.treasure-box').addEventListener('mouseleave', () => {
+            document.querySelector('.popup-text').style.opacity = '0';
+        });
+    </script>
 
     <!-- Skills Section -->
     <section id="skills" class="skills fade-in">
@@ -408,6 +417,9 @@
             <p class="footer-text">&copy; 2025 Semon Jacob. Crafted with <span class="heart">❤</span> and creativity.</p>
         </div>
     </footer>
+
+    <!-- Add scroll-top button -->
+    <button class="scroll-top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
     <script src="script.js"></script>
