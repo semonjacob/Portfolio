@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth = true;
-        $mail->Username = 'your-email@gmail.com'; // 🔹 Replace with your Gmail
-        $mail->Password = 'your-app-password'; // 🔹 Use an **App Password**, not your main password
+        $mail->Username = 'semonjeyakumar@gmail.com'; // 🔹 Replace with your Gmail
+        $mail->Password = 'ctmx gahw jeya wcgf'; // 🔹 Use an **App Password**, not your main password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('your-email@gmail.com', 'Your Name');
-        $mail->addAddress('your-email@gmail.com'); // 🔹 Receiver's email (your own)
+        $mail->setFrom('semonjeyakumar@gmail.com', 'Your Name');
+        $mail->addAddress('semonjeyakumar@gmail.com'); // 🔹 Receiver's email (your own)
 
         $mail->Subject = "New Contact Form Submission from $name";
         $mail->Body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
