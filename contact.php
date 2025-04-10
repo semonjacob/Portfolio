@@ -1,5 +1,8 @@
 <?php
-header('Content-Type: application/json');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
@@ -16,17 +19,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $to = 'semonjeyakumar@gmail.com'; // Replace with your email address
-    $subject = "New Contact Form Submission from $name";
-    $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
-    $headers = "From: $email";
+    $mail = new PHPMailer(true);
 
-    if (mail($to, $subject, $body, $headers)) {
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'error' => 'Failed to send the email.']);
+    try {
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; 
+        $mail->SMTPAuth = true;
+        $mail->Username = 'your-email@gmail.com'; // 🔹 Replace with your Gmail
+        $mail->Password = 'your-app-password'; // 🔹 Use an **App Password**, not your main password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        $mail->setFrom('your-email@gmail.com', 'Your Name');
+        $mail->addAddress('your-email@gmail.com'); // 🔹 Receiver's email (your own)
+
+        $mail->Subject = "New Contact Form Submission from $name";
+        $mail->Body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+
+        if ($mail->send()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Email sending failed.']);
+        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'error' => 'Mail Error: ' . $mail->ErrorInfo]);
     }
-} else {
-    echo json_encode(['success' => false, 'error' => 'Invalid request method.']);
 }
 ?>
