@@ -4,6 +4,11 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode(['success' => true, 'message' => 'Contact endpoint is working']);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
