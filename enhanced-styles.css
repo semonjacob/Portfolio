@@ -1,0 +1,123 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    font-weight: 700; /* Make all text bold */
+}
+
+/* Text enhancements: bold, radiant colors, animations */
+h1, h2, h3, h4, h5, h6, p, a, button, span, li {
+    font-weight: 700;
+    color: #d72631; /* Vivid Red */
+    text-shadow: 0 0 10px #f46036, 0 0 20px #d72631;
+    animation: colorPulse 3s infinite alternate;
+}
+
+/* Harmonious text and background blending */
+section, .container, .projects, .skills, .experience, .about, .contact, .portfolio-gallery, .testimonials, .blog-posts {
+    background: linear-gradient(135deg, rgba(215, 38, 49, 0.1), rgba(244, 96, 54, 0.1));
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(215, 38, 49, 0.2);
+    transition: background 0.5s ease;
+}
+
+/* Subtle background shift animation */
+@keyframes backgroundShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+@keyframes colorPulse {
+    0% {
+        color: #f46036;
+        text-shadow: 0 0 8px #d72631, 0 0 15px #f46036;
+    }
+    50% {
+        color: #d72631;
+        text-shadow: 0 0 15px #f46036, 0 0 30px #d72631;
+    }
+    100% {
+        color: #f46036;
+        text-shadow: 0 0 8px #d72631, 0 0 15px #f46036;
+    }
+}
+
+/* Button styles */
+button {
+    background-color: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(215, 38, 49, 0.6);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-weight: 700;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 0 6px 12px rgba(244, 96, 54, 0.8);
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* Add fade-in animation to paragraphs */
+p {
+    animation: fadeInUp 2s ease forwards;
+    opacity: 0;
+}
+
+p.visible {
+    opacity: 1;
+}
+
+/* Keyframe for fade-in */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Highlight class with glow animation */
+.highlight {
+    color: #ffcc00;
+    text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 
+                 0 0 30px rgba(255, 204, 0, 0.6);
+    animation: highlightGlow 3s infinite alternate;
+}
+
+/* Keyframe for highlight glow */
+@keyframes highlightGlow {
+    0% {
+        text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    }
+    100% {
+        text-shadow: 0 0 30px rgba(255, 204, 0, 1);
+    }
+}
+
+/* Main title animation */
+.main-title {
+    animation: titlePulse 4s ease-in-out infinite;
+}
+
+/* Keyframe for main title pulse */
+@keyframes titlePulse {
+    0%, 100% {
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--primary-color);
+    }
+    50% {
+        color: var(--secondary-color);
+        text-shadow: 0 0 20px var(--secondary-color);
+    }
+}

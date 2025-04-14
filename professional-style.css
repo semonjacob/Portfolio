@@ -1,0 +1,143 @@
+/* Professional Style: Enhanced Vivid Colors with Artistic Sophistication */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Background with smooth gradient blending */
+body {
+    background: linear-gradient(135deg, #0a3d62, #1e3799, #0a3d62);
+    color: #f0e6d2;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Text enhancements: bold, radiant hues, captivating animations */
+h1, h2, h3, h4, h5, h6, p, a, button, span, li {
+    font-weight: 700;
+    color: #f0e6d2;
+    text-shadow: 0 0 5px #f7b731, 0 0 10px #f7b731;
+    animation: textGlow 4s ease-in-out infinite alternate;
+}
+
+/* Radiant gold glow animation */
+@keyframes textGlow {
+    0% {
+        color: #f0e6d2;
+        text-shadow: 0 0 5px #f7b731, 0 0 10px #f7b731;
+    }
+    50% {
+        color: #f7b731;
+        text-shadow: 0 0 15px #f7b731, 0 0 30px #f7b731;
+    }
+    100% {
+        color: #f0e6d2;
+        text-shadow: 0 0 5px #f7b731, 0 0 10px #f7b731;
+    }
+}
+
+/* Sections with subtle translucent backgrounds for harmony */
+section, .container, .projects, .skills, .experience, .about, .contact, .portfolio-gallery, .testimonials, .blog-posts {
+    background: rgba(15, 52, 96, 0.7);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(247, 183, 49, 0.3);
+    padding: 2rem;
+    margin: 1rem auto;
+    max-width: 1200px;
+    transition: background 0.5s ease;
+}
+
+/* Buttons with gold accent and smooth hover */
+button, .btn, .cta-button {
+    background-color: #f7b731;
+    color: #0a3d62;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(247, 183, 49, 0.6);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover, .btn:hover, .cta-button:hover {
+    background-color: #d4a017;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(212, 160, 23, 0.8);
+}
+
+/* Links with subtle gold glow on hover */
+a {
+    color: #f0e6d2;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #f7b731;
+    text-shadow: 0 0 10px #f7b731;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(15, 52, 96, 0.85);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(247, 183, 49, 0.5);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #f7b731;
+    text-shadow: 0 0 8px #f7b731;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll to top button */
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #f7b731;
+    color: #0a3d62;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(247, 183, 49, 0.7);
+    display: none;
+    z-index: 1100;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-top:hover {
+    background-color: #d4a017;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .logo {
+        margin-bottom: 0.5rem;
+    }
+}
