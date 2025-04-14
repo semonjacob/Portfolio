@@ -149,6 +149,59 @@
         burger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeBtn = modal.querySelector('.close');
+            const buttons = document.querySelectorAll('.project-popup-btn');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const imgSrc = button.getAttribute('data-img');
+                    const videoSrc = button.getAttribute('data-video');
+                    const title = button.getAttribute('data-title');
+                    modalTitle.textContent = title;
+                    if (imgSrc) {
+                        modalImage.src = imgSrc;
+                        modalImage.alt = title;
+                        modalImage.style.display = 'block';
+                        modalVideo.style.display = 'none';
+                        modalVideo.src = '';
+                    } else if (videoSrc) {
+                        modalVideo.src = videoSrc + "?autoplay=1";
+                        modalVideo.style.display = 'block';
+                        modalImage.style.display = 'none';
+                        modalImage.src = '';
+                        modalImage.alt = '';
+                    }
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                modalImage.src = '';
+                modalImage.alt = '';
+                modalImage.style.display = 'none';
+                modalVideo.src = '';
+                modalVideo.style.display = 'none';
+                modalTitle.textContent = '';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    modalImage.src = '';
+                    modalImage.alt = '';
+                    modalImage.style.display = 'none';
+                    modalVideo.src = '';
+                    modalVideo.style.display = 'none';
+                    modalTitle.textContent = '';
+                }
+            });
+        });
     </script>
 
     <!-- Loader -->
@@ -291,48 +344,140 @@
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Projects</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>Social Media Graphics</h3>
+                    <h3><button class="project-popup-btn" data-img="event-banner.jpg" data-title="Event Banner Design">Social Media Graphics</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Designed banners, posters, and social media posts for weekly church events, boosting attendance by 15%.</p>
                 </div>
                 <div class="project-card">
-                    <h3>AI-Generated Content</h3>
+                    <h3><button class="project-popup-btn" data-img="promo-video-screenshot.jpg" data-title="Promotional Video Screenshot">AI-Generated Content</button></h3>
                     <span>Freelance Project</span>
                     <p>Used AI tools to generate explainer videos for online Bible studies, reducing production time by 30%.</p>
                 </div>
                 <div class="project-card">
-                    <h3>Ministry Outreach Video Campaign</h3>
+                    <h3><button class="project-popup-btn" data-img="social-media-campaign.jpg" data-title="Social Media Campaign Graphics">Ministry Outreach Video Campaign</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Created a series of promotional videos for Jesus Redeems Ministry, increasing social media engagement by 20%.</p>
                 </div>
+                <div class="project-card">
+                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/yourVideoID1" data-title="My Direction Video 1">My Direction Video 1</button></h3>
+                    <span>My Direction</span>
+                    <p>Video showcasing my direction project 1.</p>
+                </div>
+                <div class="project-card">
+                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/yourVideoID2" data-title="My Direction Video 2">My Direction Video 2</button></h3>
+                    <span>My Direction</span>
+                    <p>Video showcasing my direction project 2.</p>
+                </div>
+                <div class="project-card">
+                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/yourVideoID3" data-title="My Direction Video 3">My Direction Video 3</button></h3>
+                    <span>My Direction</span>
+                    <p>Video showcasing my direction project 3.</p>
+                </div>
+            </div>
+            <!-- Popup Modal -->
+            <div id="projectModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modalTitle"></h2>
+                    <img id="modalImage" src="" alt="" style="max-width:100%; height:auto; border-radius:10px; display:none;">
+                    <iframe id="modalVideo" width="100%" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px; display:none;"></iframe>
+                </div>
             </div>
         </div>
     </section>
+    <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+        }
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .project-popup-btn {
+            background: none;
+            border: none;
+            color: #005f73;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+        }
+        .project-popup-btn:hover {
+            color: #0a9396;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const closeBtn = modal.querySelector('.close');
+            const buttons = document.querySelectorAll('.project-popup-btn');
 
-    <!-- Portfolio Gallery Section -->
-    <section id="portfolio-gallery" class="portfolio-gallery fade-in">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-images"></i> Portfolio Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="portfolio1.jpg" alt="Project 1" loading="lazy" onerror="this.src='https://via.placeholder.com/300';">
-                    <p>Event Banner Design</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="portfolio2.jpg" alt="Project 2" loading="lazy" onerror="this.src='https://via.placeholder.com/300';">
-                    <p>Promotional Video Screenshot</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="portfolio3.jpg" alt="Project 3" loading="lazy" onerror="this.src='https://via.placeholder.com/300';">
-                    <p>Social Media Campaign Graphics</p>
-                </div>
-                <div class="gallery-item">
-                    <iframe width="300" height="169" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Sample Video" frameborder="0" allowfullscreen></iframe>
-                    <p>Sample Video Project</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const imgSrc = button.getAttribute('data-img');
+                    const title = button.getAttribute('data-title');
+                    modalTitle.textContent = title;
+                    modalImage.src = imgSrc;
+                    modalImage.alt = title;
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                modalImage.src = '';
+                modalTitle.textContent = '';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    modalImage.src = '';
+                    modalTitle.textContent = '';
+                }
+            });
+        });
+    </script>
 
     <!-- Treasure Box Section -->
     <section id="testimonials" class="testimonials fade-in">
