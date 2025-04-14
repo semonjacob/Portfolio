@@ -23,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $mail->SMTPDebug = 2; // Enable debug output (remove in production)
-        $mail->Debugoutput = 'echo';
+        $mail->Debugoutput = function($str, $level) {
+            error_log("SMTP Debug level $level; message: $str");
+        };
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -40,9 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($mail->send()) {
             echo json_encode(['success' => true]);
         } else {
+            error_log('Email sending failed: ' . $mail->ErrorInfo);
             echo json_encode(['success' => false, 'error' => 'Email sending failed: ' . $mail->ErrorInfo]);
         }
     } catch (Exception $e) {
+        error_log('Mail Error: ' . $e->getMessage());
         echo json_encode(['success' => false, 'error' => 'Mail Error: ' . $e->getMessage()]);
     }
 }
