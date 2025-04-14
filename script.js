@@ -166,7 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     formMessage.classList.add("success");
                     contactForm.reset();
                 } else {
-                    formMessage.textContent = result.error || "An error occurred. Please try again.";
+                    console.error("Contact form error response:", result);
+                    formMessage.innerHTML = result.error || "An error occurred. Please try again.";
                     formMessage.classList.add("error");
                 }
             } catch (error) {

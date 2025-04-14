@@ -42,12 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($mail->send()) {
             echo json_encode(['success' => true]);
         } else {
-            error_log('Email sending failed: ' . $mail->ErrorInfo);
-            echo json_encode(['success' => false, 'error' => 'Email sending failed: ' . $mail->ErrorInfo]);
+            $errorMessage = 'Email sending failed: ' . $mail->ErrorInfo;
+            error_log($errorMessage);
+            echo json_encode(['success' => false, 'error' => $errorMessage]);
         }
     } catch (Exception $e) {
-        error_log('Mail Error: ' . $e->getMessage());
-        echo json_encode(['success' => false, 'error' => 'Mail Error: ' . $e->getMessage()]);
+        $errorMessage = 'Mail Error: ' . $e->getMessage();
+        error_log($errorMessage);
+        echo json_encode(['success' => false, 'error' => $errorMessage]);
     }
 }
 ?>
