@@ -7,23 +7,6 @@
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Background enhancements: vivid gradients and subtle animations */
-/* body {
-    background: linear-gradient(135deg, #ffcc00, #ff4500, #ff6347);
-    background-size: 400% 400%;
-    animation: backgroundShift 10s ease infinite;
-    color: #1b1b3a;
-    line-height: 1.6;
-} */
-
-/* Text enhancements: bold, radiant colors, animations */
-/* h1, h2, h3, h4, h5, h6, p, a, button, span, li {
-    font-weight: bold;
-    color: #ff4500;
-    text-shadow: 0 0 10px #ff6347, 0 0 20px #ff4500;
-    animation: textGlow 3s infinite alternate;
-} */
-
 /* Harmonious text and background blending */
 section, .container, .projects, .skills, .experience, .about, .contact, .portfolio-gallery, .testimonials, .blog-posts {
     background: linear-gradient(135deg, rgba(215, 38, 49, 0.1), rgba(244, 96, 54, 0.1));
@@ -63,26 +46,6 @@ section, .container, .projects, .skills, .experience, .about, .contact, .portfol
     }
 }
 
-/* .cta-button {
-    background-color: #ff4500;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.6);
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    animation: buttonPulse 2s infinite alternate;
-  }
-  
-  .cta-button:hover {
-    background-color: #ff6347;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 15px rgba(255, 99, 71, 0.8);
-  } */
-
 @keyframes buttonPulse {
     0% {
         transform: scale(1);
@@ -96,8 +59,8 @@ section, .container, .projects, .skills, .experience, .about, .contact, .portfol
 
 .highlight {
     color: #ffcc00;
-    text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 
-                 0 0 30px rgba(255, 204, 0, 0.6);
+    text-shadow: 0 0 15px rgba(255, 204, 0, 0.9), 
+                 0 0 30px rgba(255, 204, 0, 0.7);
     animation: highlightGlow 3s infinite alternate;
 }
 
@@ -127,24 +90,48 @@ section, .container, .projects, .skills, .experience, .about, .contact, .portfol
 
 body {
     background-color: var(--background-color);
-    color: var(--text-color);
-    /* Enhance text color to be more vivid */
-    color: #003366;
+    color: #002244;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    cursor: url('custom-cursor.png'), auto;
 }
 
-button {
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    text-shadow: 0 2px 4px rgba(215, 38, 49, 0.7);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p, li, span, a, button {
+    color: #1b1b3a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--secondary-color);
+    text-shadow: 0 0 8px rgba(244, 96, 54, 0.9);
+}
+
+button, .cta-button {
     background-color: var(--primary-color);
     color: #fff;
-    box-shadow: 0 4px 8px rgba(215, 38, 49, 0.6);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 10px rgba(215, 38, 49, 0.6);
     border: none;
     border-radius: 6px;
     padding: 10px 20px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
+button:hover, .cta-button:hover {
     background-color: var(--secondary-color);
-    box-shadow: 0 6px 12px rgba(244, 96, 54, 0.8);
+    box-shadow: 0 6px 15px rgba(244, 96, 54, 0.8);
     cursor: pointer;
 }
 
@@ -225,37 +212,6 @@ button:hover {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-}
-
-/* Hide Default Cursor */
-body {
-    cursor: none;
-}
-
-/* Custom Cursor */
-.custom-cursor {
-    position: fixed;
-    width: 15px;
-    height: 15px;
-    background: teal;
-    border-radius: 50%;
-    pointer-events: none;
-    transition: transform 0.1s linear;
-    mix-blend-mode: difference; /* Makes it visible over different backgrounds */
-}
-
-.parallax-element {
-    position: absolute;
-    font-size: 24px;
-    font-weight: bold;
-    color: rgb(255, 241, 46);
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
-}
-
-/* Custom Cursor */
-body {
-    cursor: url('custom-cursor.png'), auto;
 }
 
 /* Loader Animation (Spinning Circle) */
@@ -354,18 +310,6 @@ body {
     width: 200px;
     border-radius: 50%;
     margin-top: 2rem;
-}
-
-/* Hero Section */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: -1;
 }
 
 /* Parallax Effect */
@@ -905,186 +849,6 @@ footer {
     animation: float 3s ease-in-out infinite; /* Floating animation */
 }
 
-.treasure-box {
-    position: relative;
-    width: 300px; /* Increased size */
-    height: 300px; /* Increased size */
-    cursor: pointer;
-}
-
-.box-base {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-}
-
-.box-lid {
-    width: 100%;
-    position: absolute;
-    top: 0; /* Changed from -100px to 0 */
-    transform-origin: bottom center;
-    transition: transform 0.5s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-}
-
-.treasure-box:hover .box-lid {
-    transform: rotateX(-90deg);
-}
-
-/* Portfolio Gallery Section */
-.portfolio-gallery {
-    padding: 60px 20px;
-    background-color: #fff;
-    text-align: center;
-}
-
-.portfolio-gallery .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    justify-items: center;
-}
-
-.gallery-item {
-    background: #fafafa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 15px;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-}
-
-.gallery-item img,
-.gallery-item iframe {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-/* Testimonials Section */
-.testimonials {
-    padding: 60px 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-}
-
-.testimonials .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-.testimonial-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.testimonial-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 25px;
-    max-width: 320px;
-    font-style: italic;
-    color: #555;
-    transition: box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-}
-
-.testimonial-card h4 {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #222;
-}
-
-/* Blog/Updates Section */
-#blog-updates {
-    padding: 60px 20px;
-    background-color: #fff;
-    text-align: center;
-}
-
-#blog-updates .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-.blog-posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    justify-items: center;
-}
-
-.blog-post {
-    background: #fafafa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    max-width: 320px;
-    text-align: left;
-    transition: transform 0.3s ease;
-}
-
-.blog-post:hover {
-    transform: translateY(-5px);
-}
-
-.blog-post h3 {
-    margin-top: 0;
-    color: #222;
-}
-
-.blog-post p {
-    color: #555;
-    font-size: 0.95rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .gallery-grid,
-    .testimonial-cards,
-    .blog-posts {
-        grid-template-columns: 1fr;
-    }
-}
-
-.popup-text {
-    position: absolute;
-    top: -80px; /* Adjusted for larger size */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3rem; /* Make text larger */
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
-                 0 0 20px rgba(255, 204, 0, 0.6), 
-                 0 0 30px rgba(255, 102, 0, 0.4); /* Creative glowing effect */
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.treasure-box:hover .popup-text {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-30px); /* Adjust hover effect */
-}
-
 @keyframes float {
     0%, 100% {
         transform: rotateX(10deg) rotateY(-10deg) translateY(0);
@@ -1110,30 +874,6 @@ footer {
 }
 .scroll-top:hover {
     background: var(--secondary-color);
-}
-
-.treasure-box {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    cursor: pointer;
-}
-.box-base, .box-lid {
-    width: 100%;
-    position: absolute;
-}
-.box-base {
-    bottom: 0;
-    z-index: 1;
-}
-.box-lid {
-    top: 0; /* Changed from -100px to 0 */
-    z-index: 2;
-    transform-origin: bottom center;
-    transition: transform 0.5s ease;
-}
-.treasure-box:hover .box-lid {
-    transform: rotateX(-90deg);
 }
 
 html {

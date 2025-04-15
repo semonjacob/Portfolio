@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semon Jacob | Portfolio</title>
+    <meta name="description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional." />
+    <meta name="keywords" content="Portfolio, Multimedia Creator, Graphic Designer, Video Editor, Accounting, Finance" />
+    <meta name="author" content="Semon Jacob" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="animations-enhancements.css" />
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -31,6 +38,10 @@
 </head>
 <body>
     <!-- Navigation Bar -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        </div>
+        
     <nav class="navbar">
         <div class="logo">Semon Jacob</div>
         <ul class="nav-links">
@@ -338,33 +349,40 @@
     <section id="projects" class="projects fade-in">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Projects</h2>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="multimedia">Multimedia</button>
+                <button class="filter-btn" data-filter="graphic-design">Graphic Design</button>
+                <button class="filter-btn" data-filter="video-editing">Video Editing</button>
+                <button class="filter-btn" data-filter="accounting">Accounting</button>
+            </div>
             <div class="project-grid">
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-img="event-banner.jpg" data-title="Event Banner Design">Social Media Graphics</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Designed banners, posters, and social media posts for weekly church events, boosting attendance by 15%.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-img="promo-video-screenshot.jpg" data-title="Promotional Video Screenshot">AI-Generated Content</button></h3>
                     <span>Freelance Project</span>
                     <p>Used AI tools to generate explainer videos for online Bible studies, reducing production time by 30%.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-img="social-media-campaign.jpg" data-title="Social Media Campaign Graphics">Ministry Outreach Video Campaign</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Created a series of promotional videos for Jesus Redeems Ministry, increasing social media engagement by 20%.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/GEK-YJdPLYQ?si=0AYu9BX6JtU03dJ0&amp;start=178" data-title="My work">CHURCH HISTORY</button></h3>
                     <span>My work</span>
                     <p>"My contributions to this project encompass editing, animation, and the integration of AI-generated visuals, blending technical precision with creative innovation to bring the vision to life."</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/6V7eUm7nDH8?si=4nodPXlGKymBXyEn" data-title="My first Direction">Don't escape | short film</button></h3>
                     <span>My Direction</span>
                     <p>"I am the Writer, Director, Editor, and SFX Designer of Don't Escape from Gospel , crafting the story, overseeing its execution, and capturing it through carefully shot visuals."</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-category="multimedia">
                     <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/yourVideoID3" data-title="My Direction Video 3">My Direction</button></h3>
                     <span>My Direction</span>
                     <p>Video showcasing my direction project</p>
@@ -501,14 +519,17 @@
             <h2 class="section-title"><i class="fas fa-comments"></i> Testimonials</h2>
             <div class="testimonial-cards">
                 <div class="testimonial-card">
+                    <img src="client1.jpg" alt="Client A" class="client-image" loading="lazy" />
                     <p>"Semon's creativity and professionalism exceeded our expectations. Highly recommended!"</p>
                     <h4>- Client A</h4>
                 </div>
                 <div class="testimonial-card">
+                    <img src="client2.jpg" alt="Client B" class="client-image" loading="lazy" />
                     <p>"The video content produced by Semon helped boost our engagement significantly."</p>
                     <h4>- Client B</h4>
                 </div>
                 <div class="testimonial-card">
+                    <img src="client3.jpg" alt="Client C" class="client-image" loading="lazy" />
                     <p>"Excellent communication and timely delivery. A pleasure to work with."</p>
                     <h4>- Client C</h4>
                 </div>
@@ -636,5 +657,6 @@
             document.querySelector(".loader-wrapper").style.display = "none";
         });
     </script>
+<script src="animations-enhancements.js"></script>
 </body>
 </html>
