@@ -39,6 +39,20 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_KEY"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Semon Jacob",
+        "jobTitle": "Multimedia Creator",
+        "url": "https://yourwebsite.com",
+        "sameAs": [
+            "https://www.linkedin.com/in/j-semon",
+            "https://www.instagram.com/semon_jacob/",
+            "https://github.com/semonjacob"
+        ]
+    }
+    </script>
 
 </head>
 <body>
@@ -47,7 +61,7 @@
         <div class="spinner"></div>
         </div>
         
-    <nav class="navbar" aria-label="Main Navigation">
+    <nav class="navbar" aria-label="Main Navigation" role="navigation">
         <div class="logo">Semon Jacob</div>
         <ul class="nav-links">
             <li><a href="#home" aria-label="Go to Home Section">Home</a></li>
@@ -62,6 +76,7 @@
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
+        <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
     </nav>
 
     <div class="custom-cursor"></div>
@@ -207,6 +222,34 @@
                 width: 200px;
             }
         }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .navbar.dark-mode {
+            background-color: #1e1e1e;
+        }
+
+        .nav-links li a.dark-mode {
+            color: #ffffff;
+        }
+
+        .nav-links li a.dark-mode:hover {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .social-icons a.dark-mode {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .social-icons a.dark-mode:hover {
+            background-color: #ffffff;
+            color: #000;
+        }
     </style>
     <script>
         document.addEventListener("mousemove", function(e) {
@@ -271,6 +314,22 @@
                     modalVideo.style.display = 'none';
                     modalTitle.textContent = '';
                 }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Check for saved preference in localStorage
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
             });
         });
     </script>

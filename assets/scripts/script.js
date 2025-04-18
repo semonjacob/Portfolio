@@ -212,4 +212,25 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.style.display = 'none';
         }
     });
+
+    // Lazy load images
+    const lazyImages = document.querySelectorAll("img[loading='lazy']");
+    lazyImages.forEach(img => {
+        img.addEventListener("error", () => {
+            img.src = "https://via.placeholder.com/200";
+        });
+    });
 });
+
+// Debounce scroll event for performance
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+window.addEventListener("scroll", debounce(() => {
+    // Scroll-related logic here
+}, 100));

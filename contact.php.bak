@@ -27,10 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
 
     try {
-        $mail->SMTPDebug = 2; // Enable debug output (remove in production)
-        $mail->Debugoutput = function($str, $level) {
-            error_log("SMTP Debug level $level; message: $str");
-        };
+        $mail->SMTPDebug = 0; // Disable debug output for production
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
