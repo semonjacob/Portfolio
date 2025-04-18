@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
     <title>Semon Jacob | Portfolio</title>
     <meta name="description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional." />
     <meta name="keywords" content="Portfolio, Multimedia Creator, Graphic Designer, Video Editing, Accounting, Finance" />
@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="animations-enhancements.css" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/styles/animations-enhancements.css" />
+    <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .social-icons a {
@@ -47,15 +47,15 @@
         <div class="spinner"></div>
         </div>
         
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main Navigation">
         <div class="logo">Semon Jacob</div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Portfolio</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" aria-label="Go to Home Section">Home</a></li>
+            <li><a href="#about" aria-label="Go to About Section">About</a></li>
+            <li><a href="#experience" aria-label="Go to Experience Section">Experience</a></li>
+            <li><a href="#projects" aria-label="Go to Portfolio Section">Portfolio</a></li>
+            <li><a href="#skills" aria-label="Go to Skills Section">Skills</a></li>
+            <li><a href="#contact" aria-label="Go to Contact Section">Contact</a></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -150,6 +150,61 @@
 
             .burger {
                 display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero .animated-title {
+                font-size: 2.5rem;
+            }
+            .hero .highlight {
+                font-size: 1.2rem;
+            }
+            .profile-img {
+                width: 150px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 1024px) {
+            body {
+                font-size: 16px;
+            }
+            .navbar {
+                padding: 15px 30px;
+            }
+            .hero .animated-title {
+                font-size: 3.5rem;
+            }
+            .hero .highlight {
+                font-size: 1.5rem;
+            }
+            .profile-img {
+                width: 180px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            body {
+                font-size: 18px;
+            }
+            .navbar {
+                padding: 20px 40px;
+            }
+            .hero .animated-title {
+                font-size: 4rem;
+            }
+            .hero .highlight {
+                font-size: 1.8rem;
+            }
+            .profile-img {
+                width: 200px;
             }
         }
     </style>
@@ -641,12 +696,12 @@
     <footer>
         <div class="footer-container">
             <div class="social-icons">
-                <a href="https://www.linkedin.com/in/j-semon" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/semon_jacob/" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/semonjacob" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="mailto:semonjeyakumar@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.facebook.com/semon.jacob" class="social-link"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/@semonjacob" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/j-semon" class="social-link" aria-label="Visit LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/semon_jacob/" class="social-link" aria-label="Visit Instagram Profile"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/semonjacob" class="social-link" aria-label="Visit GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="mailto:semonjeyakumar@gmail.com" class="social-link" aria-label="Send Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.facebook.com/semon.jacob" class="social-link" aria-label="Visit Facebook Profile"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@semonjacob" class="social-link" aria-label="Visit YouTube Channel"><i class="fab fa-youtube"></i></a>
             </div>
             <p class="footer-text">&copy; 2025 Semon Jacob. Crafted with <span class="heart">❤</span> and creativity.</p>
         </div>
@@ -656,13 +711,13 @@
     <button class="scroll-top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="assets/scripts/script.js"></script>
 
     <script>
         window.addEventListener("load", function () {
             document.querySelector(".loader-wrapper").style.display = "none";
         });
     </script>
-<script src="animations-enhancements.js"></script>
+<script src="assets/scripts/animations-enhancements.js"></script>
 </body>
 </html>
