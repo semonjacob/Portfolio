@@ -76,7 +76,6 @@
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
-        <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
     </nav>
 
     <div class="custom-cursor"></div>
@@ -314,22 +313,6 @@
                     modalVideo.style.display = 'none';
                     modalTitle.textContent = '';
                 }
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            const body = document.body;
-
-            // Check for saved preference in localStorage
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                body.classList.add('dark-mode');
-            }
-
-            darkModeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                const isDarkMode = body.classList.contains('dark-mode');
-                localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
             });
         });
     </script>

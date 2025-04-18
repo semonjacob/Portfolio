@@ -105,8 +105,31 @@ body {
 }
 
 body.dark-mode {
-    background-color: var(--accent-color);
-    color: var(--background-color);
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.navbar.dark-mode {
+    background-color: #1e1e1e;
+}
+
+.nav-links li a.dark-mode {
+    color: #ffffff;
+}
+
+.nav-links li a.dark-mode:hover {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+.social-icons a.dark-mode {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.social-icons a.dark-mode:hover {
+    background-color: #ffffff;
+    color: #121212;
 }
 
 h1, h2, h3, h4, h5, h6 {
