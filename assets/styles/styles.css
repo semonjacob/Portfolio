@@ -86,6 +86,8 @@ section, .container, .projects, .skills, .experience, .about, .contact, .portfol
     --accent-color: #2e294e; /* Deep Indigo */
     --text-color: #1b1b3a; /* Dark Blue */
     --background-color: #f9f7f7; /* Soft Light */
+    --dark-background-color: #1b1b3a;
+    --dark-text-color: #f9f7f7;
 }
 
 body {
@@ -93,6 +95,11 @@ body {
     color: #002244;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     cursor: url('custom-cursor.png'), auto;
+}
+
+body.dark-mode {
+    background-color: var(--dark-background-color);
+    color: var(--dark-text-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -133,6 +140,15 @@ button:hover, .cta-button:hover {
     background-color: var(--secondary-color);
     box-shadow: 0 6px 15px rgba(244, 96, 54, 0.8);
     cursor: pointer;
+}
+
+button, a {
+    transition: all 0.3s ease;
+}
+
+button:hover, a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn,

@@ -191,4 +191,25 @@ document.addEventListener("DOMContentLoaded", () => {
         popupText.style.opacity = '0';
         popupText.style.transform = 'translateX(-50%) translateY(0)';
     });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.textContent = 'Toggle Dark Mode';
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '20px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.zIndex = '1000';
+    document.body.appendChild(darkModeToggle);
+
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+
+    // Keyboard Navigation for Modal
+    const modal = document.getElementById('projectModal');
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
 });

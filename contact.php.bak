@@ -27,12 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
 
     try {
-        $mail->SMTPDebug = 0; // Disable debug output for production
+        $mail->SMTPDebug = 2; // Enable debug output (remove in production)
+        $mail->Debugoutput = function($str, $level) {
+            error_log("SMTP Debug level $level; message: $str");
+        };
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = getenv('SMTP_USERNAME') ?: 'semonjeyakumar@gmail.com';
-        $mail->Password = getenv('SMTP_PASSWORD') ?: 'ctmx gahw jeya wcgf';
+        $mail->Username = 'semonjeyakumar@gmail.com';
+        $mail->Password = 'ctmx gahw jeya wcgf';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
