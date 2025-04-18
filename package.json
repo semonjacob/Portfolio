@@ -1,0 +1,20 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "**Multimedia Creator | Graphic Designer | Video Editor | Accounting & Finance Professional**  \r Passionate about blending **creative storytelling** with **financial excellence** to deliver impactful results.  \r Showcasing a **modern, interactive, and visually engaging portfolio** with advanced animations and responsive design.",
+  "main": "animations-enhancements.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/semonjacob/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/semonjacob/Portfolio/issues"
+  },
+  "homepage": "https://github.com/semonjacob/Portfolio#readme"
+}

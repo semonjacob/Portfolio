@@ -782,6 +782,35 @@ footer {
 }
 
 /* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .profile-img {
+        width: 180px;
+    }
+
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item {
+        width: 100% !important;
+        left: 0 !important;
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-content::after {
+        left: -30px !important;
+    }
+
+    .timeline-content {
+        padding: 1rem;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -797,6 +826,99 @@ footer {
 
     .timeline-item {
         padding-left: 0;
+    }
+
+    /* About Section Flexbox */
+    .about .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .about .row {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .about .col-md-6 {
+        width: 100%;
+    }
+
+    /* Projects Grid */
+    .project-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    /* Skills Flexbox */
+    .skill-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .skill-item {
+        width: 100% !important;
+        max-width: 300px;
+    }
+
+    /* Testimonials Flexbox */
+    .testimonial-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .testimonial-card {
+        width: 100% !important;
+        max-width: 400px;
+    }
+
+    /* Contact Form */
+    .contact form {
+        max-width: 100% !important;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero .animated-title {
+        font-size: 2.5rem !important;
+    }
+
+    .hero .highlight {
+        font-size: 1.2rem !important;
+    }
+
+    .profile-img {
+        width: 120px !important;
+    }
+
+    .nav-links {
+        font-size: 14px !important;
+    }
+
+    .nav-links li a {
+        padding: 6px 8px !important;
+    }
+
+    /* Reduce padding in container */
+    .container {
+        padding: 0.5rem !important;
+    }
+
+    /* Adjust project cards */
+    .project-card {
+        padding: 1rem !important;
+    }
+
+    /* Adjust skill items */
+    .skill-item {
+        width: 100% !important;
+        max-width: 100% !important;
     }
 }
 
@@ -878,4 +1000,137 @@ footer {
 
 html {
     scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+/* Responsive Typography using clamp for fluid scaling */
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+p, li, span, a, button {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Large desktop breakpoint */
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+        padding: 3rem;
+    }
+
+    .profile-img {
+        width: 220px;
+    }
+
+    .project-card {
+        padding: 3rem;
+    }
+
+    .skill-item {
+        width: 300px;
+    }
+}
+
+/* Very small mobile devices */
+@media screen and (max-width: 360px) {
+    .nav-links li a {
+        font-size: 12px !important;
+        padding: 4px 6px !important;
+    }
+
+    .hero .animated-title {
+        font-size: 2rem !important;
+    }
+
+    .hero .highlight {
+        font-size: 1rem !important;
+    }
+
+    .profile-img {
+        width: 100px !important;
+    }
+
+    .container {
+        padding: 0.25rem !important;
+    }
+
+    .project-card {
+        padding: 0.5rem !important;
+    }
+
+    .skill-item {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Responsive Design Enhancements */
+
+/* For tablets (768px and above) */
+@media (min-width: 768px) {
+    .hero .animated-title {
+        font-size: 3rem;
+    }
+
+    .hero .highlight {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .profile-img {
+        width: 250px;
+    }
+}
+
+/* For desktops (1024px and above) */
+@media (min-width: 1024px) {
+    .hero .animated-title {
+        font-size: 4.5rem;
+    }
+
+    .hero .highlight {
+        font-size: 2rem;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .profile-img {
+        width: 300px;
+    }
+}
+
+/* For small screens (below 768px) */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-img {
+        width: 150px;
+    }
+
+    .cta-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }
