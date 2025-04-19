@@ -207,6 +207,26 @@ document.addEventListener("DOMContentLoaded", () => {
             img.src = "https://via.placeholder.com/200";
         });
     });
+
+    const viewResumeBtn = document.getElementById("viewResume");
+    const resumeModal = document.getElementById("resumeModal");
+    const closeResumeBtn = resumeModal.querySelector(".close");
+
+    if (viewResumeBtn && resumeModal) {
+        viewResumeBtn.addEventListener("click", () => {
+            resumeModal.style.display = "flex";
+        });
+
+        closeResumeBtn.addEventListener("click", () => {
+            resumeModal.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+            if (event.target === resumeModal) {
+                resumeModal.style.display = "none";
+            }
+        });
+    }
 });
 
 // Debounce scroll event for performance
