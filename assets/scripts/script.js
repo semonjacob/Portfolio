@@ -23,15 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Intersection Observer for Fade-in Animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.5 });
-
     document.querySelectorAll('.fade-in').forEach(element => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
         observer.observe(element);
     });
 
