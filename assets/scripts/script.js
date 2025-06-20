@@ -36,17 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Custom Cursor
-    document.addEventListener('mousemove', e => {
-        cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
-    });
+    if (cursor) {
+        document.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
+        });
 
-    document.addEventListener('mouseover', () => {
-        cursor.classList.add('hover');
-    });
+        document.addEventListener('mouseover', () => {
+            cursor.classList.add('hover');
+        });
 
-    document.addEventListener('mouseout', () => {
-        cursor.classList.remove('hover');
-    });
+        document.addEventListener('mouseout', () => {
+            cursor.classList.remove('hover');
+        });
+    }
 
     // Scroll to Top Button
     if (scrollTopBtn) {
@@ -178,24 +180,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.getElementById('readAbout')?.addEventListener('click', () => {
-        responsiveVoice.speak(document.querySelector('.about-text').textContent, "UK English Male");
+        const aboutText = document.querySelector('.about-text');
+        if (aboutText) {
+            responsiveVoice.speak(aboutText.textContent, "UK English Male");
+        }
     });
 
+    // Add null checks for popupText
     treasureBox?.addEventListener('mouseenter', () => {
         boxSound?.play();
-        popupText.style.opacity = '1';
-        popupText.style.transform = 'translateX(-50%) translateY(-30px)';
+        if (popupText) {
+            popupText.style.opacity = '1';
+            popupText.style.transform = 'translateX(-50%) translateY(-30px)';
+        }
     });
 
     treasureBox?.addEventListener('mouseleave', () => {
-        popupText.style.opacity = '0';
-        popupText.style.transform = 'translateX(-50%) translateY(0)';
+        if (popupText) {
+            popupText.style.opacity = '0';
+            popupText.style.transform = 'translateX(-50%) translateY(0)';
+        }
     });
 
     // Keyboard Navigation for Modal
     const modal = document.getElementById('projectModal');
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
+        if (modal && e.key === 'Escape' && modal.style.display === 'flex') {
             modal.style.display = 'none';
         }
     });
@@ -210,9 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const viewResumeBtn = document.getElementById("viewResume");
     const resumeModal = document.getElementById("resumeModal");
-    const closeResumeBtn = resumeModal.querySelector(".close");
+    const closeResumeBtn = resumeModal ? resumeModal.querySelector(".close") : null;
 
-    if (viewResumeBtn && resumeModal) {
+    if (viewResumeBtn && resumeModal && closeResumeBtn) {
         viewResumeBtn.addEventListener("click", () => {
             resumeModal.style.display = "flex";
         });
@@ -238,6 +248,8 @@ function debounce(func, wait) {
     };
 }
 
+// If you have scroll logic, add it here. Otherwise, you can remove this listener.
 window.addEventListener("scroll", debounce(() => {
     // Scroll-related logic here
 }, 100));
+
