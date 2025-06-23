@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semon Jacob | Portfolio</title>
     <meta name="description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional." />
     <meta name="keywords" content="Portfolio, Multimedia Creator, Graphic Designer, Video Editing, Accounting, Finance" />
@@ -13,31 +13,11 @@
     <link rel="stylesheet" href="assets/styles/animations-enhancements.css" />
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        .social-icons a {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 15px;
-            border: 2px solid #000;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #000;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background-color: #000;
-            color: #fff;
-        }
-    </style>
-
     <meta property="og:title" content="Semon Jacob | Portfolio">
     <meta property="og:description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional.">
     <meta property="og:image" content="assets/images/profile.jpg">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="twitter:card" content="summary_large_image">
-
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_KEY"></script>
     <script type="application/ld+json">
     {
@@ -53,7 +33,6 @@
         ]
     }
     </script>
-
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -781,5 +760,31 @@
         });
     </script>
 <script src="assets/scripts/animations-enhancements.js"></script>
+<!-- Accessibility: Add focus style for links and buttons -->
+<style>
+    a:focus, button:focus {
+        outline: 2px solid #ffcc00;
+        outline-offset: 2px;
+    }
+    /* Responsive modal for mobile */
+    @media (max-width: 600px) {
+        .modal-content {
+            max-width: 95vw;
+            width: 95vw;
+            padding: 10px;
+        }
+    }
+    /* Responsive testimonial cards */
+    @media (max-width: 600px) {
+        .testimonial-cards {
+            flex-direction: column;
+            align-items: center;
+        }
+        .testimonial-card {
+            width: 90vw;
+            margin-bottom: 1rem;
+        }
+    }
+</style>
 </body>
 </html>
