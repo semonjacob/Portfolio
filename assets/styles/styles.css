@@ -1165,178 +1165,6 @@ p, li, span, a, button {
     cursor: pointer;
 }
 
-/* --- Center Tool Icons/Buttons --- */
-.tool-carousel-section .carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-.carousel-mask {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.carousel-track {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Center tool icons/buttons below hero name */
-.tool-carousel-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2.5rem auto;
-    width: 100%;
-}
-.tool-carousel-section .carousel-container {
-    margin: 0 auto;
-}
-
-/* --- Even Padding/Margins Between Sections --- */
-section,
-.container {
-    /* ...existing code... */
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-}
-.resume,
-.contact {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 700px;
-    width: 100%;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
-    /* Remove background for contact, if needed, to match resume */
-}
-@media (max-width: 768px) {
-    .resume,
-    .contact {
-        max-width: 99vw;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-@media (max-width: 480px) {
-    .resume,
-    .contact {
-        padding-left: 0.2rem;
-        padding-right: 0.2rem;
-    }
-}
-
-/* --- Vertically Center Text in Cards/Sections --- */
-.project-card,
-.skill-item,
-.cert-item,
-.edu-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.project-card h3, .project-card span, .project-card p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-.skill-item h4,
-.skill-item p {
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-}
-
-/* --- Social/Contact Bar at Bottom Spacing --- */
-.footer-container .social-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 1rem;
-}
-.footer-container .social-link {
-    margin: 0;
-    padding: 0.6em;
-    font-size: 1.6rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.5em;
-    min-height: 2.5em;
-}
-
-/* --- Hero Section Centering --- */
-.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 100vh;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-.hero .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.hero .animated-title,
-.hero .highlight,
-.hero .cta-button {
-    margin-left: auto;
-    margin-right: auto;
-}
-.profile-img {
-    display: block;
-    margin: 2rem auto 0 auto;
-}
-
-/* Responsive fix for hero vertical alignment */
-@media (min-width: 768px) {
-    .hero {
-        min-height: 80vh;
-        justify-content: center;
-    }
-    .hero .content {
-        min-height: 300px;
-        justify-content: center;
-    }
-}
-
-/* --- Remove duplicate/empty layers if any --- */
-/* (No code needed, just ensure no duplicate sections in the HTML) */
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  font-size: 1.5rem;
-  box-shadow: var(--shadow);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1200;
-  transition: background 0.2s, box-shadow 0.2s;
-}
-
-.scroll-top:hover,
-.scroll-top:focus {
-  background: var(--secondary-color);
-  box-shadow: 0 6px 24px rgba(44, 62, 80, 0.13);
-  outline: var(--focus-outline);
-}
-
 /* ===== Responsive Typography ===== */
 html {
   font-size: 100%; /* 16px base */
@@ -1877,534 +1705,157 @@ a:focus, button:focus, input:focus, textarea:focus {
   color: #d72631;
 }
 
-/* ===== Responsive Contact Section ===== */
+/* --- Center Tool Icons/Buttons --- */
+.tool-carousel-section .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.carousel-mask {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center tool icons/buttons below hero name */
+.tool-carousel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem auto;
+    width: 100%;
+}
+.tool-carousel-section .carousel-container {
+    margin: 0 auto;
+}
+
+/* --- Even Padding/Margins Between Sections --- */
+section,
+.container {
+    /* ...existing code... */
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+.resume,
+.contact {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+    /* Remove background for contact, if needed, to match resume */
+}
 @media (max-width: 768px) {
-  .contact {
-    padding: 2rem 0.5rem;
-    max-width: 99vw;
-  }
-  .contact form {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
+    .resume,
+    .contact {
+        max-width: 99vw;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }
-
 @media (max-width: 480px) {
-  .contact {
-    padding: 1rem 0.2rem;
-  }
-  .contact h2 {
-    font-size: 1.3rem;
-  }
-  .contact input,
-  .contact textarea {
-    font-size: 0.95rem;
-    padding: 0.7em 0.7em;
-  }
-  .contact button,
-  .contact .cta-button {
-    font-size: 0.95rem;
-    padding: 0.6em 1em;
-  }
+    .resume,
+    .contact {
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
 }
 
-/* Add padding to the first section */
-#home {
-    padding-top: 60px; /* Match this value to your header's height */
-  }
-  
-  /* If other sections are affected, add padding to them too */
-  section {
-    padding-top: 60px;
-  }
-
-/* Footer */
-footer {
-    background: linear-gradient(135deg, #333, #555);
-    color: #fff;
-    padding: 2rem 0;
+/* --- Vertically Center Text in Cards/Sections --- */
+.project-card,
+.skill-item,
+.cert-item,
+.edu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+}
+.project-card h3, .project-card span, .project-card p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.skill-item h4,
+.skill-item p {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
 }
 
-.footer-container {
-    position: relative;
-    z-index: 1;
-}
-
+/* --- Social/Contact Bar at Bottom Spacing --- */
 .footer-container .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     margin-bottom: 1rem;
 }
-
 .footer-container .social-link {
-    color: #fff;
-    margin: 0 0.5rem;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.footer-container .social-link:hover {
-    color: #ffcc00;
-    transform: scale(1.2);
-}
-
-.footer-text {
-    font-size: 1rem;
-    color: #ccc;
-}
-
-.footer-text .heart {
-    color: #ff6600;
-    animation: heartbeat 1.5s infinite;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-/* Responsive Adjustments */
-@media screen and (max-width: 1024px) {
-    .container {
-        padding: 1.5rem;
-    }
-
-    .profile-img {
-        width: 180px;
-    }
-
-    .timeline::before {
-        left: 15px;
-    }
-
-    .timeline-item {
-        width: 100% !important;
-        left: 0 !important;
-        padding-left: 0;
-        margin-bottom: 1.5rem;
-    }
-
-    .timeline-content::after {
-        left: -30px !important;
-    }
-
-    .timeline-content {
-        padding: 1rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    .profile-img {
-        width: 150px;
-    }
-
-    .timeline::before {
-        left: 10px;
-    }
-
-    .timeline-item {
-        padding-left: 0;
-    }
-
-    /* About Section Flexbox */
-    .about .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .about .row {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .about .col-md-6 {
-        width: 100%;
-    }
-
-    /* Projects Grid */
-    .project-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-    }
-
-    /* Skills Flexbox */
-    .skill-list {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .skill-item {
-        width: 100% !important;
-        max-width: 300px;
-    }
-
-    /* Testimonials Flexbox */
-    .testimonial-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .testimonial-card {
-        width: 100% !important;
-        max-width: 400px;
-    }
-
-    /* Contact Form */
-    .contact form {
-        max-width: 100% !important;
-        padding: 0 1rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .hero .animated-title {
-        font-size: 2.5rem !important;
-    }
-
-    .hero .highlight {
-        font-size: 1.2rem !important;
-    }
-
-    .profile-img {
-        width: 120px !important;
-    }
-
-    .nav-links {
-        font-size: 14px !important;
-    }
-
-    .nav-links li a {
-        padding: 6px 8px !important;
-    }
-
-    /* Reduce padding in container */
-    .container {
-        padding: 0.5rem !important;
-    }
-
-    /* Adjust project cards */
-    .project-card {
-        padding: 1rem !important;
-    }
-
-    /* Adjust skill items */
-    .skill-item {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Particles Container */
-#tsparticles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure particles are behind other content */
-}
-
-/* Black-and-White to Color Hover Effect */
-.profile-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-}
-
-.profile-image {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.5s ease-in-out;
-}
-
-.profile-image:hover {
-    filter: grayscale(0%);
-}
-
-/* Treasure Box Section */
-.treasure-box-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffcc00, #ff6600);
-    position: relative;
-    perspective: 1000px; /* Add 3D perspective */
-}
-
-.treasure-box-container {
-    position: relative;
-    text-align: center;
-    transform: rotateX(10deg) rotateY(-10deg); /* 3D rotation */
-    animation: float 3s ease-in-out infinite; /* Floating animation */
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: rotateX(10deg) rotateY(-10deg) translateY(0);
-    }
-    50% {
-        transform: rotateX(10deg) rotateY(-10deg) translateY(-20px);
-    }
-}
-
-.scroll-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
+    margin: 0;
+    padding: 0.6em;
+    font-size: 1.6rem;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: block; /* Ensure the scroll-to-top button is visible */
-    z-index: 1000;
-}
-.scroll-top:hover {
-    background: var(--secondary-color);
-}
-
-html {
-    scroll-behavior: smooth; /* Enable smooth scrolling */
-}
-
-/* Responsive Typography using clamp for fluid scaling */
-h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-}
-
-h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-h3 {
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-}
-
-p, li, span, a, button {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-}
-
-/* Large desktop breakpoint */
-@media screen and (min-width: 1200px) {
-    .container {
-        max-width: 1400px;
-        padding: 3rem;
-    }
-
-    .profile-img {
-        width: 220px;
-    }
-
-    .project-card {
-        padding: 3rem;
-    }
-
-    .skill-item {
-        width: 300px;
-    }
-}
-
-/* Very small mobile devices */
-@media screen and (max-width: 360px) {
-    .nav-links li a {
-        font-size: 12px !important;
-        padding: 4px 6px !important;
-    }
-
-    .hero .animated-title {
-        font-size: 2rem !important;
-    }
-
-    .hero .highlight {
-        font-size: 1rem !important;
-    }
-
-    .profile-img {
-        width: 100px !important;
-    }
-
-    .container {
-        padding: 0.25rem !important;
-    }
-
-    .project-card {
-        padding: 0.5rem !important;
-    }
-
-    .skill-item {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Responsive Design Enhancements */
-
-/* For tablets (768px and above) */
-@media (min-width: 768px) {
-    .hero .animated-title {
-        font-size: 3rem;
-    }
-
-    .hero .highlight {
-        font-size: 1.5rem;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 20px;
-    }
-
-    .profile-img {
-        width: 250px;
-    }
-}
-
-/* For desktops (1024px and above) */
-@media (min-width: 1024px) {
-    .hero .animated-title {
-        font-size: 4.5rem;
-    }
-
-    .hero .highlight {
-        font-size: 2rem;
-    }
-
-    .container {
-        max-width: 1200px;
-    }
-
-    .profile-img {
-        width: 300px;
-    }
-}
-
-/* For small screens (below 768px) */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .profile-img {
-        width: 150px;
-    }
-
-    .cta-button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
-
-/* Resume Section */
-.resume {
-    text-align: center;
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.resume-actions {
-    margin-top: 1.5rem;
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.resume-actions .cta-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #fff;
-    background-color: var(--primary-color);
-    transition: background-color 0.3s ease;
-}
-
-.resume-actions .cta-button:hover {
-    background-color: var(--secondary-color);
-}
-
-/* Resume Modal */
-#resumeModal {
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-width: 2.5em;
+    min-height: 2.5em;
 }
 
-#resumeModal .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
+/* --- Hero Section Centering --- */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.hero .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hero .animated-title,
+.hero .highlight,
+.hero .cta-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-img {
+    display: block;
+    margin: 2rem auto 0 auto;
 }
 
-#resumeModal .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+/* Responsive fix for hero vertical alignment */
+@media (min-width: 768px) {
+    .hero {
+        min-height: 80vh;
+        justify-content: center;
+    }
+    .hero .content {
+        min-height: 300px;
+        justify-content: center;
+    }
 }
 
-#resumeModal .close:hover,
-#resumeModal .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+/* --- Remove duplicate/empty layers if any --- */
+/* (No code needed, just ensure no duplicate sections in the HTML) */
 
 /* ===== Artistic Theme Variables ===== */
 :root {
@@ -2549,7 +2000,6 @@ section,
   box-sizing: border-box;
   border-radius: var(--border-radius, 10px);
   background: rgba(255,255,255,0.93);
-
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   margin: 2rem auto;
@@ -2846,7 +2296,6 @@ p, li, span, a, button {
     text-decoration: none;
     cursor: pointer;
 }
-}
 
 /* ===== Responsive Typography ===== */
 html {
@@ -3005,7 +2454,7 @@ a:focus, button:focus, input:focus, textarea:focus {
 .about {
     background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
     padding: 4rem 0;
-    border-radius: 10px;
+       border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -3388,531 +2837,154 @@ a:focus, button:focus, input:focus, textarea:focus {
   color: #d72631;
 }
 
-/* ===== Responsive Contact Section ===== */
+/* --- Center Tool Icons/Buttons --- */
+.tool-carousel-section .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.carousel-mask {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center tool icons/buttons below hero name */
+.tool-carousel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem auto;
+    width: 100%;
+}
+.tool-carousel-section .carousel-container {
+    margin: 0 auto;
+}
+
+/* --- Even Padding/Margins Between Sections --- */
+section,
+.container {
+    /* ...existing code... */
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+.resume,
+.contact {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+    /* Remove background for contact, if needed, to match resume */
+}
 @media (max-width: 768px) {
-  .contact {
-    padding: 2rem 0.5rem;
-    max-width: 99vw;
-  }
-  .contact form {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
+    .resume,
+    .contact {
+        max-width: 99vw;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }
-
 @media (max-width: 480px) {
-  .contact {
-    padding: 1rem 0.2rem;
-  }
-  .contact h2 {
-    font-size: 1.3rem;
-  }
-  .contact input,
-  .contact textarea {
-    font-size: 0.95rem;
-    padding: 0.7em 0.7em;
-  }
-  .contact button,
-  .contact .cta-button {
-    font-size: 0.95rem;
-    padding: 0.6em 1em;
-  }
+    .resume,
+    .contact {
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
 }
 
-/* Add padding to the first section */
-#home {
-    padding-top: 60px; /* Match this value to your header's height */
-  }
-  
-  /* If other sections are affected, add padding to them too */
-  section {
-    padding-top: 60px;
-  }
-
-/* Footer */
-footer {
-    background: linear-gradient(135deg, #333, #555);
-    color: #fff;
-    padding: 2rem 0;
+/* --- Vertically Center Text in Cards/Sections --- */
+.project-card,
+.skill-item,
+.cert-item,
+.edu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+}
+.project-card h3, .project-card span, .project-card p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.skill-item h4,
+.skill-item p {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
 }
 
-.footer-container {
-    position: relative;
-    z-index: 1;
-}
-
+/* --- Social/Contact Bar at Bottom Spacing --- */
 .footer-container .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     margin-bottom: 1rem;
 }
-
 .footer-container .social-link {
-    color: #fff;
-    margin: 0 0.5rem;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.footer-container .social-link:hover {
-    color: #ffcc00;
-    transform: scale(1.2);
-}
-
-.footer-text {
-    font-size: 1rem;
-    color: #ccc;
-}
-
-.footer-text .heart {
-    color: #ff6600;
-    animation: heartbeat 1.5s infinite;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-/* Responsive Adjustments */
-@media screen and (max-width: 1024px) {
-    .container {
-        padding: 1.5rem;
-    }
-
-    .profile-img {
-        width: 180px;
-    }
-
-    .timeline::before {
-        left: 15px;
-    }
-
-    .timeline-item {
-        width: 100% !important;
-        left: 0 !important;
-        padding-left: 0;
-        margin-bottom: 1.5rem;
-    }
-
-    .timeline-content::after {
-        left: -30px !important;
-    }
-
-    .timeline-content {
-        padding: 1rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    .profile-img {
-        width: 150px;
-    }
-
-    .timeline::before {
-        left: 10px;
-    }
-
-    .timeline-item {
-        padding-left: 0;
-    }
-
-    /* About Section Flexbox */
-    .about .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .about .row {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .about .col-md-6 {
-        width: 100%;
-    }
-
-    /* Projects Grid */
-    .project-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-    }
-
-    /* Skills Flexbox */
-    .skill-list {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .skill-item {
-        width: 100% !important;
-        max-width: 300px;
-    }
-
-    /* Testimonials Flexbox */
-    .testimonial-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .testimonial-card {
-        width: 100% !important;
-        max-width: 400px;
-    }
-
-    /* Contact Form */
-    .contact form {
-        max-width: 100% !important;
-        padding: 0 1rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .hero .animated-title {
-        font-size: 2.5rem !important;
-    }
-
-    .hero .highlight {
-        font-size: 1.2rem !important;
-    }
-
-    .profile-img {
-        width: 120px !important;
-    }
-
-    .nav-links {
-        font-size: 14px !important;
-    }
-
-    .nav-links li a {
-        padding: 6px 8px !important;
-    }
-
-    /* Reduce padding in container */
-    .container {
-        padding: 0.5rem !important;
-    }
-
-    /* Adjust project cards */
-    .project-card {
-        padding: 1rem !important;
-    }
-
-    /* Adjust skill items */
-    .skill-item {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Particles Container */
-#tsparticles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure particles are behind other content */
-}
-
-/* Black-and-White to Color Hover Effect */
-.profile-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-}
-
-.profile-image {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.5s ease-in-out;
-}
-
-.profile-image:hover {
-    filter: grayscale(0%);
-}
-
-/* Treasure Box Section */
-.treasure-box-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffcc00, #ff6600);
-    position: relative;
-    perspective: 1000px; /* Add 3D perspective */
-}
-
-.treasure-box-container {
-    position: relative;
-    text-align: center;
-    transform: rotateX(10deg) rotateY(-10deg); /* 3D rotation */
-    animation: float 3s ease-in-out infinite; /* Floating animation */
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: rotateX(10deg) rotateY(-10deg) translateY(0);
-    }
-    50% {
-        transform: rotateX(10deg) rotateY(-10deg) translateY(-20px);
-    }
-}
-
-.scroll-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
+    margin: 0;
+    padding: 0.6em;
+    font-size: 1.6rem;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: block; /* Ensure the scroll-to-top button is visible */
-    z-index: 1000;
-}
-.scroll-top:hover {
-    background: var(--secondary-color);
-}
-
-html {
-    scroll-behavior: smooth; /* Enable smooth scrolling */
-}
-
-/* Responsive Typography using clamp for fluid scaling */
-h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-}
-
-h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-h3 {
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-}
-
-p, li, span, a, button {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-}
-
-/* Large desktop breakpoint */
-@media screen and (min-width: 1200px) {
-    .container {
-        max-width: 1400px;
-        padding: 3rem;
-    }
-
-    .profile-img {
-        width: 220px;
-    }
-
-    .project-card {
-        padding: 3rem;
-    }
-
-    .skill-item {
-        width: 300px;
-    }
-}
-
-/* Very small mobile devices */
-@media screen and (max-width: 360px) {
-    .nav-links li a {
-        font-size: 12px !important;
-        padding: 4px 6px !important;
-    }
-
-    .hero .animated-title {
-        font-size: 2rem !important;
-    }
-
-    .hero .highlight {
-        font-size: 1rem !important;
-    }
-
-    .profile-img {
-        width: 100px !important;
-    }
-
-    .container {
-        padding: 0.25rem !important;
-    }
-
-    .project-card {
-        padding: 0.5rem !important;
-    }
-
-    .skill-item {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Responsive Design Enhancements */
-
-/* For tablets (768px and above) */
-@media (min-width: 768px) {
-    .hero .animated-title {
-        font-size: 3rem;
-    }
-
-    .hero .highlight {
-        font-size: 1.5rem;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 20px;
-    }
-
-    .profile-img {
-        width: 250px;
-    }
-}
-
-/* For desktops (1024px and above) */
-@media (min-width: 1024px) {
-    .hero .animated-title {
-        font-size: 4.5rem;
-    }
-
-    .hero .highlight {
-        font-size: 2rem;
-    }
-
-    .container {
-        max-width: 1200px;
-    }
-
-    .profile-img {
-        width: 300px;
-    }
-}
-
-/* For small screens (below 768px) */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .profile-img {
-        width: 150px;
-    }
-
-    .cta-button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
-
-/* Resume Section */
-.resume {
-    text-align: center;
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.resume-actions {
-    margin-top: 1.5rem;
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.resume-actions .cta-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #fff;
-    background-color: var(--primary-color);
-    transition: background-color 0.3s ease;
-}
-
-.resume-actions .cta-button:hover {
-    background-color: var(--secondary-color);
-}
-
-/* Resume Modal */
-#resumeModal {
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-width: 2.5em;
+    min-height: 2.5em;
 }
 
-#resumeModal .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
+/* --- Hero Section Centering --- */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.hero .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hero .animated-title,
+.hero .highlight,
+.hero .cta-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-img {
+    display: block;
+    margin: 2rem auto 0 auto;
 }
 
-#resumeModal .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+/* Responsive fix for hero vertical alignment */
+@media (min-width: 768px) {
+    .hero {
+        min-height: 80vh;
+        justify-content: center;
+    }
+    .hero .content {
+        min-height: 300px;
+        justify-content: center;
+    }
 }
 
-#resumeModal .close:hover,
-#resumeModal .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+/* --- Remove duplicate/empty layers if any --- */
+/* (No code needed, just ensure no duplicate sections in the HTML) */

@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = getenv('SMTP_USERNAME') ?: 'semonjeyakumar@gmail.com';
-        $mail->Password = getenv('SMTP_PASSWORD') ?: 'ctmx gahw jeya wcgf';
+        $mail->Username = 'semonjeyakumar@gmail.com';
+        $mail->Password = 'jgfmiypetzomsczb'; // 16-character app password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
@@ -49,9 +49,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => false, 'error' => $errorMessage]);
         }
     } catch (Exception $e) {
-        $errorMessage = 'Mail Error: ' . $e->getMessage();
-        error_log($errorMessage);
+        $errorMessage = 'Mail Error: ' . $mail->ErrorInfo; // use PHPMailer error info
+        error_log($errorMessage); // logs to Apache log
+
+        // Show full error in browser temporarily for debugging
         echo json_encode(['success' => false, 'error' => $errorMessage]);
     }
 }
 ?>
+
+<form id="contact-form" method="POST">
+  <input name="name" type="text" placeholder="Your Name" required>
+  <input name="email" type="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Your Message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+
+  const res = await fetch("contact.php", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  if (data.success) {
+    alert("Message sent!");
+    form.reset();
+  } else {
+    alert("Failed: " + data.error);
+  }
+});
+</script>
+  } else {
+    alert("Failed: " + data.error);
+  }
+});
+</script>
