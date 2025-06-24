@@ -1,4 +1,16 @@
 {
+    "name": "welcome/portfolio",
+    "autoload": {
+        "psr-4": {
+            "Welcome\\Portfolio\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "semonjacob",
+            "email": "semonjeyakumar@gmail.com"
+        }
+    ],
     "require": {
         "phpmailer/phpmailer": "^6.10"
     }
