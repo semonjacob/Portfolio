@@ -66,27 +66,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 
 <script>
-document.getElementById("contact-form").addEventListener("submit", async function(e) {
+const form = document.querySelector("form");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const form = e.target;
+
   const formData = new FormData(form);
 
-  const res = await fetch("contact.php", {
-    method: "POST",
-    body: formData
-  });
+  try {
+    const response = await fetch("contact.php", {
+      method: "POST",
+      body: formData,
+    });
 
-  const data = await res.json();
-  if (data.success) {
-    alert("Message sent!");
-    form.reset();
-  } else {
-    alert("Failed: " + data.error);
-  }
-});
-</script>
-  } else {
-    alert("Failed: " + data.error);
+    const data = await response.json();
+
+    if (data.success) {
+      alert("✅ Message sent successfully!");
+      form.reset();
+    } else {
+      alert("❌ Error: " + data.error);
+    }
+  } catch (err) {
+    alert("❌ Failed to send the message. Try again later.");
+    console.error(err);
   }
 });
 </script>

@@ -144,37 +144,50 @@ document.addEventListener("DOMContentLoaded", () => {
         retina_detect: true,
     });
 
-    const contactForm = document.getElementById("contactForm");
-    const formMessage = document.getElementById("formMessage");
+    // Contact form logic
+    const form = document.querySelector("form");
+    const nameInput = document.querySelector("input[name='name']");
+    const emailInput = document.querySelector("input[name='email']");
+    const messageInput = document.querySelector("textarea[name='message']");
+    const submitButton = document.querySelector("button[type='submit']");
+    const statusText = document.createElement("p");
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", async (e) => {
+    if (form && nameInput && emailInput && messageInput && submitButton) {
+        statusText.style.marginTop = "10px";
+        statusText.style.fontWeight = "bold";
+        submitButton.parentNode.appendChild(statusText);
+
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            formMessage.textContent = ""; // Clear previous messages
-            formMessage.className = "form-message";
 
-            const formData = new FormData(contactForm);
+            submitButton.disabled = true;
+            submitButton.innerText = "Sending...";
 
             try {
                 const response = await fetch("contact.php", {
                     method: "POST",
-                    body: formData,
+                    body: new FormData(form)
                 });
 
                 const result = await response.json();
 
                 if (result.success) {
-                    formMessage.textContent = "Your message has been sent successfully!";
-                    formMessage.classList.add("success");
-                    contactForm.reset();
+                    statusText.innerText = "✅ Message sent successfully!";
+                    statusText.style.color = "green";
+                    nameInput.value = "";
+                    emailInput.value = "";
+                    messageInput.value = "";
                 } else {
-                    console.error("Contact form error response:", result);
-                    formMessage.innerHTML = result.error || "An error occurred. Please try again.";
-                    formMessage.classList.add("error");
+                    statusText.innerText = `❌ ${result.error || "Failed to send message."}`;
+                    statusText.style.color = "red";
                 }
             } catch (error) {
-                formMessage.textContent = "Failed to send the message. Please try again later.";
-                formMessage.classList.add("error");
+                statusText.innerText = `❌ Something went wrong.`;
+                statusText.style.color = "red";
+                console.error("Send Error:", error);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerText = "Send Message";
             }
         });
     }
