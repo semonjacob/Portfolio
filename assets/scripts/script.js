@@ -169,7 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: new FormData(form)
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (err) {
+                    throw new Error("Invalid JSON response from server");
+                }
 
                 if (result.success) {
                     statusText.innerText = "✅ Message sent successfully!";

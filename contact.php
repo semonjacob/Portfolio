@@ -1,4 +1,7 @@
 <?php
+ob_start(); // Start output buffering
+header('Content-Type: application/json');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -51,14 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (Exception $e) {
         $errorMessage = 'Mail Error: ' . $mail->ErrorInfo; // use PHPMailer error info
         error_log($errorMessage); // logs to Apache log
-
-        // Show full error in browser temporarily for debugging
         echo json_encode(['success' => false, 'error' => $errorMessage]);
     }
+    exit;
 }
-?>
-
-<form id="contact-form" method="POST">
+exit;
   <input name="name" type="text" placeholder="Your Name" required>
   <input name="email" type="email" placeholder="Your Email" required>
   <textarea name="message" placeholder="Your Message" required></textarea>
