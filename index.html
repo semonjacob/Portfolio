@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport"="width=device-width, initial-scale=1.0">
     <title>Semon Jacob | Portfolio</title>
-    <meta name="description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional." />
-    <meta name="keywords" content="Portfolio, Multimedia Creator, Graphic Designer, Video Editing, Accounting, Finance" />
+    <meta name="description" content="Portfolio of Semon Jacob, a video editor, multimedia creator, and AI visuals creator specializing in promotional videos, social media content, motion graphics, photography, and creative storytelling." />
+    <meta name="keywords" content="Semon Jacob, video editor, multimedia creator, AI visuals creator, motion graphics, photography, creative producer" />
     <meta name="author" content="Semon Jacob" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/styles/animations-enhancements.css" />
     <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="stylesheet" href="assets/styles/phase2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .social-icons a {
@@ -33,10 +34,14 @@
     </style>
 
     <meta property="og:title" content="Semon Jacob | Portfolio">
-    <meta property="og:description" content="Portfolio of Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional.">
-    <meta property="og:image" content="assets/images/profile.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:description" content="Video editing, AI visuals, motion graphics, photography, and creative storytelling portfolio by Semon Jacob.">
+    <meta property="og:image" content="https://semonjacob.github.io/Portfolio/assets/images/profile.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://semonjacob.github.io/Portfolio/">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Semon Jacob | Video Editor & Multimedia Creator">
+    <meta name="twitter:description" content="Video editing, AI visuals, motion graphics, photography, and creative storytelling portfolio by Semon Jacob.">
+    <meta name="twitter:image" content="https://semonjacob.github.io/Portfolio/assets/images/profile.jpg">
 
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_KEY"></script>
     <script type="application/ld+json">
@@ -45,7 +50,9 @@
         "@type": "Person",
         "name": "Semon Jacob",
         "jobTitle": "Multimedia Creator",
-        "url": "https://yourwebsite.com",
+        "url": "https://semonjacob.github.io/Portfolio/",
+        "image": "https://semonjacob.github.io/Portfolio/assets/images/profile.jpg",
+        "email": "mailto:semonjeyakumar@gmail.com",
         "sameAs": [
             "https://www.linkedin.com/in/j-semon",
             "https://www.instagram.com/semon_jacob/",
@@ -63,19 +70,20 @@
         
     <nav class="navbar" aria-label="Main Navigation" role="navigation">
         <div class="logo">Semon Jacob</div>
-        <ul class="nav-links">
+        <ul class="nav-links" id="primary-navigation">
             <li><a href="#home" aria-label="Go to Home Section">Home</a></li>
+            <li><a href="#showreel" aria-label="Go to Showreel Section">Showreel</a></li>
+            <li><a href="#projects" aria-label="Go to Featured Projects Section">Work</a></li>
             <li><a href="#about" aria-label="Go to About Section">About</a></li>
             <li><a href="#experience" aria-label="Go to Experience Section">Experience</a></li>
-            <li><a href="#projects" aria-label="Go to Portfolio Section">Portfolio</a></li>
             <li><a href="#skills" aria-label="Go to Skills Section">Skills</a></li>
             <li><a href="#contact" aria-label="Go to Contact Section">Contact</a></li>
         </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
+        <button class="burger" type="button" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+            <span class="line1"></span>
+            <span class="line2"></span>
+            <span class="line3"></span>
+        </button>
     </nav>
 
     <div class="custom-cursor"></div>
@@ -256,12 +264,6 @@
             cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
         });
 
-        const burger = document.querySelector('.burger');
-        const navLinks = document.querySelector('.nav-links');
-
-        burger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('projectModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -328,74 +330,49 @@
     <div id="tsparticles"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="hero fade-in">
-        <div class="content">
+    <section id="home" class="hero hero-redesign fade-in">
+        <div class="hero-copy">
+            <p class="eyebrow">Video Editing • Motion Graphics • AI Visuals</p>
             <h1 class="animated-title">Semon Jacob</h1>
-            <p class="highlight">Results-driven Multimedia Creator</p>
-            <a href="#projects" class="cta-button">View My Work</a>
+            <p class="highlight">Multimedia creator crafting cinematic faith-based stories, promotional videos, social content, and AI-enhanced visual experiences.</p>
+            <div class="hero-actions" aria-label="Primary actions">
+                <a href="#showreel" class="cta-button primary-action">Watch Showreel</a>
+                <a href="#projects" class="cta-button secondary-action">Explore Work</a>
+            </div>
+            <div class="hero-proof" aria-label="Portfolio highlights">
+                <span><strong>20%</strong> engagement lift</span>
+                <span><strong>30%</strong> faster production workflows</span>
+                <span><strong>6+</strong> featured creative projects</span>
+            </div>
         </div>
-        <img src="assets/images/profile.jpg" alt="Profile Photo of Semon Jacob" class="profile-img" 
-             style="border: 5px solid #ffcc00; box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);"
-             loading="lazy" 
-             onerror="this.src='https://via.placeholder.com/200';">
+        <div class="hero-visual" aria-label="Featured profile visual">
+            <img src="assets/images/profile.jpg" alt="Profile Photo of Semon Jacob" class="profile-img" loading="eager" onerror="this.src='https://via.placeholder.com/200';">
+            <div class="hero-card">
+                <span class="hero-card-label">Available for</span>
+                <strong>Editing, AI visuals & creative production</strong>
+            </div>
+        </div>
     </section>
-    <style>
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #f46036, #d72631 50%, #f9f7f7 100%), 
-                        url('hero-bg.jpg') no-repeat center center/cover;
-            color: #fff;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
 
-        .hero .animated-title {
-            font-size: 4rem;
-        }
-
-        .hero .highlight {
-            font-size: 1.8rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Dark overlay for better text visibility */
-            z-index: -1;
-        }
-
-        .content {
-            z-index: 1; /* Ensure text is above the overlay */
-            max-width: 600px;
-        }
-
-        .profile-img {
-            width: 200px;
-            border-radius: 50%;
-            margin-top: 2rem;
-        }
-    </style>
-
-    <script>
-        document.addEventListener("mousemove", function(e) {
-            let elements = document.querySelectorAll(".parallax-element");
-            elements.forEach(el => {
-                let speed = 5;
-                let x = (window.innerWidth - e.clientX * speed) / 100;
-                let y = (window.innerHeight - e.clientY * speed) / 100;
-                el.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-    </script>
+    <!-- Showreel Section -->
+    <section id="showreel" class="showreel-section fade-in" aria-labelledby="showreel-title">
+        <div class="container showreel-layout">
+            <div class="showreel-copy">
+                <p class="eyebrow">Featured Showreel</p>
+                <h2 id="showreel-title" class="section-title">See the work in motion</h2>
+                <p>Start with a quick look at editing, animation, AI-generated visuals, and faith-based storytelling work before exploring individual projects.</p>
+                <div class="showreel-tags" aria-label="Showreel skills">
+                    <span>Video Editing</span>
+                    <span>AI Visuals</span>
+                    <span>Motion Graphics</span>
+                    <span>Creative Direction</span>
+                </div>
+            </div>
+            <div class="showreel-frame">
+                <iframe src="https://www.youtube.com/embed/GEK-YJdPLYQ?si=0AYu9BX6JtU03dJ0&amp;start=178" title="Semon Jacob showreel featuring editing, animation, and AI visuals" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
 
 <!-- Place this after the closing </section> of the Hero section and before the About section -->
 <section class="tool-carousel-section fade-in" aria-label="My Tools">
@@ -559,100 +536,54 @@
         });
     });
 </script>
-    <!-- About Section -->
-    <section id="about" class="about fade-in">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="profile-image-container">
-                        <img src="assets/images/profile.jpg" alt="Profile Photo of Semon Jacob" class="profile-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200';">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <p class="about-text">
-                        <span class="highlight">Results-driven Multimedia Creator</span> with hands-on experience in <strong>photo/video editing</strong>, <strong>graphic design</strong>, and <strong>AI-driven media tools</strong>. Proficient in <span class="highlight">Adobe Creative Suite</span> and skilled in creating engaging content for <em>social media</em>, <em>events</em>, and <em>promotional campaigns</em>.
-                    </p>
-                    <p class="about-highlight">
-                        <i class="fas fa-quote-left"></i> Passionate about storytelling through visuals and technology. <i class="fas fa-quote-right"></i>
-                    </p>
-                    <p class="languages">
-                        <strong>Languages:</strong> <span class="highlight">Tamil</span>, <span class="highlight">English</span>
-                    </p>
-                    <button id="readAbout" class="cta-button">Read About Me</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience fade-in">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Multimedia Creator & Content Specialist</h3>
-                        <span>Jesus Redeems Ministry-Media | 6 Months (Present)</span>
-                        <ul>
-                            <li>Developed engaging multimedia content for ministry outreach, increasing audience engagement by 20%.</li>
-                            <li>Edited photos and videos using Adobe Premiere Pro, After Effects, and Photoshop to produce high-quality visuals.</li>
-                            <li>Implemented AI tools to streamline production workflows, reducing production time by 30%.</li>
-                            <li>Collaborated with cross-functional teams to align content with organizational goals.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Freelance Multimedia Designer</h3>
-                        <span>Self-Employed | 1 Year</span>
-                        <ul>
-                            <li>Designed custom graphics and promotional materials for clients, enhancing brand visibility.</li>
-                            <li>Produced explainer videos and motion graphics for online campaigns.</li>
-                            <li>Provided end-to-end multimedia solutions, from concept to delivery.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Projects Section -->
     <section id="projects" class="projects fade-in">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Projects</h2>
+            <p class="eyebrow">Selected Work</p>
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Featured Projects</h2>
+            <p class="section-intro">A curated look at video editing, AI visuals, social graphics, and creative direction projects.</p>
             <div class="project-grid">
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-img="event-banner.jpg" data-title="Event Banner Design">Social Media Graphics</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="assets/images/portfolio1.jpg.jpg" alt="Social media graphics portfolio preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-img="assets/images/portfolio1.jpg.jpg" data-title="Social Media Graphics">Social Media Graphics</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Designed banners, posters, and social media posts for weekly church events, boosting attendance by 15%.</p>
+                    </div>
                 </div>
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-img="promo-video-screenshot.jpg" data-title="Promotional Video Screenshot">AI-Generated Content</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="https://img.youtube.com/vi/3a0nRIi3nRE/hqdefault.jpg" alt="AI-generated content video preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/3a0nRIi3nRE?si=BnKDPtXcHkoF3qeA" data-title="AI-Generated Content">AI-Generated Content</button></h3>
                     <span>Freelance Project</span>
                     <p>Used AI tools to generate explainer videos for online Bible studies, reducing production time by 30%.</p>
+                    </div>
                 </div>
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-img="social-media-campaign.jpg" data-title="Social Media Campaign Graphics">Ministry Outreach Video Campaign</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="https://img.youtube.com/vi/GEK-YJdPLYQ/hqdefault.jpg" alt="Ministry outreach video campaign preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/GEK-YJdPLYQ?si=0AYu9BX6JtU03dJ0&amp;start=178" data-title="Ministry Outreach Video Campaign">Ministry Outreach Video Campaign</button></h3>
                     <span>Jesus Redeems Ministry-Media</span>
                     <p>Created a series of promotional videos for Jesus Redeems Ministry, increasing social media engagement by 20%.</p>
+                    </div>
                 </div>
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/GEK-YJdPLYQ?si=0AYu9BX6JtU03dJ0&amp;start=178" data-title="My work">CHURCH HISTORY</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="https://img.youtube.com/vi/GEK-YJdPLYQ/hqdefault.jpg" alt="Church history video project preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/GEK-YJdPLYQ?si=0AYu9BX6JtU03dJ0&amp;start=178" data-title="My work">CHURCH HISTORY</button></h3>
                     <span>My work</span>
                     <p>"My contributions to this project encompass editing, animation, and the integration of AI-generated visuals, blending technical precision with creative innovation to bring the vision to life."</p>
+                    </div>
                 </div>
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/6V7eUm7nDH8?si=4nodPXlGKymBXyEn" data-title="My first Direction">Don't escape | short film</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="https://img.youtube.com/vi/6V7eUm7nDH8/hqdefault.jpg" alt="Don't Escape short film preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/6V7eUm7nDH8?si=4nodPXlGKymBXyEn" data-title="My first Direction">Don't escape | short film</button></h3>
                     <span>My Direction</span>
                     <p>"I am the Writer, Director, Editor, and SFX Designer of Don't Escape from Gospel , crafting the story, overseeing its execution, and capturing it through carefully shot visuals."</p>
+                    </div>
                 </div>
-                <div class="project-card" data-category="multimedia">
-                    <h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/3a0nRIi3nRE?si=BnKDPtXcHkoF3qeA" data-title="AI Visuals Creator">Siluvai Sumantha Uruvam</button></h3>
+                <div class="project-card featured-project-card" data-category="multimedia">
+                    <div class="project-media"><img src="https://img.youtube.com/vi/3a0nRIi3nRE/hqdefault.jpg" alt="Siluvai Sumantha Uruvam AI visuals preview" loading="lazy"></div>
+                    <div class="project-content"><h3><button class="project-popup-btn" data-video="https://www.youtube.com/embed/3a0nRIi3nRE?si=BnKDPtXcHkoF3qeA" data-title="AI Visuals Creator">Siluvai Sumantha Uruvam</button></h3>
                     <span>AI Visuals Creator</span>
                     <p>"I serve as the AI Visuals Creator for Siluvai Sumantha Uruvam , a soul-stirring Christian song that masterfully weaves together themes of faith, love, and divine connection, bringing its spiritual message to life through creative and immersive visual storytelling."                    </p>
+                    </div>
                 </div>
             </div>
             <!-- Popup Modal -->
@@ -780,6 +711,66 @@
         });
     </script>
 
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-image-container">
+                        <img src="assets/images/profile.jpg" alt="Profile Photo of Semon Jacob" class="profile-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200';">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="about-text">
+                        <span class="highlight">Results-driven Multimedia Creator</span> with hands-on experience in <strong>photo/video editing</strong>, <strong>graphic design</strong>, and <strong>AI-driven media tools</strong>. Proficient in <span class="highlight">Adobe Creative Suite</span> and skilled in creating engaging content for <em>social media</em>, <em>events</em>, and <em>promotional campaigns</em>.
+                    </p>
+                    <p class="about-highlight">
+                        <i class="fas fa-quote-left"></i> Passionate about storytelling through visuals and technology. <i class="fas fa-quote-right"></i>
+                    </p>
+                    <p class="languages">
+                        <strong>Languages:</strong> <span class="highlight">Tamil</span>, <span class="highlight">English</span>
+                    </p>
+                    <button id="readAbout" class="cta-button">Read About Me</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience fade-in">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Multimedia Creator & Content Specialist</h3>
+                        <span>Jesus Redeems Ministry-Media | 6 Months (Present)</span>
+                        <ul>
+                            <li>Developed engaging multimedia content for ministry outreach, increasing audience engagement by 20%.</li>
+                            <li>Edited photos and videos using Adobe Premiere Pro, After Effects, and Photoshop to produce high-quality visuals.</li>
+                            <li>Implemented AI tools to streamline production workflows, reducing production time by 30%.</li>
+                            <li>Collaborated with cross-functional teams to align content with organizational goals.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Freelance Multimedia Designer</h3>
+                        <span>Self-Employed | 1 Year</span>
+                        <ul>
+                            <li>Designed custom graphics and promotional materials for clients, enhancing brand visibility.</li>
+                            <li>Produced explainer videos and motion graphics for online campaigns.</li>
+                            <li>Provided end-to-end multimedia solutions, from concept to delivery.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills" class="skills fade-in">
         <div class="container">
@@ -824,12 +815,12 @@
         <div class="container">
             <h2><i class="fas fa-certificate"></i> Certifications</h2>
             <div class="cert-item">
-                <h3>Adobe Creative Suite Mastery</h3>
-                <span>Not Specified</span>
+                <h3>Adobe Creative Suite</h3>
+                <span>Premiere Pro, After Effects, Photoshop, Illustrator, and Lightroom workflow experience</span>
             </div>
             <div class="cert-item">
-                <h3>AI Video Generation & Media Tools Training</h3>
-                <span>Not Specified</span>
+                <h3>AI Video Generation & Media Tools</h3>
+                <span>Adobe Firefly, ChatGPT-assisted ideation, and AI-enhanced visual production workflows</span>
             </div>
         </div>
     </section>
@@ -858,8 +849,8 @@
     <section id="contact" class="contact fade-in">
         <div class="container">
             <h2><i class="fas fa-envelope"></i> Get in Touch</h2>
-            <p class="contact-intro">Feel free to reach out for collaborations or just a friendly hello!</p>
-            <form id="contactForm" action="contact.php" method="post">
+            <p class="contact-intro">Interested in working together? Send a project note here or email me directly at <a href="mailto:semonjeyakumar@gmail.com">semonjeyakumar@gmail.com</a>.</p>
+            <form id="contactForm" action="mailto:semonjeyakumar@gmail.com" method="post" enctype="text/plain">
                 <div class="form-group">
                     <input type="text" id="name" name="name" placeholder="Your Name" required>
                 </div>

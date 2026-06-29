@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (burger && navLinks) {
         burger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('active');
+            burger.setAttribute('aria-expanded', String(isOpen));
         });
     }
 
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             navLinks.classList.remove('active');
+            burger?.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -144,8 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
         retina_detect: true,
     });
 
-    // Contact form logic
-    const form = document.querySelector("form");
+    // Static-hosting friendly contact form logic
+    const form = document.querySelector("#contactForm");
     const nameInput = document.querySelector("input[name='name']");
     const emailInput = document.querySelector("input[name='email']");
     const messageInput = document.querySelector("textarea[name='message']");
@@ -155,45 +157,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form && nameInput && emailInput && messageInput && submitButton) {
         statusText.style.marginTop = "10px";
         statusText.style.fontWeight = "bold";
+        statusText.setAttribute("aria-live", "polite");
         submitButton.parentNode.appendChild(statusText);
 
-        form.addEventListener("submit", async (e) => {
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            submitButton.disabled = true;
-            submitButton.innerText = "Sending...";
+            const subject = encodeURIComponent(`Portfolio inquiry from ${nameInput.value.trim() || "Website Visitor"}`);
+            const body = encodeURIComponent(
+                `Name: ${nameInput.value.trim()}\nEmail: ${emailInput.value.trim()}\n\nMessage:\n${messageInput.value.trim()}`
+            );
 
-            try {
-                const response = await fetch("contact.php", {
-                    method: "POST",
-                    body: new FormData(form)
-                });
-
-                let result;
-                try {
-                    result = await response.json();
-                } catch (err) {
-                    throw new Error("Invalid JSON response from server");
-                }
-
-                if (result.success) {
-                    statusText.innerText = "✅ Message sent successfully!";
-                    statusText.style.color = "green";
-                    nameInput.value = "";
-                    emailInput.value = "";
-                    messageInput.value = "";
-                } else {
-                    statusText.innerText = `❌ ${result.error || "Failed to send message."}`;
-                    statusText.style.color = "red";
-                }
-            } catch (error) {
-                statusText.innerText = `❌ Something went wrong.`;
-                statusText.style.color = "red";
-                console.error("Send Error:", error);
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerText = "Send Message";
-            }
+            window.location.href = `mailto:semonjeyakumar@gmail.com?subject=${subject}&body=${body}`;
+            statusText.innerText = "Opening your email app to send the message.";
+            statusText.style.color = "green";
         });
     }
 
