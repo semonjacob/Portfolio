@@ -1,0 +1,4 @@
+# ADD YOUR PINE LABELS VIDEO LINKS HERE
+# FORMAT: Title | YouTube Video URL or Social Media Link | Description | Thumbnail Image URL (optional)
+
+Pine Labels Product Reel | https://www.youtube.com/watch?v=dQw4w9WgXcQ | Dynamic label packaging and manufacturing video reel. | https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg

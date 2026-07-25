@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Premiere Pro",
+    "icon": "Pr",
+    "color": "#00005b",
+    "url": "https://www.adobe.com/products/premiere.html"
+  },
+  {
+    "name": "After Effects",
+    "icon": "Ae",
+    "color": "#00003f",
+    "url": "https://www.adobe.com/products/aftereffects.html"
+  },
+  {
+    "name": "DaVinci Resolve",
+    "icon": "DVR",
+    "color": "#d04423",
+    "url": "https://www.blackmagicdesign.com/products/davinciresolve"
+  },
+  {
+    "name": "Photoshop",
+    "icon": "Ps",
+    "color": "#001e36",
+    "url": "https://www.adobe.com/products/photoshop.html"
+  },
+  {
+    "name": "Illustrator",
+    "icon": "Ai",
+    "color": "#330000",
+    "url": "https://www.adobe.com/products/illustrator.html"
+  },
+  {
+    "name": "Leonardo AI",
+    "icon": "Leo",
+    "color": "#7c3aed",
+    "url": "https://leonardo.ai/"
+  },
+  {
+    "name": "PixVerse",
+    "icon": "Pix",
+    "color": "#2563eb",
+    "url": "https://pixverse.ai/"
+  },
+  {
+    "name": "Canva",
+    "icon": "Cn",
+    "color": "#00c4cc",
+    "url": "https://www.canva.com/"
+  },
+  {
+    "name": "CapCut",
+    "icon": "CC",
+    "color": "#222222",
+    "url": "https://www.capcut.com/"
+  },
+  {
+    "name": "Adobe Firefly",
+    "icon": "Ff",
+    "color": "#e05600",
+    "url": "https://firefly.adobe.com/"
+  }
+]

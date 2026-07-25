@@ -1,0 +1,11 @@
+# ADD YOUR VIDEO CUTS OR SOCIAL MEDIA LINKS HERE
+# FORMAT: Title | YouTube Video URL or Social Media Link | Description | Thumbnail Image URL (optional)
+
+CHURCH HISTORY EP 1 | https://youtu.be/byCvsgVIWTk?si=vQ7tnChcSLcQGHYA | End-to-end production, cinematography, editing, color grading, audio enhancement, and AI visual integration for a church history documentary. | https://img.youtube.com/vi/byCvsgVIWTk/hqdefault.jpg
+CHURCH HISTORY EP 2 | https://youtu.be/RoQtyjpfqag?si=r6bmwEq4QVTwcfs2 | Produced and edited this documentary episode with cinematic color grading, refined audio, and AI-enhanced historical visuals. | https://img.youtube.com/vi/RoQtyjpfqag/hqdefault.jpg
+CHURCH HISTORY EP 3 | https://youtu.be/Bscg2QebCyI?si=ZY3RCmHnRshOVPI_ | Complete video production including filming, post-production, audio cleanup, color correction, and AI-generated visual storytelling. | https://img.youtube.com/vi/Bscg2QebCyI/hqdefault.jpg
+CHURCH HISTORY EP 4 | https://youtu.be/Bv4MqdZ6fas?si=TI2l46yKi5jVa15m | Led the full production workflow with professional editing, color grading, sound enhancement, and AI-powered historical imagery. | https://img.youtube.com/vi/Bv4MqdZ6fas/hqdefault.jpg
+CHURCH HISTORY EP 5 | https://youtu.be/JhfLTnccC_A?si=w-7GK4IHM3tbSDNA | Managed end-to-end production, video editing, cinematic color grading, audio polishing, and AI visual integration. | https://img.youtube.com/vi/JhfLTnccC_A/hqdefault.jpg
+CHURCH HISTORY EP 6 | https://youtu.be/GEK-YJdPLYQ?si=S3qYeP5e_qsDuRwc | Shot and crafted this documentary with complete post-production, audio editing, cinematic grading, and AI-assisted visuals. | https://img.youtube.com/vi/GEK-YJdPLYQ/hqdefault.jpg
+CHURCH HISTORY EP 7 | https://youtu.be/75ZAdnLc964?si=VSSS2mBMsk41RUOZ | End-to-end documentary production featuring professional filming, editing, color grading, audio refinement, and AI visual enhancement. | https://img.youtube.com/vi/75ZAdnLc964/hqdefault.jpg
+Don't Escape Short Film | https://www.youtube.com/watch?v=6V7eUm7nDH8 | Writer, Director, Editor, and SFX sound designer for Don't Escape gospel short film. | https://img.youtube.com/vi/6V7eUm7nDH8/hqdefault.jpg

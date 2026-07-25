@@ -1,0 +1,8 @@
+{
+  "name": "Semon Jacob Portfolio",
+  "description": "Portfolio website for Semon Jacob, Multimedia Creator, Graphic Designer, Video Editor, and Accounting & Finance Professional.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,11 @@
+# EDIT THIS FILE TO ADD OR REMOVE TOOLS & SKILLS
+# FORMAT: Tool Name | Short Badge or Logo Image Path | Badge Color Hex | Website URL
+Premiere Pro | Pr | #00005b | https://www.adobe.com/products/premiere.html
+After Effects | Ae | #00003f | https://www.adobe.com/products/aftereffects.html
+Photoshop | Ps | #001e36 | https://www.adobe.com/products/photoshop.html
+Illustrator | Ai | #330000 | https://www.adobe.com/products/illustrator.html
+Lightroom | Lr | #001e36 | https://www.adobe.com/products/photoshop-lightroom.html
+CapCut | CC | #222222 | https://www.capcut.com/
+Adobe Firefly | Ff | #e05600 | https://firefly.adobe.com/
+Figma | Fg | #a259ff | https://www.figma.com/
+ChatGPT | GPT | #10a37f | https://chat.openai.com/

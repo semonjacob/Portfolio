@@ -1,0 +1,4 @@
+# ADD YOUR FREELANCE VIDEO & REEL LINKS HERE
+# FORMAT: Title | YouTube Video URL or Social Media Link | Description | Thumbnail Image URL (optional)
+
+Commercial Social Media Reel | https://www.youtube.com/watch?v=dQw4w9WgXcQ | High-retention Instagram reel with kinetic subtitles and sound design. | https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg
