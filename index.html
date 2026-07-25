@@ -444,18 +444,11 @@
             box-shadow: 0 0 35px rgba(34, 211, 211, 0.25);
             background: #0d1117;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
         }
 
         .profile-frame:hover {
             transform: scale(1.015);
             box-shadow: 0 0 45px rgba(34, 211, 211, 0.4);
-        }
-
-        .profile-frame.drag-over {
-            border-color: #f59e0b !important;
-            box-shadow: 0 0 50px rgba(245, 158, 11, 0.6) !important;
-            transform: scale(1.02);
         }
 
         .profile-frame img {
@@ -466,35 +459,6 @@
             display: block;
             filter: contrast(105%) brightness(100%);
             transition: opacity 0.2s ease;
-        }
-
-        /* Dropzone hint overlay on photo */
-        .profile-drop-hint {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(13, 17, 23, 0.85);
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px dashed rgba(34, 211, 211, 0.4);
-            pointer-events: none;
-            opacity: 0.8;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 5;
-        }
-
-        .profile-frame:hover .profile-drop-hint,
-        .profile-frame.drag-over .profile-drop-hint {
-            opacity: 1;
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-            background: rgba(13, 17, 23, 0.95);
         }
 
         /* Aspect ratio & crosshair OSD overlay on photo */
@@ -535,7 +499,7 @@
 
         /* ===== TOOL CAROUSEL / EDIT SUITE RACK ===== */
         .tool-rack {
-            margin-top: 40px;
+            margin-top: 20px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             padding: 20px;
@@ -3014,13 +2978,11 @@
 
                     <!-- Profile Photo Frame in Camera Viewfinder -->
                     <div class="profile-frame-container">
-                        <div class="profile-frame" id="profileFrame" title="Drag & Drop an image here or click to upload a custom profile picture">
-                            <img id="profileImg" src="assets/images/semon profile.png" alt="Semon Jacob - Multimedia Creator" onerror="this.src='assets/images/profile.jpg'">
+                        <div class="profile-frame" id="profileFrame">
+                            <img id="profileImg" src="assets/images/semon%20profile.png" alt="Semon Jacob - Multimedia Creator" onerror="this.src='assets/images/profile.jpg'">
                             <div class="autofocus-reticle"></div>
-                            <div class="profile-drop-hint"><i class="fas fa-cloud-upload-alt"></i> DRAG & DROP / CLICK TO AUTO-FIT IMAGE</div>
-                            <div class="frame-badge" id="profileBadge"><i class="fas fa-camera"></i> RAW 4K // AUTO-FIT</div>
+                            <div class="frame-badge" id="profileBadge"><i class="fas fa-camera"></i> RAW 4K // LOG-C</div>
                         </div>
-                        <input type="file" id="profileFileInput" accept="image/*" style="display: none;">
                     </div>
                 </div>
 
@@ -4929,23 +4891,13 @@
         });
 
         // ==========================================
-        // PROFILE PHOTO AUTO-RESIZE & DRAG-AND-DROP CONTROLLER
+        // PROFILE PHOTO AUTO-RESIZE CONTROLLER
         // ==========================================
-        (function initProfileImageAutoResizeAndDragDrop() {
-            const profileFrame = document.getElementById('profileFrame');
+        (function initProfileImageAutoResize() {
             const profileImg = document.getElementById('profileImg');
             const profileBadge = document.getElementById('profileBadge');
-            const profileFileInput = document.getElementById('profileFileInput');
 
             if (!profileImg) return;
-
-            // Restore saved custom image if present
-            try {
-                const savedImg = localStorage.getItem('semon_custom_profile_img');
-                if (savedImg) {
-                    profileImg.src = savedImg;
-                }
-            } catch (e) {}
 
             function autoAdjustProfileLayout() {
                 if (!profileImg) return;
@@ -4970,65 +4922,6 @@
                 autoAdjustProfileLayout();
             }
             profileImg.addEventListener('load', autoAdjustProfileLayout);
-
-            if (!profileFrame) return;
-
-            // Click to upload
-            profileFrame.addEventListener('click', () => {
-                if (profileFileInput) profileFileInput.click();
-            });
-
-            if (profileFileInput) {
-                profileFileInput.addEventListener('change', (e) => {
-                    if (e.target.files && e.target.files[0]) {
-                        handleProfileFile(e.target.files[0]);
-                    }
-                });
-            }
-
-            // Drag and drop handlers
-            profileFrame.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                profileFrame.classList.add('drag-over');
-            });
-
-            profileFrame.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                profileFrame.classList.remove('drag-over');
-            });
-
-            profileFrame.addEventListener('drop', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                profileFrame.classList.remove('drag-over');
-
-                const files = e.dataTransfer.files;
-                if (files && files.length > 0) {
-                    const file = files[0];
-                    if (file.type.startsWith('image/')) {
-                        handleProfileFile(file);
-                    } else {
-                        alert('Please drop an image file (PNG, JPG, WEBP, etc.)');
-                    }
-                }
-            });
-
-            function handleProfileFile(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const dataUrl = e.target.result;
-                    profileImg.src = dataUrl;
-                    try {
-                        localStorage.setItem('semon_custom_profile_img', dataUrl);
-                    } catch (err) {}
-                    if (typeof showNotificationToast === 'function') {
-                        showNotificationToast('Profile picture updated & layout auto-resized!');
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
         })();
 
         // ==========================================
