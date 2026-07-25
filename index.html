@@ -4286,7 +4286,13 @@
 
             <div class="contact-grid">
                 <div class="contact-form-card">
-                    <form id="contactForm" action="contact.php" method="post">
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key & Email Destination -->
+                        <input type="hidden" name="access_key" value="0fa11036-7c34-4a41-b8ef-51a87db7367c">
+                        <input type="hidden" name="subject" value="[Portfolio Contact] New Transmission from Semon Jacob Portfolio">
+                        <input type="hidden" name="from_name" value="Semon Jacob Portfolio">
+                        <input type="hidden" name="redirect" value="false">
+
                         <div class="form-group">
                             <label class="form-label" for="name">NAME // SENDER</label>
                             <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
@@ -4299,11 +4305,14 @@
                             <label class="form-label" for="message">MESSAGE // TRANSMISSION BODY</label>
                             <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
                         </div>
-                        <button type="submit" class="btn-action btn-primary" style="width:100%; justify-content:center;">
-                            <i class="fas fa-paper-plane"></i> TRANSMIT MESSAGE
+                        <button type="submit" id="contactSubmitBtn" class="btn-action btn-primary" style="width:100%; justify-content:center;">
+                            <i class="fas fa-paper-plane"></i> TRANSMIT MESSAGE TO SEMON
                         </button>
                     </form>
                     <div id="formFeedback" style="margin-top: 16px; font-family: var(--font-mono); font-size:0.85rem; display:none;"></div>
+                    <div style="margin-top: 12px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+                        Direct Email: <a href="mailto:semonjeyakumar@gmail.com?subject=Portfolio%20Inquiry" style="color: var(--accent-cyan); text-decoration: underline;">semonjeyakumar@gmail.com</a>
+                    </div>
                 </div>
 
                 <div>
@@ -4698,36 +4707,65 @@
                 });
             }
 
-            // Contact Form Ajax Submission
+            // Contact Form Ajax Submission with Email Delivery to semonjeyakumar@gmail.com
             const contactForm = document.getElementById('contactForm');
             const formFeedback = document.getElementById('formFeedback');
+            const contactSubmitBtn = document.getElementById('contactSubmitBtn');
 
             if (contactForm && formFeedback) {
                 contactForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const formData = new FormData(contactForm);
 
-                    fetch('/contact.php', {
+                    // Show transmitting state
+                    if (contactSubmitBtn) {
+                        contactSubmitBtn.disabled = true;
+                        contactSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> TRANSMITTING TO SEMON...';
+                    }
+                    formFeedback.style.display = 'block';
+                    formFeedback.style.color = '#f59e0b';
+                    formFeedback.textContent = '[ ENCRYPTING & TRANSMITTING MESSAGE... ]';
+
+                    // Try Web3Forms (Works on GitHub Pages & static sites directly)
+                    fetch('https://api.web3forms.com/submit', {
                         method: 'POST',
                         body: formData
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            formFeedback.style.display = 'block';
+                    .then(async (res) => {
+                        let data;
+                        try { data = await res.json(); } catch(e) {}
+                        if (res.ok && data && data.success) {
                             formFeedback.style.color = 'var(--accent-cyan)';
-                            formFeedback.textContent = '[ TRANSMISSION SUCCESSFUL ]: ' + (data.message || 'Message sent!');
+                            formFeedback.textContent = '[ TRANSMISSION SUCCESSFUL ]: Your message has been sent directly to semonjeyakumar@gmail.com!';
                             contactForm.reset();
                         } else {
-                            formFeedback.style.display = 'block';
-                            formFeedback.style.color = 'var(--accent-pink)';
-                            formFeedback.textContent = '[ TRANSMISSION FAILED ]: ' + (data.error || 'Please check fields.');
+                            // Fallback to local server endpoint if running on node
+                            return fetch('/api/contact', { method: 'POST', body: formData }).then(r => r.json());
+                        }
+                    })
+                    .then(data => {
+                        if (data && data.success) {
+                            formFeedback.style.color = 'var(--accent-cyan)';
+                            formFeedback.textContent = '[ TRANSMISSION SUCCESSFUL ]: Message delivered to semonjeyakumar@gmail.com!';
+                            contactForm.reset();
                         }
                     })
                     .catch(() => {
-                        formFeedback.style.display = 'block';
-                        formFeedback.style.color = 'var(--accent-pink)';
-                        formFeedback.textContent = '[ TRANSMISSION FAILED ]: Server error.';
+                        // Ultimate fallback: open mailto link with pre-filled message
+                        const name = formData.get('name') || '';
+                        const email = formData.get('email') || '';
+                        const message = formData.get('message') || '';
+                        const mailtoUrl = `mailto:semonjeyakumar@gmail.com?subject=${encodeURIComponent('[Portfolio Message] from ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+                        
+                        formFeedback.style.color = 'var(--accent-cyan)';
+                        formFeedback.innerHTML = `[ TRANSMISSION READY ]: Opening your email client to send to <strong>semonjeyakumar@gmail.com</strong>... <br><a href="${mailtoUrl}" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">Click here if your email client didn't open automatically</a>`;
+                        window.location.href = mailtoUrl;
+                    })
+                    .finally(() => {
+                        if (contactSubmitBtn) {
+                            contactSubmitBtn.disabled = false;
+                            contactSubmitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> TRANSMIT MESSAGE TO SEMON';
+                        }
                     });
                 });
             }
