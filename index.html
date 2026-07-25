@@ -4673,14 +4673,27 @@
 
             function loadProjects() {
                 fetch('/api/projects')
-                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.ok) throw new Error('API route unavailable');
+                        return res.json();
+                    })
                     .then(data => {
-                        if (data.success && data.projects) {
-                            allProjectsData = data.projects;
+                        if (data && data.success && data.projects) {
+                            return data.projects;
+                        } else if (Array.isArray(data)) {
+                            return data;
+                        }
+                        throw new Error('Invalid project data format');
+                    })
+                    .catch(() => fetch('data/projects.json').then(r => r.json()))
+                    .then(data => {
+                        const projects = Array.isArray(data) ? data : (data && data.projects ? data.projects : []);
+                        if (projects.length > 0) {
+                            allProjectsData = projects;
                             renderProjects();
                         }
                     })
-                    .catch(err => console.error('Error fetching projects:', err));
+                    .catch(err => console.error('Error fetching projects fallback:', err));
             }
 
             loadProjects();
