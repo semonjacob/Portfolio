@@ -106,6 +106,11 @@
             transform: translateY(0);
         }
 
+        .letterbox-overlay.loaded {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
         .letterbox-overlay.loaded .letterbox-top {
             transform: translateY(-100%);
         }
@@ -121,19 +126,26 @@
             transform: translate(-50%, -50%);
             color: var(--accent-pink);
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 0.15em;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 12px 24px;
+            letter-spacing: 0.12em;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 20px;
             border: 1px solid var(--accent-pink);
-            box-shadow: 0 0 20px rgba(255, 46, 126, 0.4);
+            box-shadow: 0 0 25px rgba(255, 46, 126, 0.5);
             opacity: 1;
-            transition: opacity 0.5s ease;
+            z-index: 100;
+            white-space: nowrap;
+            max-width: 90vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         .letterbox-overlay.loaded .letterbox-info {
             opacity: 0;
+            visibility: hidden;
         }
 
         /* ===== TOP NAVIGATION / VIDEO SCRUBBER ===== */
@@ -2853,6 +2865,18 @@
             border: none;
         }
 
+        /* DIWALI REELS GRID & MOBILE STYLING */
+        .diwali-reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            align-items: start;
+            justify-items: center;
+            padding: 16px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         /* Responsive Breakpoints */
         @media (max-width: 900px) {
             .hero-grid, .about-grid, .contact-grid {
@@ -2884,6 +2908,39 @@
             }
         }
 
+        @media (max-width: 600px) {
+            .pinelabs-grading-studio {
+                padding: 14px 10px !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .pinelabs-team-title {
+                font-size: 1.1rem !important;
+            }
+            .pinelabs-sub-tag {
+                font-size: 0.68rem !important;
+            }
+            .diwali-reels-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                padding: 10px 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .diwali-reels-grid > div {
+                max-width: 100% !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .diwali-reels-grid iframe {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
+
         @media prefers-reduced-motion: reduce {
             * {
                 animation: none !important;
@@ -2900,10 +2957,10 @@
     <!-- 7. LETTERBOXING INTRO ANIMATION -->
     <div class="letterbox-overlay" id="letterboxOverlay">
         <div class="letterbox-bar letterbox-top"></div>
+        <div class="letterbox-bar letterbox-bottom"></div>
         <div class="letterbox-info">
             [ REC 00:00:00:00 ] INITIALIZING EDIT_SUITE...
         </div>
-        <div class="letterbox-bar letterbox-bottom"></div>
     </div>
 
     <!-- 1. TOP NAVIGATION / VIDEO SCRUBBER -->
@@ -2994,7 +3051,7 @@
                     </div>
                     <div class="tool-marquee-container">
                         <div class="tool-track" id="toolTrack">
-                            <!-- Dynamically loaded from /api/tools -->
+                            <!-- Set 1 -->
                             <a href="https://www.adobe.com/products/premiere.html" target="_blank" rel="noopener" class="tool-pill">
                                 <div class="tool-icon-badge" style="background:#00005b;">Pr</div> Premiere Pro
                             </a>
@@ -3006,6 +3063,44 @@
                             </a>
                             <a href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noopener" class="tool-pill">
                                 <div class="tool-icon-badge" style="background:#330000;">Ai</div> Illustrator
+                            </a>
+                            <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#e11d48;">Dv</div> DaVinci Resolve
+                            </a>
+                            <a href="https://www.adobe.com/products/audition.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#002c3a;">Au</div> Audition
+                            </a>
+                            <a href="https://www.adobe.com/products/photoshop-lightroom.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#001e36;">Lr</div> Lightroom
+                            </a>
+                            <a href="https://www.figma.com" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#a855f7;">Fg</div> Figma
+                            </a>
+
+                            <!-- Set 2 (Duplicated for Seamless Infinite Loop) -->
+                            <a href="https://www.adobe.com/products/premiere.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#00005b;">Pr</div> Premiere Pro
+                            </a>
+                            <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#00003f;">Ae</div> After Effects
+                            </a>
+                            <a href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#001e36;">Ps</div> Photoshop
+                            </a>
+                            <a href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#330000;">Ai</div> Illustrator
+                            </a>
+                            <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#e11d48;">Dv</div> DaVinci Resolve
+                            </a>
+                            <a href="https://www.adobe.com/products/audition.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#002c3a;">Au</div> Audition
+                            </a>
+                            <a href="https://www.adobe.com/products/photoshop-lightroom.html" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#001e36;">Lr</div> Lightroom
+                            </a>
+                            <a href="https://www.figma.com" target="_blank" rel="noopener" class="tool-pill">
+                                <div class="tool-icon-badge" style="background:#a855f7;">Fg</div> Figma
                             </a>
                         </div>
                     </div>
@@ -3452,26 +3547,6 @@
                 <!-- PINE LABS DEDICATED SHOWCASES (VISIBLE WHEN PINE LABS FOLDER IS SELECTED) -->
                 <div id="pinelabsShowcasesContainer">
 
-                    <!-- TOP STILLS & COLOR GRADING MANAGER BAR -->
-                    <div style="display:flex; justify-content:space-between; align-items:center; background:#0b0e14; border:1px solid #10b981; border-radius:8px; padding:12px 18px; margin-bottom:28px; flex-wrap:wrap; gap:12px; box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);">
-                        <div>
-                            <span style="font-family:var(--font-mono); font-size:0.92rem; font-weight:800; color:#10b981; display:flex; align-items:center; gap:8px;">
-                                <i class="fas fa-sliders-h"></i> COLOR GRADING & BF/AF STILLS MANAGER
-                            </span>
-                            <div style="font-size:0.78rem; color:#9ca3af; margin-top:2px;">
-                                💡 <strong>Easy Drag & Drop:</strong> Drag any photo file directly onto any Before/After thumbnail card to replace it instantly!
-                            </div>
-                        </div>
-                        <div style="display:flex; gap:10px;">
-                            <button onclick="openBulkUploaderModal()" style="background:#10b981; color:#000000; font-family:var(--font-mono); font-weight:800; font-size:0.75rem; padding:8px 16px; border-radius:4px; border:none; cursor:pointer; display:flex; align-items:center; gap:6px; transition:transform 0.2s ease;">
-                                <i class="fas fa-cloud-upload-alt"></i> BATCH UPLOAD ALL STILLS
-                            </button>
-                            <button onclick="resetAllBfAfStills()" style="background:rgba(239, 68, 68, 0.15); color:#f87171; border:1px solid #ef4444; font-family:var(--font-mono); font-size:0.75rem; padding:8px 14px; border-radius:4px; cursor:pointer;">
-                                <i class="fas fa-undo"></i> Reset Default Stills
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- SHOWCASE 1: CodePLAY BANGALORE (Nirupama's Team) -->
                     <div class="showcase-block-wrapper">
                         <div class="showcase-header-text">
@@ -3874,7 +3949,7 @@
                             <div class="pinelabs-sub-tag">VERTICAL REELS & LINKEDIN EMBEDS — FESTIVE CORPORATE UNBOXING & EMPLOYEE REWARDS</div>
                         </div>
 
-                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: start; justify-items: center; padding:16px 0;">
+                        <div class="diwali-reels-grid">
                             <!-- Reel 1: Google Drive Vertical Reel -->
                             <div onclick="openDriveVideoModal('1AiMEFfgYvx8LgkpqkFhEJefKMP3F9Sdw', 'Diwali Gifting Showcase Reel')" style="width:100%; max-width:280px; height:420px; background-image: url('https://lh3.googleusercontent.com/d/1AiMEFfgYvx8LgkpqkFhEJefKMP3F9Sdw=w800'); background-size:cover; background-position:center; border-radius:12px; border:2px solid #10b981; position:relative; cursor:pointer; box-shadow:0 0 20px rgba(16,185,129,0.25); overflow:hidden;">
                                 <div style="position:absolute; top:12px; left:12px; background:rgba(0,0,0,0.8); border:1px solid #10b981; color:#34d399; font-family:var(--font-mono); font-size:0.68rem; padding:3px 8px; border-radius:4px;">
@@ -4435,11 +4510,14 @@
             function loadTools() {
                 if (!toolTrack) return;
                 fetch('/api/tools')
-                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.ok) throw new Error('API route unavailable');
+                        return res.json();
+                    })
+                    .catch(() => fetch('data/tools.json').then(r => r.json()))
                     .then(data => {
-                        if (data.success && data.tools && data.tools.length > 0) {
+                        if (data && data.success && data.tools && data.tools.length > 0) {
                             toolTrack.innerHTML = '';
-                            // Create duplicate list for smooth infinite marquee looping
                             const list = [...data.tools, ...data.tools];
                             list.forEach(tool => {
                                 const pill = document.createElement('a');
@@ -4460,7 +4538,7 @@
                             });
                         }
                     })
-                    .catch(err => console.error('Error fetching tools:', err));
+                    .catch(err => console.log('Using static tool rack HTML'));
             }
 
             loadTools();
