@@ -1685,7 +1685,7 @@
             gap: 12px;
         }
 
-        /* Individual Drag & Drop BF/AF Card */
+        /* Individual BF/AF Showcase Card */
         .bfaf-card-box {
             background: #0d1117;
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1711,61 +1711,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            cursor: default;
             transition: filter 0.3s ease;
         }
 
-        /* Visual distinction for Raw (Before) vs Graded (After) default stills */
+        /* Visual distinction for Raw (Before) vs Graded (After) stills */
         .bfaf-card-box[data-slot-id*="_bf"] .bfaf-image-area:not([data-custom="true"]) {
             filter: saturate(0.55) contrast(0.85) brightness(1.08);
         }
 
         .bfaf-card-box[data-slot-id*="_af"] .bfaf-image-area:not([data-custom="true"]) {
             filter: saturate(1.25) contrast(1.12) brightness(1.02);
-        }
-
-        .bfaf-drop-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(16, 185, 129, 0.92);
-            color: #000000;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 800;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .bfaf-card-box.drag-over .bfaf-drop-overlay {
-            opacity: 1;
-        }
-
-        .bfaf-hover-upload-btn {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(16, 185, 129, 0.6);
-            color: #34d399;
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            padding: 3px 6px;
-            border-radius: 3px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            z-index: 5;
-        }
-
-        .bfaf-card-box:hover .bfaf-hover-upload-btn {
-            opacity: 1;
         }
 
         .bfaf-label-badge {
@@ -3557,30 +3513,6 @@
                 <!-- PINE LABS DEDICATED SHOWCASES (VISIBLE WHEN PINE LABS FOLDER IS SELECTED) -->
                 <div id="pinelabsShowcasesContainer">
 
-                    <!-- COLOR GRADING STUDIO CONTROL TOOLBAR -->
-                    <div class="grading-studio-control-bar" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; background: rgba(13, 17, 23, 0.95); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 14px 20px; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></div>
-                            <span style="font-family: var(--font-mono); font-weight: 800; font-size: 0.92rem; color: #ffffff; letter-spacing: 0.5px;">
-                                <i class="fas fa-sliders-h" style="color: #10b981;"></i> BEFORE & AFTER COLOR GRADING CONTROL STUDIO
-                            </span>
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                            <button onclick="openBulkUploaderModal()" style="background: rgba(16, 185, 129, 0.12); border: 1px solid #10b981; color: #34d399; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 14px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
-                                <i class="fas fa-cloud-upload-alt"></i> BATCH UPLOAD STILLS
-                            </button>
-                            <button onclick="saveAndApplyAllStills()" style="background: #10b981; border: 1px solid #10b981; color: #000000; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; padding: 8px 16px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 0 15px rgba(16,185,129,0.4);">
-                                <i class="fas fa-save"></i> SAVE & UPDATE CHANGES
-                            </button>
-                            <button onclick="scrollToVectorscopeAnalysis()" style="background: rgba(34, 211, 211, 0.12); border: 1px solid #22d3ee; color: #22d3ee; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 14px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
-                                <i class="fas fa-chart-line"></i> COLOR ANALYSIS & VECTORSCOPE
-                            </button>
-                            <button onclick="resetAllBfAfStills()" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 12px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
-                                <i class="fas fa-undo"></i> RESET
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- SHOWCASE 1: CodePLAY BANGALORE (Nirupama's Team) -->
                     <div class="showcase-block-wrapper">
                         <div class="showcase-header-text">
@@ -3597,16 +3529,12 @@
                                     <div class="bfaf-card-box" data-slot-id="cp_bgl_bf1">
                                         <div class="bfaf-image-area" id="img_cp_bgl_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1bgrEVc_tjEPP3Ua727xtL9ZTcJvDjKm3=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_bgl_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="cp_bgl_af1">
                                         <div class="bfaf-image-area" id="img_cp_bgl_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1bgrEVc_tjEPP3Ua727xtL9ZTcJvDjKm3=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_bgl_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3615,16 +3543,12 @@
                                     <div class="bfaf-card-box" data-slot-id="cp_bgl_bf2">
                                         <div class="bfaf-image-area" id="img_cp_bgl_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1bgrEVc_tjEPP3Ua727xtL9ZTcJvDjKm3=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_bgl_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="cp_bgl_af2">
                                         <div class="bfaf-image-area" id="img_cp_bgl_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1bgrEVc_tjEPP3Ua727xtL9ZTcJvDjKm3=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_bgl_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3649,16 +3573,12 @@
                                     <div class="bfaf-card-box" data-slot-id="cp_noida_bf1">
                                         <div class="bfaf-image-area" id="img_cp_noida_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1b4M_YLCFvyCsrgeRBMw5IViVqaYZ5RqI=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_noida_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="cp_noida_af1">
                                         <div class="bfaf-image-area" id="img_cp_noida_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1b4M_YLCFvyCsrgeRBMw5IViVqaYZ5RqI=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_noida_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3667,16 +3587,12 @@
                                     <div class="bfaf-card-box" data-slot-id="cp_noida_bf2">
                                         <div class="bfaf-image-area" id="img_cp_noida_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1b4M_YLCFvyCsrgeRBMw5IViVqaYZ5RqI=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_noida_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="cp_noida_af2">
                                         <div class="bfaf-image-area" id="img_cp_noida_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1b4M_YLCFvyCsrgeRBMw5IViVqaYZ5RqI=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('cp_noida_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3701,16 +3617,12 @@
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep1_bf1">
                                         <div class="bfaf-image-area" id="img_diwali_ep1_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1S16EJ9kzr4XwcRLLjlpLYePCKUujO18J=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep1_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep1_af1">
                                         <div class="bfaf-image-area" id="img_diwali_ep1_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1S16EJ9kzr4XwcRLLjlpLYePCKUujO18J=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep1_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3719,16 +3631,12 @@
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep1_bf2">
                                         <div class="bfaf-image-area" id="img_diwali_ep1_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1S16EJ9kzr4XwcRLLjlpLYePCKUujO18J=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep1_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep1_af2">
                                         <div class="bfaf-image-area" id="img_diwali_ep1_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1S16EJ9kzr4XwcRLLjlpLYePCKUujO18J=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep1_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3753,16 +3661,12 @@
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep2_bf1">
                                         <div class="bfaf-image-area" id="img_diwali_ep2_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1EN8hBcL7mn_26x6IYP5OSR3seY8DHodc=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep2_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep2_af1">
                                         <div class="bfaf-image-area" id="img_diwali_ep2_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1EN8hBcL7mn_26x6IYP5OSR3seY8DHodc=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep2_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3771,16 +3675,12 @@
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep2_bf2">
                                         <div class="bfaf-image-area" id="img_diwali_ep2_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1EN8hBcL7mn_26x6IYP5OSR3seY8DHodc=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep2_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="diwali_ep2_af2">
                                         <div class="bfaf-image-area" id="img_diwali_ep2_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1EN8hBcL7mn_26x6IYP5OSR3seY8DHodc=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('diwali_ep2_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3805,16 +3705,12 @@
                                     <div class="bfaf-card-box" data-slot-id="ipo_mstone_bf1">
                                         <div class="bfaf-image-area" id="img_ipo_mstone_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1AcaZ00aKGxA1M42EWyQjYNPW9oJWIeIu=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('ipo_mstone_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="ipo_mstone_af1">
                                         <div class="bfaf-image-area" id="img_ipo_mstone_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1AcaZ00aKGxA1M42EWyQjYNPW9oJWIeIu=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('ipo_mstone_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3823,16 +3719,12 @@
                                     <div class="bfaf-card-box" data-slot-id="ipo_mstone_bf2">
                                         <div class="bfaf-image-area" id="img_ipo_mstone_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1AcaZ00aKGxA1M42EWyQjYNPW9oJWIeIu=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('ipo_mstone_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="ipo_mstone_af2">
                                         <div class="bfaf-image-area" id="img_ipo_mstone_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1AcaZ00aKGxA1M42EWyQjYNPW9oJWIeIu=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('ipo_mstone_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3857,16 +3749,12 @@
                                     <div class="bfaf-card-box" data-slot-id="zepto_rnr_bf1">
                                         <div class="bfaf-image-area" id="img_zepto_rnr_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1ESsCZdX0hDDEFGpiNaWpmdODUtl91RCV=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('zepto_rnr_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="zepto_rnr_af1">
                                         <div class="bfaf-image-area" id="img_zepto_rnr_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1ESsCZdX0hDDEFGpiNaWpmdODUtl91RCV=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('zepto_rnr_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3875,16 +3763,12 @@
                                     <div class="bfaf-card-box" data-slot-id="zepto_rnr_bf2">
                                         <div class="bfaf-image-area" id="img_zepto_rnr_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1ESsCZdX0hDDEFGpiNaWpmdODUtl91RCV=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('zepto_rnr_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="zepto_rnr_af2">
                                         <div class="bfaf-image-area" id="img_zepto_rnr_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1ESsCZdX0hDDEFGpiNaWpmdODUtl91RCV=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('zepto_rnr_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3909,16 +3793,12 @@
                                     <div class="bfaf-card-box" data-slot-id="candidate_bf1">
                                         <div class="bfaf-image-area" id="img_candidate_bf1" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('candidate_bf1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="candidate_af1">
                                         <div class="bfaf-image-area" id="img_candidate_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('candidate_af1', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -3927,16 +3807,12 @@
                                     <div class="bfaf-card-box" data-slot-id="candidate_bf2">
                                         <div class="bfaf-image-area" id="img_candidate_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('candidate_bf2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="candidate_af2">
                                         <div class="bfaf-image-area" id="img_candidate_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
-                                            <div class="bfaf-drop-overlay"><i class="fas fa-cloud-upload-alt fa-lg"></i><span>DROP IMAGE</span></div>
-                                            <button class="bfaf-hover-upload-btn" onclick="triggerSlotUpload('candidate_af2', event)"><i class="fas fa-camera"></i> Replace</button>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
                                     </div>
@@ -5091,121 +4967,7 @@
         }
 
         function initDragAndDropForStills() {
-            const boxes = document.querySelectorAll('.bfaf-card-box');
-            boxes.forEach(box => {
-                const slotId = box.getAttribute('data-slot-id');
-                if (!slotId) return;
-
-                box.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    box.classList.add('drag-over');
-                });
-
-                box.addEventListener('dragleave', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    box.classList.remove('drag-over');
-                });
-
-                box.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    box.classList.remove('drag-over');
-
-                    const files = e.dataTransfer.files;
-                    if (files && files.length > 0) {
-                        const file = files[0];
-                        if (file.type.startsWith('image/')) {
-                            applyImageFileToSlot(slotId, file);
-                        } else {
-                            alert('Please drop an image file (PNG, JPG, WEBP, etc.)');
-                        }
-                    }
-                });
-            });
-
             loadSavedBfAfStills();
-        }
-
-        function applyImageFileToSlot(slotId, file) {
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-                const dataUrl = e.target.result;
-                const imgEl = document.getElementById(`img_${slotId}`);
-                if (imgEl) {
-                    imgEl.style.backgroundImage = `url('${dataUrl}')`;
-                    imgEl.setAttribute('data-custom', 'true');
-                    imgEl.style.filter = 'none';
-                }
-                await saveStillToDB(slotId, dataUrl);
-                showNotificationToast(`Updated and saved image for slot: ${slotId.toUpperCase()}`);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function triggerSlotUpload(slotId, event) {
-            if (event) event.stopPropagation();
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                if (e.target.files && e.target.files[0]) {
-                    applyImageFileToSlot(slotId, e.target.files[0]);
-                }
-            };
-            input.click();
-        }
-
-        async function saveAndApplyAllStills() {
-            const boxes = document.querySelectorAll('.bfaf-card-box');
-            const allStills = {};
-            let count = 0;
-
-            for (const box of boxes) {
-                const slotId = box.getAttribute('data-slot-id');
-                if (!slotId) continue;
-                const imgEl = document.getElementById(`img_${slotId}`);
-                if (!imgEl) continue;
-
-                const bgStyle = imgEl.style.backgroundImage;
-                if (bgStyle && (bgStyle.includes('data:image') || imgEl.getAttribute('data-custom') === 'true')) {
-                    const match = bgStyle.match(/url\(['"]?(.*?)['"]?\)/);
-                    if (match && match[1]) {
-                        const url = match[1];
-                        allStills[slotId] = url;
-                        await saveStillToDB(slotId, url);
-                        count++;
-                    }
-                }
-            }
-
-            if (Object.keys(allStills).length > 0) {
-                try {
-                    await fetch('/api/stills', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ stills: allStills })
-                    });
-                } catch(e) {}
-            }
-
-            showNotificationToast(`All Before & After changes saved & updated successfully! (${count} custom stills)`);
-        }
-
-        function scrollToVectorscopeAnalysis() {
-            const el = document.getElementById('vsCanvasContainer') || document.querySelector('.vectorscope-card');
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                const card = el.closest('.vectorscope-card') || el;
-                card.style.transition = 'all 0.3s ease';
-                card.style.boxShadow = '0 0 35px #22d3ee';
-                card.style.borderColor = '#22d3ee';
-                setTimeout(() => {
-                    card.style.boxShadow = '';
-                    card.style.borderColor = '';
-                }, 2000);
-            }
         }
 
         async function loadSavedBfAfStills() {
@@ -5263,30 +5025,6 @@
             }
         }
 
-        async function resetAllBfAfStills() {
-            if (confirm('Are you sure you want to reset all custom Before/After stills back to original defaults?')) {
-                try {
-                    const db = await openStillsDB();
-                    const tx = db.transaction(STORE_NAME, 'readwrite');
-                    tx.objectStore(STORE_NAME).clear();
-                } catch (e) {}
-
-                try {
-                    fetch('/api/stills', { method: 'DELETE' }).catch(() => {});
-                } catch(e) {}
-
-                const keysToRemove = [];
-                for (let i = 0; i < localStorage.length; i++) {
-                    const key = localStorage.key(i);
-                    if (key && key.startsWith('bfaf_still_')) {
-                        keysToRemove.push(key);
-                    }
-                }
-                keysToRemove.forEach(k => localStorage.removeItem(k));
-                location.reload();
-            }
-        }
-
         function showNotificationToast(msg) {
             let toast = document.getElementById('bfafToast');
             if (!toast) {
@@ -5304,117 +5042,7 @@
             }, 3000);
         }
 
-        // Batch Uploader Modal Logic
-        function openBulkUploaderModal() {
-            let modal = document.getElementById('bulkUploadModal');
-            if (!modal) {
-                modal = document.createElement('div');
-                modal.id = 'bulkUploadModal';
-                modal.className = 'drive-modal-overlay';
-                modal.style.display = 'flex';
-                modal.innerHTML = `
-                    <div class="drive-modal-container" style="max-width: 650px;">
-                        <div class="drive-modal-header">
-                            <div class="drive-modal-title">
-                                <i class="fas fa-cloud-upload-alt" style="color: #10b981;"></i> BATCH STILLS UPLOADER
-                            </div>
-                            <button class="drive-modal-close-btn" onclick="document.getElementById('bulkUploadModal').style.display='none'">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div style="padding: 24px; color: var(--text-main);">
-                            <p style="margin-bottom: 16px; font-size: 0.9rem; color: #9ca3af;">
-                                Select multiple Before/After image files from your computer to auto-fill all 28 video slots in sequence, or click any individual card on the page to customize.
-                            </p>
-                            
-                            <div id="bulkDropZone" style="border: 2px dashed #10b981; background: rgba(16, 185, 129, 0.05); padding: 40px 20px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
-                                <i class="fas fa-images fa-3x" style="color: #10b981; margin-bottom: 12px;"></i>
-                                <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1.1rem; color: #ffffff;">DRAG & DROP MULTIPLE PHOTOS HERE</div>
-                                <div style="font-size: 0.8rem; color: #9ca3af; margin-top: 6px;">or click to browse local files (JPG, PNG, WEBP)</div>
-                            </div>
-                            <input type="file" id="bulkFileInput" multiple accept="image/*" style="display:none;">
-
-                            <div id="bulkProgress" style="margin-top: 20px; display: none;">
-                                <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.8rem; color: #10b981; margin-bottom: 6px;">
-                                    <span>UPLOADING STILLS...</span>
-                                    <span id="bulkPercent">0%</span>
-                                </div>
-                                <div style="width: 100%; height: 6px; background: #111827; border-radius: 3px; overflow: hidden;">
-                                    <div id="bulkBar" style="width: 0%; height: 100%; background: #10b981; transition: width 0.2s ease;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-
-                const dropZone = document.getElementById('bulkDropZone');
-                const fileInput = document.getElementById('bulkFileInput');
-
-                dropZone.onclick = () => fileInput.click();
-
-                fileInput.onchange = (e) => {
-                    if (e.target.files && e.target.files.length > 0) {
-                        processBatchFiles(Array.from(e.target.files));
-                    }
-                };
-
-                dropZone.ondragover = (e) => { e.preventDefault(); dropZone.style.background = 'rgba(16, 185, 129, 0.15)'; };
-                dropZone.ondragleave = (e) => { e.preventDefault(); dropZone.style.background = 'rgba(16, 185, 129, 0.05)'; };
-                dropZone.ondrop = (e) => {
-                    e.preventDefault();
-                    dropZone.style.background = 'rgba(16, 185, 129, 0.05)';
-                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                        processBatchFiles(Array.from(e.dataTransfer.files));
-                    }
-                };
-            } else {
-                modal.style.display = 'flex';
-            }
-        }
-
-        function processBatchFiles(files) {
-            const boxes = Array.from(document.querySelectorAll('.bfaf-card-box'));
-            if (boxes.length === 0) return;
-
-            const progressEl = document.getElementById('bulkProgress');
-            const percentEl = document.getElementById('bulkPercent');
-            const barEl = document.getElementById('bulkBar');
-            if (progressEl) progressEl.style.display = 'block';
-
-            let completed = 0;
-            const total = Math.min(files.length, boxes.length);
-
-            files.slice(0, total).forEach((file, idx) => {
-                const box = boxes[idx];
-                const slotId = box.getAttribute('data-slot-id');
-                if (!slotId) return;
-
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    const dataUrl = e.target.result;
-                    const imgEl = document.getElementById(`img_${slotId}`);
-                    if (imgEl) imgEl.style.backgroundImage = `url('${dataUrl}')`;
-                    await saveStillToDB(slotId, dataUrl);
-
-                    completed++;
-                    const pct = Math.round((completed / total) * 100);
-                    if (percentEl) percentEl.textContent = `${pct}%`;
-                    if (barEl) barEl.style.width = `${pct}%`;
-
-                    if (completed === total) {
-                        setTimeout(() => {
-                            document.getElementById('bulkUploadModal').style.display = 'none';
-                            if (progressEl) progressEl.style.display = 'none';
-                            showNotificationToast(`Successfully updated ${total} Before/After stills!`);
-                        }, 500);
-                    }
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // Initialize drag & drop when DOM ready
+        // Initialize when DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             initDragAndDropForStills();
         });
