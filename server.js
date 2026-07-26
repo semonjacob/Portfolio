@@ -14,11 +14,25 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.get('/api/stills', (req, res) => {
   try {
     const stillsPath = path.join(__dirname, 'data', 'stills.json');
+    let stills = {};
     if (fs.existsSync(stillsPath)) {
-      const data = JSON.parse(fs.readFileSync(stillsPath, 'utf8'));
-      return res.json({ success: true, stills: data });
+      try { stills = JSON.parse(fs.readFileSync(stillsPath, 'utf8')); } catch (e) {}
     }
-    return res.json({ success: true, stills: {} });
+
+    // Auto-discover files in assets/stills
+    const stillsDir = path.join(__dirname, 'assets', 'stills');
+    if (fs.existsSync(stillsDir)) {
+      const files = fs.readdirSync(stillsDir);
+      files.forEach(file => {
+        const ext = path.extname(file);
+        const slotId = path.basename(file, ext);
+        if (!stills[slotId]) {
+          stills[slotId] = `/assets/stills/${file}`;
+        }
+      });
+    }
+
+    return res.json({ success: true, stills });
   } catch (err) {
     console.error('Error loading stills:', err);
     res.status(500).json({ success: false, error: err.message });
@@ -28,19 +42,41 @@ app.get('/api/stills', (req, res) => {
 app.post('/api/stills', (req, res) => {
   try {
     const stillsPath = path.join(__dirname, 'data', 'stills.json');
+    const stillsDir = path.join(__dirname, 'assets', 'stills');
+    if (!fs.existsSync(stillsDir)) {
+      fs.mkdirSync(stillsDir, { recursive: true });
+    }
+
     let currentStills = {};
     if (fs.existsSync(stillsPath)) {
       try { currentStills = JSON.parse(fs.readFileSync(stillsPath, 'utf8')); } catch (e) {}
     }
 
+    const saveBase64ToFile = (slotId, dataUrl) => {
+      if (typeof dataUrl === 'string' && dataUrl.startsWith('data:image')) {
+        const matches = dataUrl.match(/^data:image\/([a-zA-Z0-9]+);base64,(.+)$/);
+        if (matches) {
+          const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+          const buffer = Buffer.from(matches[2], 'base64');
+          const fileName = `${slotId}.${ext}`;
+          const filePath = path.join(stillsDir, fileName);
+          fs.writeFileSync(filePath, buffer);
+          return `/assets/stills/${fileName}`;
+        }
+      }
+      return dataUrl;
+    };
+
     if (req.body.stills && typeof req.body.stills === 'object') {
-      currentStills = { ...currentStills, ...req.body.stills };
+      for (const [sId, urlVal] of Object.entries(req.body.stills)) {
+        currentStills[sId] = saveBase64ToFile(sId, urlVal);
+      }
     } else if (req.body.slotId && req.body.dataUrl) {
-      currentStills[req.body.slotId] = req.body.dataUrl;
+      currentStills[req.body.slotId] = saveBase64ToFile(req.body.slotId, req.body.dataUrl);
     }
 
     fs.writeFileSync(stillsPath, JSON.stringify(currentStills, null, 2), 'utf8');
-    return res.json({ success: true, count: Object.keys(currentStills).length });
+    return res.json({ success: true, count: Object.keys(currentStills).length, stills: currentStills });
   } catch (err) {
     console.error('Error saving stills:', err);
     res.status(500).json({ success: false, error: err.message });
