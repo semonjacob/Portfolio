@@ -1712,6 +1712,16 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        /* Visual distinction for Raw (Before) vs Graded (After) default stills */
+        .bfaf-card-box[data-slot-id*="_bf"] .bfaf-image-area:not([data-custom="true"]) {
+            filter: saturate(0.55) contrast(0.85) brightness(1.08);
+        }
+
+        .bfaf-card-box[data-slot-id*="_af"] .bfaf-image-area:not([data-custom="true"]) {
+            filter: saturate(1.25) contrast(1.12) brightness(1.02);
         }
 
         .bfaf-drop-overlay {
@@ -3547,6 +3557,30 @@
                 <!-- PINE LABS DEDICATED SHOWCASES (VISIBLE WHEN PINE LABS FOLDER IS SELECTED) -->
                 <div id="pinelabsShowcasesContainer">
 
+                    <!-- COLOR GRADING STUDIO CONTROL TOOLBAR -->
+                    <div class="grading-studio-control-bar" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; background: rgba(13, 17, 23, 0.95); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 14px 20px; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></div>
+                            <span style="font-family: var(--font-mono); font-weight: 800; font-size: 0.92rem; color: #ffffff; letter-spacing: 0.5px;">
+                                <i class="fas fa-sliders-h" style="color: #10b981;"></i> BEFORE & AFTER COLOR GRADING CONTROL STUDIO
+                            </span>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <button onclick="openBulkUploaderModal()" style="background: rgba(16, 185, 129, 0.12); border: 1px solid #10b981; color: #34d399; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 14px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
+                                <i class="fas fa-cloud-upload-alt"></i> BATCH UPLOAD STILLS
+                            </button>
+                            <button onclick="saveAndApplyAllStills()" style="background: #10b981; border: 1px solid #10b981; color: #000000; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; padding: 8px 16px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 0 15px rgba(16,185,129,0.4);">
+                                <i class="fas fa-save"></i> SAVE & UPDATE CHANGES
+                            </button>
+                            <button onclick="scrollToVectorscopeAnalysis()" style="background: rgba(34, 211, 211, 0.12); border: 1px solid #22d3ee; color: #22d3ee; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 14px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
+                                <i class="fas fa-chart-line"></i> COLOR ANALYSIS & VECTORSCOPE
+                            </button>
+                            <button onclick="resetAllBfAfStills()" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; padding: 8px 12px; border-radius: 5px; cursor: pointer; transition: all 0.2s ease;">
+                                <i class="fas fa-undo"></i> RESET
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- SHOWCASE 1: CodePLAY BANGALORE (Nirupama's Team) -->
                     <div class="showcase-block-wrapper">
                         <div class="showcase-header-text">
@@ -5047,6 +5081,13 @@
             } catch (err) {
                 console.error('IndexedDB Save Error:', err);
             }
+            try {
+                fetch('/api/stills', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slotId, dataUrl })
+                }).catch(() => {});
+            } catch (e) {}
         }
 
         function initDragAndDropForStills() {
@@ -5094,9 +5135,11 @@
                 const imgEl = document.getElementById(`img_${slotId}`);
                 if (imgEl) {
                     imgEl.style.backgroundImage = `url('${dataUrl}')`;
+                    imgEl.setAttribute('data-custom', 'true');
+                    imgEl.style.filter = 'none';
                 }
                 await saveStillToDB(slotId, dataUrl);
-                showNotificationToast(`Updated image for slot: ${slotId.toUpperCase()}`);
+                showNotificationToast(`Updated and saved image for slot: ${slotId.toUpperCase()}`);
             };
             reader.readAsDataURL(file);
         }
@@ -5114,7 +5157,80 @@
             input.click();
         }
 
+        async function saveAndApplyAllStills() {
+            const boxes = document.querySelectorAll('.bfaf-card-box');
+            const allStills = {};
+            let count = 0;
+
+            for (const box of boxes) {
+                const slotId = box.getAttribute('data-slot-id');
+                if (!slotId) continue;
+                const imgEl = document.getElementById(`img_${slotId}`);
+                if (!imgEl) continue;
+
+                const bgStyle = imgEl.style.backgroundImage;
+                if (bgStyle && (bgStyle.includes('data:image') || imgEl.getAttribute('data-custom') === 'true')) {
+                    const match = bgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                    if (match && match[1]) {
+                        const url = match[1];
+                        allStills[slotId] = url;
+                        await saveStillToDB(slotId, url);
+                        count++;
+                    }
+                }
+            }
+
+            if (Object.keys(allStills).length > 0) {
+                try {
+                    await fetch('/api/stills', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ stills: allStills })
+                    });
+                } catch(e) {}
+            }
+
+            showNotificationToast(`All Before & After changes saved & updated successfully! (${count} custom stills)`);
+        }
+
+        function scrollToVectorscopeAnalysis() {
+            const el = document.getElementById('vsCanvasContainer') || document.querySelector('.vectorscope-card');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const card = el.closest('.vectorscope-card') || el;
+                card.style.transition = 'all 0.3s ease';
+                card.style.boxShadow = '0 0 35px #22d3ee';
+                card.style.borderColor = '#22d3ee';
+                setTimeout(() => {
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+                }, 2000);
+            }
+        }
+
         async function loadSavedBfAfStills() {
+            const applyStillToDom = (slotId, dataUrl) => {
+                if (!slotId || !dataUrl) return;
+                const imgEl = document.getElementById(`img_${slotId}`);
+                if (imgEl) {
+                    imgEl.style.backgroundImage = `url('${dataUrl}')`;
+                    imgEl.setAttribute('data-custom', 'true');
+                    imgEl.style.filter = 'none';
+                }
+            };
+
+            try {
+                const res = await fetch('/api/stills');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.stills && Object.keys(data.stills).length > 0) {
+                        Object.keys(data.stills).forEach(slotId => {
+                            applyStillToDom(slotId, data.stills[slotId]);
+                        });
+                    }
+                }
+            } catch(e) {}
+
             try {
                 const db = await openStillsDB();
                 const tx = db.transaction(STORE_NAME, 'readonly');
@@ -5128,13 +5244,9 @@
                     
                     const req = store.get(key);
                     req.onsuccess = () => {
-                        let saved = req.result;
-                        if (!saved) {
-                            saved = localStorage.getItem(key);
-                        }
+                        let saved = req.result || localStorage.getItem(key);
                         if (saved) {
-                            const imgEl = document.getElementById(`img_${slotId}`);
-                            if (imgEl) imgEl.style.backgroundImage = `url('${saved}')`;
+                            applyStillToDom(slotId, saved);
                         }
                     };
                 });
@@ -5145,8 +5257,7 @@
                     if (!slotId) return;
                     const saved = localStorage.getItem(`bfaf_still_${slotId}`);
                     if (saved) {
-                        const imgEl = document.getElementById(`img_${slotId}`);
-                        if (imgEl) imgEl.style.backgroundImage = `url('${saved}')`;
+                        applyStillToDom(slotId, saved);
                     }
                 });
             }
@@ -5159,6 +5270,10 @@
                     const tx = db.transaction(STORE_NAME, 'readwrite');
                     tx.objectStore(STORE_NAME).clear();
                 } catch (e) {}
+
+                try {
+                    fetch('/api/stills', { method: 'DELETE' }).catch(() => {});
+                } catch(e) {}
 
                 const keysToRemove = [];
                 for (let i = 0; i < localStorage.length; i++) {

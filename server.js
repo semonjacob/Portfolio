@@ -10,6 +10,54 @@ const upload = multer();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Dynamic API for Before/After Stills Persistence
+app.get('/api/stills', (req, res) => {
+  try {
+    const stillsPath = path.join(__dirname, 'data', 'stills.json');
+    if (fs.existsSync(stillsPath)) {
+      const data = JSON.parse(fs.readFileSync(stillsPath, 'utf8'));
+      return res.json({ success: true, stills: data });
+    }
+    return res.json({ success: true, stills: {} });
+  } catch (err) {
+    console.error('Error loading stills:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/stills', (req, res) => {
+  try {
+    const stillsPath = path.join(__dirname, 'data', 'stills.json');
+    let currentStills = {};
+    if (fs.existsSync(stillsPath)) {
+      try { currentStills = JSON.parse(fs.readFileSync(stillsPath, 'utf8')); } catch (e) {}
+    }
+
+    if (req.body.stills && typeof req.body.stills === 'object') {
+      currentStills = { ...currentStills, ...req.body.stills };
+    } else if (req.body.slotId && req.body.dataUrl) {
+      currentStills[req.body.slotId] = req.body.dataUrl;
+    }
+
+    fs.writeFileSync(stillsPath, JSON.stringify(currentStills, null, 2), 'utf8');
+    return res.json({ success: true, count: Object.keys(currentStills).length });
+  } catch (err) {
+    console.error('Error saving stills:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.delete('/api/stills', (req, res) => {
+  try {
+    const stillsPath = path.join(__dirname, 'data', 'stills.json');
+    fs.writeFileSync(stillsPath, '{}', 'utf8');
+    return res.json({ success: true, message: 'Stills reset successfully' });
+  } catch (err) {
+    console.error('Error resetting stills:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Dynamic API for Tools/Skills Rack (reads data/tools.json or data/tools.txt)
 app.get('/api/tools', (req, res) => {
   try {
