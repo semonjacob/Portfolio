@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const upload = multer();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Dynamic API for Before/After Stills Persistence
 app.get('/api/stills', (req, res) => {
