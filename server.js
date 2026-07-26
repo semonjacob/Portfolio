@@ -19,18 +19,37 @@ app.get('/api/stills', (req, res) => {
       try { stills = JSON.parse(fs.readFileSync(stillsPath, 'utf8')); } catch (e) {}
     }
 
-    // Auto-discover files in assets/stills
+    // Auto-discover files recursively in assets/stills
     const stillsDir = path.join(__dirname, 'assets', 'stills');
-    if (fs.existsSync(stillsDir)) {
-      const files = fs.readdirSync(stillsDir);
-      files.forEach(file => {
-        const ext = path.extname(file);
-        const slotId = path.basename(file, ext);
-        if (!stills[slotId]) {
-          stills[slotId] = `/assets/stills/${file}`;
+    const scanDir = (dir, relPath = '') => {
+      if (!fs.existsSync(dir)) return;
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      entries.forEach(entry => {
+        if (entry.isDirectory()) {
+          scanDir(path.join(dir, entry.name), path.join(relPath, entry.name));
+        } else if (entry.isFile()) {
+          const ext = path.extname(entry.name);
+          if (['.png', '.jpg', '.jpeg', '.webp'].includes(ext.toLowerCase())) {
+            const baseName = path.basename(entry.name, ext);
+            let slotId = baseName;
+            
+            // If inside a project subfolder (e.g., cp_bgl) and file is named "bf1" or "cp_bgl_bf1"
+            if (relPath) {
+              const folderName = relPath.replace(/\\/g, '/');
+              if (!baseName.startsWith(folderName)) {
+                slotId = `${folderName}_${baseName}`;
+              }
+            }
+            
+            const fileRelUrl = `/assets/stills/${relPath ? relPath + '/' : ''}${entry.name}`.replace(/\\/g, '/');
+            if (!stills[slotId]) {
+              stills[slotId] = fileRelUrl;
+            }
+          }
         }
       });
-    }
+    };
+    scanDir(stillsDir);
 
     return res.json({ success: true, stills });
   } catch (err) {

@@ -1,6 +1,7 @@
 {
-  "cp_bgl_af2": "/assets/stills/cp_bgl_af2.png",
-  "cp_bgl_bf2": "/assets/stills/cp_bgl_bf2.png",
-  "cp_bgl_bf1": "/assets/stills/cp_bgl_bf1.png",
-  "ipo_mstone_af2": "/assets/stills/ipo_mstone_af2.png"
+  "cp_bgl_bf1": "/assets/stills/cp_bgl/cp_bgl_bf1.png",
+  "cp_bgl_af1": "/assets/stills/cp_bgl/cp_bgl_af1.png",
+  "cp_bgl_bf2": "/assets/stills/cp_bgl/cp_bgl_bf2.png",
+  "cp_bgl_af2": "/assets/stills/cp_bgl/cp_bgl_af2.png",
+  "ipo_mstone_af2": "/assets/stills/ipo_mstone/ipo_mstone_af2.png"
 }
