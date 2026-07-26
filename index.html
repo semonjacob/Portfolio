@@ -3002,7 +3002,10 @@
                     <!-- Profile Photo Frame in Camera Viewfinder -->
                     <div class="profile-frame-container">
                         <div class="profile-frame" id="profileFrame">
-                            <img id="profileImg" src="assets/images/semon%20profile.png" alt="Semon Jacob - Multimedia Creator" onerror="this.src='assets/images/profile.jpg'">
+                            <picture>
+                                <source srcset="assets/images/semon_profile.webp" type="image/webp">
+                                <img id="profileImg" src="assets/images/semon_profile.jpg" alt="Semon Jacob - Multimedia Creator" onerror="this.src='assets/images/profile.jpg'">
+                            </picture>
                             <div class="autofocus-reticle"></div>
                             <div class="frame-badge" id="profileBadge"><i class="fas fa-camera"></i> RAW 4K // LOG-C</div>
                         </div>
