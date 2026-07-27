@@ -3727,7 +3727,7 @@
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="ipo_mstone_af2">
-                                        <div class="bfaf-image-area" id="img_ipo_mstone_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1AcaZ00aKGxA1M42EWyQjYNPW9oJWIeIu=w800');">
+                                        <div class="bfaf-image-area" id="img_ipo_mstone_af2" style="background-image: url('assets/stills/ipo_mstone/ipo_mstone_af2.png');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
@@ -3801,7 +3801,7 @@
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="candidate_af1">
-                                        <div class="bfaf-image-area" id="img_candidate_af1" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
+                                        <div class="bfaf-image-area" id="img_candidate_af1" style="background-image: url('assets/stills/candidate/candidate_af1.png');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
@@ -3809,13 +3809,13 @@
                                 </div>
                                 <div class="bfaf-row-pair">
                                     <div class="bfaf-card-box" data-slot-id="candidate_bf2">
-                                        <div class="bfaf-image-area" id="img_candidate_bf2" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
+                                        <div class="bfaf-image-area" id="img_candidate_bf2" style="background-image: url('assets/stills/candidate/candidate_bf2.png');">
                                             <span class="bfaf-label-badge badge-before-style">BEFORE</span>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-video raw-icon"></i> Raw Footage</div>
                                     </div>
                                     <div class="bfaf-card-box" data-slot-id="candidate_af2">
-                                        <div class="bfaf-image-area" id="img_candidate_af2" style="background-image: url('https://lh3.googleusercontent.com/d/1hxmJAUfZiwSkwacfZsMzSKN6irIz0U0I=w800');">
+                                        <div class="bfaf-image-area" id="img_candidate_af2" style="background-image: url('assets/stills/candidate/candidate_af2.png');">
                                             <span class="bfaf-label-badge badge-after-style">AFTER</span>
                                         </div>
                                         <div class="bfaf-caption-footer"><i class="fas fa-check-square graded-icon" style="color:#10b981;"></i> Graded</div>
@@ -5012,6 +5012,14 @@
                     req.onsuccess = () => {
                         let saved = req.result || localStorage.getItem(key);
                         if (saved) {
+                            if (typeof saved === 'string' && (saved.includes('googleusercontent.com') || saved.includes('drive.google.com'))) {
+                                try {
+                                    const delTx = db.transaction(STORE_NAME, 'readwrite');
+                                    delTx.objectStore(STORE_NAME).delete(key);
+                                } catch(e){}
+                                localStorage.removeItem(key);
+                                return;
+                            }
                             applyStillToDom(slotId, saved);
                         }
                     };
@@ -5021,8 +5029,13 @@
                 boxes.forEach(box => {
                     const slotId = box.getAttribute('data-slot-id');
                     if (!slotId) return;
-                    const saved = localStorage.getItem(`bfaf_still_${slotId}`);
+                    const key = `bfaf_still_${slotId}`;
+                    const saved = localStorage.getItem(key);
                     if (saved) {
+                        if (typeof saved === 'string' && (saved.includes('googleusercontent.com') || saved.includes('drive.google.com'))) {
+                            localStorage.removeItem(key);
+                            return;
+                        }
                         applyStillToDom(slotId, saved);
                     }
                 });
