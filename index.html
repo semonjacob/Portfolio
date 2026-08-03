@@ -1715,13 +1715,10 @@
             transition: filter 0.3s ease;
         }
 
-        /* Visual distinction for Raw (Before) vs Graded (After) stills */
-        .bfaf-card-box[data-slot-id*="_bf"] .bfaf-image-area:not([data-custom="true"]) {
-            filter: saturate(0.55) contrast(0.85) brightness(1.08);
-        }
-
-        .bfaf-card-box[data-slot-id*="_af"] .bfaf-image-area:not([data-custom="true"]) {
-            filter: saturate(1.25) contrast(1.12) brightness(1.02);
+        /* Natural rendering for Raw (Before) vs Graded (After) stills */
+        .bfaf-card-box[data-slot-id*="_bf"] .bfaf-image-area,
+        .bfaf-card-box[data-slot-id*="_af"] .bfaf-image-area {
+            filter: none;
         }
 
         .bfaf-label-badge {
@@ -1798,11 +1795,11 @@
         }
 
         .grading-image-box.raw-filter {
-            filter: saturate(0.65) contrast(0.85) brightness(1.05);
+            filter: none;
         }
 
         .grading-image-box.graded-filter {
-            filter: saturate(1.25) contrast(1.12) brightness(0.98);
+            filter: none;
             box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.3);
         }
 
