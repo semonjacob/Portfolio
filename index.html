@@ -4544,8 +4544,6 @@
                         </button>
                     ` : '';
 
-<<<<<<< HEAD
-=======
                     const extLinkMarkup = item.externalUrl ? `
                         <div class="frame-ext-wrapper" style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.08);">
                             <a href="${item.externalUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--accent-cyan); text-decoration: none; transition: opacity 0.2s ease;">
@@ -4556,7 +4554,6 @@
                         </div>
                     ` : '';
 
->>>>>>> 0e1a364 (Add Don't Escape – Mobile Short Film entry with Instagram Reel link under Jesus Redeems Ministry-Media)
                     card.innerHTML = `
                         <div class="frame-header">
                             <span class="frame-number">#FRAME-${frameNum}</span>
@@ -4571,10 +4568,7 @@
                             <h3 class="frame-title">${item.title}</h3>
                             <div class="frame-client"><i class="fas fa-building"></i> ${item.client || item.organization}</div>
                             <p class="frame-desc">${item.description}</p>
-<<<<<<< HEAD
-=======
                             ${extLinkMarkup}
->>>>>>> 0e1a364 (Add Don't Escape – Mobile Short Film entry with Instagram Reel link under Jesus Redeems Ministry-Media)
                         </div>
                     `;
                     projectGrid.appendChild(card);
