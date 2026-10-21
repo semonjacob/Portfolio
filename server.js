@@ -313,9 +313,19 @@ app.post('/contact.php', upload.none(), (req, res) => {
 // Serve static assets from project root
 app.use(express.static(__dirname));
 
-// Fallback to index.html
-app.get('*', (req, res) => {
+// Primary root route
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Explicit 404 route
+app.get(['/404', '/404.html'], (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '404.html'));
+});
+
+// Thematic 404 fallback for any other unhandled routes
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
