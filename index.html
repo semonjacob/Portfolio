@@ -4987,6 +4987,85 @@
                 height: 20px;
             }
         }
+
+        /* ===== WORK TIMELINE: FILM STRIP ===== */
+        .timeline-wrapper{padding-left:0!important}
+        .timeline-track-line,.timeline-playhead-fill,.timeline-playhead-head,.keyframe-marker{display:none!important}
+        .timeline-item{display:none;opacity:1!important;transform:none!important;margin:0!important}
+        .timeline-item.is-open{display:block;animation:frameWipe .8s cubic-bezier(.77,0,.18,1) both}
+        @keyframes frameWipe{0%{clip-path:inset(0 100% 0 0);filter:brightness(2.4) contrast(1.4)}35%{filter:brightness(.7)}60%{filter:brightness(1.6)}100%{clip-path:inset(0);filter:none}}
+        .strip-shell{margin:0 0 22px}
+        .strip-viewport{overflow:hidden;overflow:clip;background:#07070b;border:1px solid var(--border-color);border-radius:8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+        .film-strip{display:flex;gap:12px;padding:30px 0;position:relative;width:max-content;transition:transform .8s cubic-bezier(.65,0,.2,1);will-change:transform}
+        .film-strip::before,.film-strip::after{content:"";position:absolute;left:-2000px;right:-2000px;height:10px;background:repeating-linear-gradient(90deg,transparent 0 8px,#d9d4c7 8px 20px,transparent 20px 30px);opacity:.55}
+        .film-strip::before{top:10px}.film-strip::after{bottom:10px}
+        .film-strip.rolling::before,.film-strip.rolling::after{animation:holeRoll .8s linear}
+        @keyframes holeRoll{to{background-position:-60px 0}}
+        .film-frame{flex:0 0 250px;display:flex;flex-direction:column;gap:4px;text-align:left;position:relative;overflow:hidden;background:linear-gradient(160deg,#1b1c27,#12131b);border:1px solid var(--border-color);border-radius:4px;padding:16px 14px;color:var(--text-main);font-family:inherit;cursor:pointer;opacity:.4;transform:scale(.92);transition:opacity .5s,transform .5s,border-color .5s,box-shadow .5s}
+        .film-frame:hover{opacity:.75}
+        .film-frame::after{content:attr(data-no);position:absolute;right:10px;top:8px;font:700 .7rem var(--font-mono);color:var(--accent-amber)}
+        .film-frame.active{opacity:1;transform:scale(1.05);border-color:var(--accent-cyan);box-shadow:0 0 28px rgba(34,211,211,.25);animation:projFlicker 2.6s infinite steps(1)}
+        .film-frame.active::before{content:"";position:absolute;inset:0 auto 0 -40%;width:40%;background:linear-gradient(90deg,transparent,rgba(34,211,211,.18),transparent);animation:scanSweep 2.6s ease-in-out infinite}
+        @keyframes scanSweep{to{left:120%}}
+        @keyframes projFlicker{0%,100%{filter:none}7%{filter:brightness(1.18)}9%{filter:brightness(.92)}52%{filter:brightness(1.1)}54%{filter:none}}
+        .film-frame .ff-reel{font:600 .7rem var(--font-mono);color:var(--accent-pink)}
+        .film-frame .ff-date{font:500 .72rem var(--font-mono);color:var(--accent-amber)}
+        .film-frame .ff-role{font-size:1rem;line-height:1.25;margin-top:6px}
+        .film-frame .ff-org{font:.75rem var(--font-mono);color:var(--accent-cyan)}
+        .film-frame.locked .ff-reel,.film-frame.locked .ff-role{color:var(--accent-amber)}
+        .tl-prog i.run{animation:progRun 5.2s linear forwards}
+        @keyframes progRun{to{width:100%}}
+
+        /* ----- Film strip controls (dock) ----- */
+        .tl-controls{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;margin-top:16px}
+        .tl-dock{display:inline-flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:rgba(21,22,31,.88);border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+        .tl-btn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--text-main);font-size:.95rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;transition:background .2s ease,color .2s ease,transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s ease}
+        .tl-btn:hover{background:rgba(255,255,255,.09);color:var(--accent-cyan);transform:translateY(-1px)}
+        .tl-btn:active{transform:scale(.92);background:rgba(34,211,211,.16)}
+        .tl-btn:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:2px}
+        .tl-btn-main{width:48px;height:48px;margin:0 2px;background:linear-gradient(135deg,var(--accent-cyan),#4be0c8);color:#07181a;font-size:1rem;box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 6px 18px rgba(34,211,211,.35)}
+        .tl-btn-main:hover{background:linear-gradient(135deg,#5fe9e9,var(--accent-cyan));color:#07181a;box-shadow:0 0 0 1px rgba(255,255,255,.3) inset,0 8px 24px rgba(34,211,211,.5)}
+        .tl-btn-main:active{background:linear-gradient(135deg,var(--accent-cyan),#4be0c8);transform:scale(.92)}
+        .tl-btn .fa-play{margin-left:2px}
+        .tl-meta{display:flex;flex-direction:column;gap:8px;min-width:0}
+        .tl-counter{display:flex;justify-content:space-between;align-items:baseline;font:600 .75rem var(--font-mono);letter-spacing:.08em;color:var(--text-muted)}
+        .tl-counter b{color:var(--accent-cyan);font-weight:700}
+        .tl-counter span:last-child{color:var(--accent-amber)}
+        .tl-prog{height:4px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+        .tl-prog i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent-pink),var(--accent-cyan));box-shadow:0 0 10px rgba(34,211,211,.6)}
+        .slate-unlock-btn{min-height:40px;padding:8px 16px!important;border-radius:999px!important;font-weight:600;letter-spacing:.04em;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:background .2s,color .2s,box-shadow .2s,transform .2s!important}
+        .slate-unlock-btn:active{transform:scale(.97)}
+        .slate-unlock-btn:focus-visible{outline:2px solid var(--accent-amber);outline-offset:2px}
+        @media(max-width:768px){
+            .tl-controls{gap:14px}
+        }
+        @media(max-width:600px){
+            .tl-controls{grid-template-columns:1fr;justify-items:stretch;gap:12px}
+            .tl-dock{justify-content:space-between;width:100%;padding:6px}
+            .tl-btn{width:52px;height:52px;font-size:1.05rem}
+            .tl-btn-main{width:58px;height:58px}
+            .timeline-hud-control{padding:10px 12px}
+            .timeline-timecode{flex-direction:column;align-items:flex-start;gap:6px}
+            .slate-unlock-btn{width:100%;justify-content:center;min-height:46px}
+        }
+        @media(hover:none){.tl-btn:hover{transform:none;background:transparent;color:var(--text-main)}.tl-btn-main:hover{background:linear-gradient(135deg,var(--accent-cyan),#4be0c8)}}
+        @media(max-width:600px){.film-frame{flex-basis:210px}}
+        @media(prefers-reduced-motion:reduce){.film-strip,.film-frame,.timeline-item.is-open{animation:none!important;transition:none!important}}
+
+        /* Light Mode Overrides for Work Timeline Film Strip */
+        html[data-theme="light"] .strip-viewport{background:#e2e8f0;border-color:var(--border-color)}
+        html[data-theme="light"] .film-strip::before,html[data-theme="light"] .film-strip::after{background:repeating-linear-gradient(90deg,transparent 0 8px,#64748b 8px 20px,transparent 20px 30px);opacity:.45}
+        html[data-theme="light"] .film-frame{background:linear-gradient(160deg,#ffffff,#f1f5f9);border-color:var(--border-color);color:var(--text-main);opacity:.6;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+        html[data-theme="light"] .film-frame:hover{opacity:.9}
+        html[data-theme="light"] .film-frame.active{opacity:1;border-color:var(--accent-cyan);box-shadow:0 6px 24px rgba(2,132,199,.2)}
+        html[data-theme="light"] .film-frame.active::before{background:linear-gradient(90deg,transparent,rgba(2,132,199,.14),transparent)}
+        html[data-theme="light"] .tl-dock{background:rgba(255,255,255,.92);border-color:var(--border-color);box-shadow:0 6px 20px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.8)}
+        html[data-theme="light"] .tl-btn{color:var(--text-main)}
+        html[data-theme="light"] .tl-btn:hover{background:rgba(2,132,199,.1);color:var(--accent-cyan)}
+        html[data-theme="light"] .tl-btn-main{background:linear-gradient(135deg,var(--accent-cyan),#0ea5e9);color:#ffffff;box-shadow:0 4px 14px rgba(2,132,199,.3)}
+        html[data-theme="light"] .tl-btn-main:hover{background:linear-gradient(135deg,#0369a1,var(--accent-cyan));color:#ffffff;box-shadow:0 6px 20px rgba(2,132,199,.4)}
+        html[data-theme="light"] .tl-prog{background:rgba(15,23,42,.1)}
+        html[data-theme="light"] .tl-prog i{box-shadow:0 0 8px rgba(2,132,199,.35)}
     </style>
 </head>
 <body>
@@ -5324,6 +5403,21 @@
                 <button class="slate-unlock-btn" id="unlockAuthorHeaderBtn">
                     <i class="fas fa-key"></i> <span id="unlockBtnLabel">UNLOCK SECRET AUTHOR FILE</span>
                 </button>
+            </div>
+
+            <div class="strip-shell" id="stripShell" tabindex="0" aria-label="Work timeline film strip">
+                <div class="strip-viewport" id="stripViewport"><div class="film-strip" id="filmStrip"></div></div>
+                <div class="tl-controls">
+                    <div class="tl-dock" role="group" aria-label="Timeline controls">
+                        <button type="button" class="tl-btn" id="stripPrev" aria-label="Previous scene"><i class="fas fa-backward-step"></i></button>
+                        <button type="button" class="tl-btn tl-btn-main" id="stripPlay" aria-label="Pause" aria-pressed="true"><i class="fas fa-pause"></i></button>
+                        <button type="button" class="tl-btn" id="stripNext" aria-label="Next scene"><i class="fas fa-forward-step"></i></button>
+                    </div>
+                    <div class="tl-meta">
+                        <div class="tl-counter"><span>SCENE <b id="stripCounter">01</b> / 05</span><span id="stripAuto">AUTO-PLAY</span></div>
+                        <div class="tl-prog"><i id="stripProg"></i></div>
+                    </div>
+                </div>
             </div>
 
             <div class="timeline-wrapper" id="timelineWrapper">
@@ -7614,79 +7708,104 @@
                 });
             }
 
-            // ===== WORK TIMELINE: SCROLL REVEAL & PLAYHEAD TRACKING =====
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            const timelineWrapper = document.getElementById('timelineWrapper');
-            const playheadFill = document.getElementById('timelinePlayheadFill');
-            const playheadHead = document.getElementById('timelinePlayheadHead');
-            const timelineReelTimecode = document.getElementById('timelineReelTimecode');
-            const timelineActiveCount = document.getElementById('timelineActiveCount');
+            // ===== WORK TIMELINE: FILM STRIP =====
+            let isAuthorUnlocked = false;
+            const items = [...document.querySelectorAll('.timeline-item')];
+            const strip = document.getElementById('filmStrip');
+            const vp = document.getElementById('stripViewport');
+            const tcEl = document.getElementById('timelineReelTimecode');
+            const cntEl = document.getElementById('timelineActiveCount');
+            const prog = document.getElementById('stripProg');
+            const playBtn = document.getElementById('stripPlay');
+            const pad = n => String(n).padStart(2, '0');
+            const seen = new Set();
+            let cur = -1, timer = null, playing = true, visible = false, fcount = 0;
 
-            // 1. Scroll Reveal Observer
-            if ('IntersectionObserver' in window) {
-                const timelineObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                        }
-                    });
-                }, { threshold: 0.15 });
-
-                timelineItems.forEach(item => timelineObserver.observe(item));
-            } else {
-                timelineItems.forEach(item => item.classList.add('revealed'));
-            }
-
-            // 2. Playhead Scroll Tracking inside Timeline Wrapper
-            function updateTimelinePlayhead() {
-                if (!timelineWrapper || !playheadFill || !playheadHead) return;
-
-                const wrapperRect = timelineWrapper.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                const wrapperHeight = wrapperRect.height;
-
-                // Calculate progress when timeline is in viewport
-                const startPoint = windowHeight * 0.75;
-                const currentPos = startPoint - wrapperRect.top;
-                let progressPercent = Math.min(Math.max((currentPos / wrapperHeight) * 100, 0), 100);
-
-                playheadFill.style.height = progressPercent + '%';
-                playheadHead.style.top = progressPercent + '%';
-
-                // Update Reel Timecode Display
-                const currentSecs = Math.floor((progressPercent / 100) * 45);
-                const currentFrames = Math.floor((progressPercent * 2.4) % 24);
-                const pad = n => String(n).padStart(2, '0');
-                if (timelineReelTimecode) {
-                    timelineReelTimecode.innerHTML = `<i class="fas fa-play" style="color:var(--accent-cyan);"></i> REEL TC: 00:01:${pad(currentSecs)}:${pad(currentFrames)}`;
+            items.forEach((it, i) => {
+                const b = document.createElement('button');
+                b.type = 'button'; b.className = 'film-frame'; b.dataset.no = pad(i + 1);
+                if (it.id === 'hiddenAuthorItem') {
+                    b.classList.add('locked');
+                    b.innerHTML = '<span class="ff-reel"><i class="fas fa-lock"></i> CLASSIFIED</span><strong class="ff-role">Secret Director\'s Cut</strong><span class="ff-org">Watch all scenes to unlock</span>';
+                } else {
+                    const spans = it.querySelectorAll('.timeline-timecode span');
+                    const date = spans[0] ? spans[0].textContent.split('//')[0].replace(/\[.*?\]/, '').trim() : '';
+                    const q = s => { const n = it.querySelector(s); return n ? n.textContent.trim() : ''; };
+                    b.innerHTML = '<span class="ff-reel">' + (spans[1] ? spans[1].textContent.trim() : '') + '</span><span class="ff-date">' + date + '</span><strong class="ff-role">' + q('.timeline-role') + '</strong><span class="ff-org">' + q('.timeline-org') + '</span>';
                 }
+                b.addEventListener('click', () => userPick(i));
+                strip.appendChild(b);
+            });
 
-                // Identify Active Keyframe Item
-                let activeSceneNum = '01';
-                timelineItems.forEach(item => {
-                    const itemRect = item.getBoundingClientRect();
-                    const itemMid = itemRect.top + itemRect.height / 2;
-                    if (itemMid > 0 && itemMid < windowHeight) {
-                        item.classList.add('active-playhead');
-                        const scene = item.getAttribute('data-scene');
-                        if (scene) activeSceneNum = scene;
-                    } else {
-                        item.classList.remove('active-playhead');
-                    }
+            function center() {
+                const f = strip.children[cur]; if (!f) return;
+                strip.style.transform = 'translateX(' + (vp.clientWidth / 2 - (f.offsetLeft + f.offsetWidth / 2)) + 'px)';
+            }
+            function restartProgress() {
+                prog.classList.remove('run'); void prog.offsetWidth;
+                if (playing && visible) prog.classList.add('run');
+            }
+            function openFrame(i) {
+                const n = items.length; i = (i + n) % n; if (i === cur) return;
+                cur = i; fcount = 0;
+                [...strip.children].forEach((f, k) => f.classList.toggle('active', k === i));
+                items.forEach((it, k) => {
+                    it.classList.remove('is-open', 'active-playhead');
+                    if (k === i) { void it.offsetWidth; it.classList.add('is-open', 'active-playhead'); }
                 });
-
-                if (timelineActiveCount) {
-                    timelineActiveCount.textContent = `SCENE ${activeSceneNum} / 05 ACTIVE`;
-                }
-
-                // Auto Unlock Author Card if scrolled near the bottom of timeline
-                if (progressPercent >= 92) {
-                    unlockHiddenAuthor(false);
-                }
+                strip.classList.add('rolling'); center();
+                setTimeout(() => strip.classList.remove('rolling'), 800);
+                seen.add(i);
+                cntEl.textContent = items[i].id === 'hiddenAuthorItem' ? 'SECRET CUT // AUTHOR FILE' : 'SCENE ' + pad(i + 1) + ' / ' + pad(n - 1) + ' ACTIVE';
+                restartProgress();
+                const sc = document.getElementById('stripCounter'); if (sc) sc.textContent = items[i].id === 'hiddenAuthorItem' ? '\u2605' : pad(i + 1);
+                if ([...seen].filter(k => items[k].id !== 'hiddenAuthorItem').length >= n - 1) unlockHiddenAuthor(false);
             }
+            function autoNext() {
+                let nx = (cur + 1) % items.length;
+                if (items[nx].id === 'hiddenAuthorItem' && !isAuthorUnlocked) nx = 0;
+                openFrame(nx);
+            }
+            function schedule() {
+                clearInterval(timer);
+                if (playing && visible) timer = setInterval(autoNext, 5200);
+                restartProgress();
+                playBtn.innerHTML = '<i class="fas fa-' + (playing ? 'pause' : 'play') + '"></i>';
+                playBtn.setAttribute('aria-pressed', playing); playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+                const au = document.getElementById('stripAuto'); if (au) au.textContent = playing ? 'AUTO-PLAY' : 'PAUSED';
+            }
+            function userPick(i) { playing = false; openFrame(i); schedule(); }
 
-            window.addEventListener('scroll', updateTimelinePlayhead);
-            updateTimelinePlayhead();
+            document.getElementById('stripPrev').addEventListener('click', () => userPick(cur - 1));
+            document.getElementById('stripNext').addEventListener('click', () => userPick(cur + 1));
+            playBtn.addEventListener('click', () => { playing = !playing; schedule(); });
+            document.getElementById('stripShell').addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight') userPick(cur + 1);
+                if (e.key === 'ArrowLeft') userPick(cur - 1);
+            });
+            let sx = null;
+            vp.addEventListener('pointerdown', e => { sx = e.clientX; });
+            vp.addEventListener('pointerup', e => {
+                if (sx !== null && Math.abs(e.clientX - sx) > 50) userPick(cur + (e.clientX < sx ? 1 : -1));
+                sx = null;
+            });
+            vp.addEventListener('scroll', () => { vp.scrollLeft = 0; });
+            window.addEventListener('resize', center);
+            window.addEventListener('load', center);
+
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(es => { visible = es[0].isIntersecting; schedule(); }, { threshold: 0.3 }).observe(document.getElementById('stripShell'));
+            } else { visible = true; }
+
+            // Running reel timecode ticker
+            setInterval(() => {
+                if (!visible || !tcEl) return;
+                fcount++;
+                tcEl.innerHTML = '<i class="fas fa-play" style="color:var(--accent-cyan);"></i> REEL TC: 00:' + pad(cur + 1) + ':' + pad(Math.floor(fcount / 24) % 60) + ':' + pad(fcount % 24);
+            }, 42);
+
+            openFrame(0);
+            schedule();
 
             // 3. Hidden Author Keyframe Unlock Logic
             const slateClapperBtn = document.getElementById('slateClapperBtn');
@@ -7694,7 +7813,6 @@
             const hiddenAuthorLock = document.getElementById('hiddenAuthorLock');
             const hiddenAuthorContent = document.getElementById('hiddenAuthorContent');
             const unlockBtnLabel = document.getElementById('unlockBtnLabel');
-            let isAuthorUnlocked = false;
 
             function unlockHiddenAuthor(smoothScroll = true) {
                 if (isAuthorUnlocked) return;
@@ -7713,7 +7831,7 @@
                 slateClapperBtn.addEventListener('click', () => unlockHiddenAuthor(true));
             }
             if (unlockAuthorHeaderBtn) {
-                unlockAuthorHeaderBtn.addEventListener('click', () => unlockHiddenAuthor(true));
+                unlockAuthorHeaderBtn.addEventListener('click', () => { userPick(items.length - 1); unlockHiddenAuthor(true); });
             }
 
         });
