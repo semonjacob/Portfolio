@@ -1,0 +1,513 @@
+/* ============================================================
+   AUTOMATIC SEASONAL THEME SYSTEM — FESTIVE MOTION GRAPHICS
+   Supports:
+   - November: Diwali Theme (Warm Golden Embers, Diya Flame, Festive Glow)
+   - December: Christmas Theme (Gentle Snow Dust, Frost Sparkles, Winter Accents)
+   - Jan-Oct: Normal Theme (Pure original portfolio design, zero overrides)
+   ============================================================ */
+
+/* Atmosphere Canvas Overlay */
+#seasonalAtmosphereCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 40;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+[data-season="diwali"] #seasonalAtmosphereCanvas,
+[data-season="christmas"] #seasonalAtmosphereCanvas {
+    opacity: 1;
+}
+
+[data-season="none"] #seasonalAtmosphereCanvas {
+    display: none;
+    opacity: 0;
+}
+
+/* ============================================================
+   1. DIWALI THEME (NOVEMBER)
+   ============================================================ */
+
+/* Seasonal OSD Slate Badge in Hero Viewfinder */
+.seasonal-osd-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+[data-season="diwali"] .seasonal-osd-badge.diwali-osd {
+    display: inline-flex;
+    background: rgba(255, 177, 0, 0.12);
+    border: 1px solid rgba(255, 177, 0, 0.35);
+    color: #ffb100;
+    box-shadow: 0 0 12px rgba(255, 177, 0, 0.2);
+}
+
+html[data-theme="light"][data-season="diwali"] .seasonal-osd-badge.diwali-osd,
+body.theme-light[data-season="diwali"] .seasonal-osd-badge.diwali-osd {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #b45309;
+    box-shadow: 0 0 10px rgba(217, 119, 6, 0.15);
+}
+
+/* Handcrafted Diya Flame Icon Micro-Animation */
+.diya-flame-icon {
+    display: inline-block;
+    position: relative;
+    width: 10px;
+    height: 14px;
+    vertical-align: middle;
+}
+
+.diya-flame-icon::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 11px;
+    background: radial-gradient(ellipse at bottom, #ffea79 0%, #ff9800 60%, #ff3d00 100%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    animation: diyaFlicker 1.8s ease-in-out infinite alternate;
+    box-shadow: 0 0 8px rgba(255, 177, 0, 0.8), 0 0 16px rgba(255, 87, 34, 0.4);
+}
+
+.diya-flame-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 5px;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: diyaCoreGlow 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes diyaFlicker {
+    0% {
+        transform: translateX(-50%) rotate(-2deg) scale(1);
+        opacity: 0.95;
+    }
+    30% {
+        transform: translateX(-48%) rotate(3deg) scale(1.08, 0.95);
+        opacity: 1;
+    }
+    60% {
+        transform: translateX(-52%) rotate(-3deg) scale(0.95, 1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(-50%) rotate(2deg) scale(1.04, 1.02);
+        opacity: 1;
+    }
+}
+
+@keyframes diyaCoreGlow {
+    0% { opacity: 0.7; transform: translateX(-50%) scale(0.9); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+/* Golden Festive Shimmer across Hero Title */
+[data-season="diwali"] .hero-content h1 {
+    background: linear-gradient(135deg, #f4f2ec 0%, #ffcf40 50%, #f4f2ec 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: festiveShimmerSweep 7s ease-in-out infinite;
+}
+
+html[data-theme="light"][data-season="diwali"] .hero-content h1,
+body.theme-light[data-season="diwali"] .hero-content h1 {
+    background: linear-gradient(135deg, #090d16 0%, #d97706 50%, #090d16 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: festiveShimmerSweep 7s ease-in-out infinite;
+}
+
+@keyframes festiveShimmerSweep {
+    0% { background-position: -200% center; }
+    30%, 100% { background-position: 200% center; }
+}
+
+/* Subtle Golden Glow on Viewfinder Corner Brackets */
+[data-season="diwali"] .viewfinder-wrapper .corner-bracket {
+    border-color: rgba(255, 177, 0, 0.55);
+    box-shadow: 0 0 10px rgba(255, 177, 0, 0.2);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+[data-season="diwali"] .viewfinder-wrapper:hover .corner-bracket {
+    border-color: #ffb100;
+    box-shadow: 0 0 18px rgba(255, 177, 0, 0.45);
+}
+
+/* Timeline Keyframe Markers — Warm Golden Glow */
+[data-season="diwali"] .timeline-item .keyframe-marker {
+    border-color: #ffb100 !important;
+    box-shadow: 0 0 12px rgba(255, 177, 0, 0.5) !important;
+}
+
+[data-season="diwali"] .timeline-item.revealed .keyframe-marker {
+    animation: goldenKeyframePulse 3s ease-in-out infinite;
+}
+
+@keyframes goldenKeyframePulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 177, 0, 0.45);
+        transform: rotate(45deg) scale(1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 177, 0, 0.75), 0 0 35px rgba(255, 110, 0, 0.35);
+        transform: rotate(45deg) scale(1.15);
+    }
+}
+
+/* Film Frame Cards & Featured Video Cards — Festive Warm Rim Hover */
+[data-season="diwali"] .film-frame-card:hover,
+[data-season="diwali"] .featured-video-card:hover,
+[data-season="diwali"] .diwali-nostalgia-card:hover {
+    border-color: rgba(255, 177, 0, 0.5) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 177, 0, 0.18) !important;
+}
+
+html[data-theme="light"][data-season="diwali"] .film-frame-card:hover,
+html[data-theme="light"][data-season="diwali"] .featured-video-card:hover {
+    border-color: #d97706 !important;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12), 0 0 20px rgba(217, 119, 6, 0.22) !important;
+}
+
+/* Play Button Sparkle Accent on Hover */
+[data-season="diwali"] .play-overlay-btn:hover,
+[data-season="diwali"] .featured-play-button:hover,
+[data-season="diwali"] .diwali-play-btn:hover {
+    box-shadow: 0 0 25px rgba(255, 177, 0, 0.8), 0 0 45px rgba(255, 60, 0, 0.45) !important;
+}
+
+/* Floating Balloon Theme Toggle — Diwali Warm Ember Glow */
+[data-season="diwali"] .floating-balloon-theme-toggle {
+    filter: drop-shadow(0 0 14px rgba(255, 177, 0, 0.75));
+}
+
+[data-season="diwali"] .balloon-string-path {
+    stroke: #ffb100 !important;
+}
+
+/* Faint Sacred Mandala Watermark in Hero Background */
+[data-season="diwali"] .viewfinder-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 520px;
+    height: 520px;
+    max-width: 90vw;
+    max-height: 90vw;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%23ffb100' stroke-width='0.7' opacity='0.35'%3E%3Ccircle cx='100' cy='100' r='90'/%3E%3Ccircle cx='100' cy='100' r='70' stroke-dasharray='3 3'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3Cpolygon points='100,10 120,80 190,100 120,120 100,190 80,120 10,100 80,80'/%3E%3Cpolygon points='100,25 115,85 175,100 115,115 100,175 85,115 25,100 85,85' transform='rotate(45 100 100)'/%3E%3Ccircle cx='100' cy='100' r='8' fill='%23ffb100' fill-opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.16;
+    animation: mandalaSlowSpin 90s linear infinite;
+}
+
+html[data-theme="light"][data-season="diwali"] .viewfinder-wrapper::before {
+    opacity: 0.08;
+}
+
+@keyframes mandalaSlowSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ============================================================
+   2. CHRISTMAS THEME (DECEMBER)
+   ============================================================ */
+
+[data-season="christmas"] .seasonal-osd-badge.christmas-osd {
+    display: inline-flex;
+    background: rgba(34, 211, 211, 0.12);
+    border: 1px solid rgba(34, 211, 211, 0.35);
+    color: #22d3d3;
+    box-shadow: 0 0 12px rgba(34, 211, 211, 0.2);
+}
+
+html[data-theme="light"][data-season="christmas"] .seasonal-osd-badge.christmas-osd,
+body.theme-light[data-season="christmas"] .seasonal-osd-badge.christmas-osd {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+    box-shadow: 0 0 10px rgba(2, 132, 199, 0.15);
+}
+
+/* Crystalline Snowflake Micro-Icon */
+.snowflake-micro-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3d3' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='12' y1='2' x2='12' y2='22'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cline x1='5' y1='5' x2='19' y2='19'/%3E%3Cline x1='5' y1='19' x2='19' y2='5'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: snowflakeTwirl 6s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes snowflakeTwirl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Frost Shimmer across Hero Title */
+[data-season="christmas"] .hero-content h1 {
+    background: linear-gradient(135deg, #f4f2ec 0%, #b8f2f2 50%, #f4f2ec 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: festiveShimmerSweep 7s ease-in-out infinite;
+}
+
+html[data-theme="light"][data-season="christmas"] .hero-content h1,
+body.theme-light[data-season="christmas"] .hero-content h1 {
+    background: linear-gradient(135deg, #090d16 0%, #0284c7 50%, #090d16 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: festiveShimmerSweep 7s ease-in-out infinite;
+}
+
+/* Frost Cyan Keyframes */
+[data-season="christmas"] .timeline-item .keyframe-marker {
+    border-color: #22d3d3 !important;
+    box-shadow: 0 0 12px rgba(34, 211, 211, 0.5) !important;
+}
+
+/* Frost Card Rim Hover */
+[data-season="christmas"] .film-frame-card:hover,
+[data-season="christmas"] .featured-video-card:hover {
+    border-color: rgba(34, 211, 211, 0.5) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 24px rgba(34, 211, 211, 0.22) !important;
+}
+
+/* Christmas Balloon Glow */
+[data-season="christmas"] .floating-balloon-theme-toggle {
+    filter: drop-shadow(0 0 14px rgba(34, 211, 211, 0.8));
+}
+
+[data-season="christmas"] .balloon-string-path {
+    stroke: #22d3d3 !important;
+}
+
+/* ============================================================
+   3. CLICK SPARKLE BURST MICRO-EFFECT (LIGHTWEIGHT)
+   ============================================================ */
+.festive-sparkle-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: sparkleBurst 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkleBurst {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0) rotate(180deg);
+    }
+}
+
+/* ============================================================
+   4. ELEGANT SEASONAL SELECTOR PILL (PREVIEW & CONTROL)
+   A discreet, professional HUD control that lets users & reviewers
+   preview the automatic mode, Diwali, Christmas, or off states.
+   ============================================================ */
+.seasonal-hud-control {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.seasonal-hud-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+}
+
+.seasonal-hud-trigger:hover {
+    color: var(--text-main);
+    border-color: var(--accent-cyan);
+    background: rgba(34, 211, 211, 0.1);
+}
+
+[data-season="diwali"] .seasonal-hud-trigger {
+    border-color: rgba(255, 177, 0, 0.4);
+    color: #ffb100;
+    background: rgba(255, 177, 0, 0.08);
+}
+
+[data-season="christmas"] .seasonal-hud-trigger {
+    border-color: rgba(34, 211, 211, 0.4);
+    color: #22d3d3;
+    background: rgba(34, 211, 211, 0.08);
+}
+
+html[data-theme="light"] .seasonal-hud-trigger {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+html[data-theme="light"][data-season="diwali"] .seasonal-hud-trigger {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #b45309;
+}
+
+html[data-theme="light"][data-season="christmas"] .seasonal-hud-trigger {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+}
+
+/* Seasonal Dropdown Menu */
+.seasonal-dropdown-menu {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 6px;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.seasonal-dropdown-menu.is-open {
+    display: flex;
+    animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="light"] .seasonal-dropdown-menu {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.seasonal-option-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.seasonal-option-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+}
+
+html[data-theme="light"] .seasonal-option-btn {
+    color: #475569;
+}
+
+html[data-theme="light"] .seasonal-option-btn:hover {
+    background: #f1f5f9;
+    color: #090d16;
+}
+
+.seasonal-option-btn.is-active {
+    background: rgba(255, 177, 0, 0.15);
+    color: #ffb100;
+    font-weight: 700;
+}
+
+[data-season="christmas"] .seasonal-option-btn.is-active {
+    background: rgba(34, 211, 211, 0.15);
+    color: #22d3d3;
+}
+
+html[data-theme="light"][data-season="diwali"] .seasonal-option-btn.is-active {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+html[data-theme="light"][data-season="christmas"] .seasonal-option-btn.is-active {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+/* ============================================================
+   5. ACCESSIBILITY — PREFERS-REDUCED-MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    #seasonalAtmosphereCanvas {
+        display: none !important;
+    }
+    .diya-flame-icon::before,
+    .diya-flame-icon::after,
+    .snowflake-micro-icon,
+    .viewfinder-wrapper::before,
+    .timeline-item.revealed .keyframe-marker,
+    .hero-content h1 {
+        animation: none !important;
+    }
+    .festive-sparkle-particle {
+        display: none !important;
+    }
+}

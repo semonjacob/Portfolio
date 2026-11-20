@@ -17,6 +17,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+    <!-- Early theme init to prevent flash of wrong theme -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('portfolio_theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <style>
         /* ===== THEME VARIABLES (Consistent with Portfolio) ===== */
         :root {
@@ -34,6 +48,22 @@
             --font-heading: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* High-Contrast Light Mode Studio Theme Variables */
+        html[data-theme="light"],
+        body.theme-light {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-elevated: #f1f5f9;
+            --accent-pink: #d91b65;
+            --accent-cyan: #0284c7;
+            --accent-amber: #b45309;
+            --accent-red: #dc2626;
+            --text-main: #090d16;
+            --text-muted: #334155;
+            --text-dim: #64748b;
+            --border-color: #cbd5e1;
         }
 
         * {

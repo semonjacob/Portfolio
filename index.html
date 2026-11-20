@@ -19,22 +19,67 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles/seasonal-themes.css">
+
+    <!-- Early theme init to prevent flash of wrong theme or season -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('portfolio_theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+
+                // Early seasonal theme detection (Nov -> diwali, Dec -> christmas, else -> none)
+                var seasonOverride = sessionStorage.getItem('portfolio_season_override') || localStorage.getItem('portfolio_season_override');
+                var season = 'none';
+                if (seasonOverride && (seasonOverride === 'diwali' || seasonOverride === 'christmas' || seasonOverride === 'none')) {
+                    season = seasonOverride;
+                } else {
+                    var m = new Date().getMonth();
+                    if (m === 10) season = 'diwali';
+                    else if (m === 11) season = 'christmas';
+                }
+                document.documentElement.setAttribute('data-season', season);
+            } catch (e) {}
+        })();
+    </script>
 
     <style>
-        /* ===== CSS VARIABLES & THEME ===== */
+        /* ===== THEME VARIABLES (Edit Suite Concept) ===== */
         :root {
-            --bg-dark: #0e0e14;
-            --bg-card: #15161f;
-            --bg-elevated: #1e1f2b;
+            --bg-dark: #0a0b10;
+            --bg-card: #13141d;
+            --bg-elevated: #1a1c29;
             --accent-pink: #ff2e7e;
             --accent-cyan: #22d3d3;
             --accent-amber: #ffb100;
+            --accent-red: #ff334b;
             --text-main: #f4f2ec;
             --text-muted: #8b8896;
+            --text-dim: #5a5768;
             --border-color: rgba(255, 255, 255, 0.1);
             --font-heading: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* High-Contrast Light Mode Studio Theme Variables */
+        html[data-theme="light"],
+        body.theme-light {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-elevated: #f1f5f9;
+            --accent-pink: #d91b65;
+            --accent-cyan: #0284c7;
+            --accent-amber: #b45309;
+            --accent-red: #dc2626;
+            --text-main: #090d16;
+            --text-muted: #334155;
+            --text-dim: #64748b;
+            --border-color: #cbd5e1;
         }
 
         /* Reset & Base */
@@ -65,7 +110,7 @@
         }
 
         /* Typography */
-        h1, h2, h3, h4 {
+        h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-heading);
             letter-spacing: -0.02em;
             color: var(--text-main);
@@ -438,20 +483,20 @@
 
         .btn-primary {
             background: var(--accent-pink);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(255, 46, 126, 0.35);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 46, 126, 0.4);
         }
 
         .btn-primary:hover {
-            background: #e0246c;
+            background: #ff478e;
             transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(255, 46, 126, 0.5);
+            box-shadow: 0 6px 25px rgba(255, 46, 126, 0.6);
         }
 
         .btn-secondary {
-            background: var(--bg-elevated);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
-            border-color: var(--border-color);
+            border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
@@ -460,7 +505,7 @@
             transform: translateY(-2px);
         }
 
-        /* Profile Photo Frame */
+        /* Profile Photo Frame (Strict Uncropped Full-Frame Auto-Resize) */
         .profile-frame-container {
             position: relative;
             text-align: center;
@@ -469,28 +514,28 @@
         .profile-frame {
             position: relative;
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
             margin: 0 auto;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 35px rgba(34, 211, 211, 0.25);
-            background: #0d1117;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid rgba(255, 46, 126, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 46, 126, 0.2);
+            background: #0d0e15;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
         }
 
         .profile-frame:hover {
             transform: scale(1.015);
-            box-shadow: 0 0 45px rgba(34, 211, 211, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(34, 211, 211, 0.35);
+            border-color: var(--accent-cyan);
         }
 
         .profile-frame img {
             width: 100%;
             height: auto;
-            max-height: 80vh;
+            max-height: 75vh;
             object-fit: contain;
             display: block;
-            filter: contrast(105%) brightness(100%);
             transition: opacity 0.2s ease;
         }
 
@@ -499,13 +544,14 @@
             position: absolute;
             bottom: 12px;
             right: 12px;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(10, 11, 16, 0.85);
             color: var(--accent-cyan);
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 3px;
-            border: 1px solid var(--accent-cyan);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(34, 211, 211, 0.3);
+            backdrop-filter: blur(6px);
         }
 
         .autofocus-reticle {
@@ -515,7 +561,7 @@
             transform: translate(-50%, -50%);
             width: 60px;
             height: 60px;
-            border: 1px dashed rgba(34, 211, 211, 0.6);
+            border: 1px dashed rgba(34, 211, 211, 0.4);
             pointer-events: none;
         }
         .autofocus-reticle::after {
@@ -726,16 +772,16 @@
         }
 
         .mm-node-card:hover {
-            border-color: #22d3ee;
+            border-color: var(--accent-cyan);
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(34, 211, 211, 0.2);
-            background: #111827;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(34, 211, 211, 0.25);
+            background: #141b26;
         }
 
         .mm-node-card.active-step {
             border-color: #10b981 !important;
-            background: rgba(16, 185, 129, 0.15) !important;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.35) !important;
+            background: rgba(16, 185, 129, 0.12) !important;
+            box-shadow: 0 0 22px rgba(16, 185, 129, 0.35) !important;
             transform: scale(1.04);
         }
 
@@ -2358,19 +2404,19 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
             position: relative;
         }
 
         .film-frame-card:hover {
             transform: translateY(-4px);
             border-color: var(--accent-pink);
-            box-shadow: 0 10px 30px rgba(255, 46, 126, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 46, 126, 0.2);
         }
 
         /* Card Header with In-Card User-Controlled Toggle */
         .frame-header {
-            background: #090a0f;
+            background: rgba(10, 11, 16, 0.9);
             padding: 8px 12px;
             display: flex;
             justify-content: space-between;
@@ -2378,7 +2424,7 @@
             font-family: var(--font-mono);
             font-size: 0.7rem;
             color: var(--text-muted);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             gap: 8px;
         }
 
@@ -2497,6 +2543,7 @@
             aspect-ratio: 16/9;
             background: var(--bg-elevated);
             overflow: hidden;
+            cursor: pointer;
         }
 
         .frame-thumbnail-wrapper img {
@@ -2544,8 +2591,8 @@
             top: 10px;
             right: 10px;
             z-index: 6;
-            background: rgba(0, 0, 0, 0.88);
-            border: 1px solid var(--accent-pink);
+            background: rgba(10, 11, 16, 0.88);
+            border: 1px solid rgba(255, 51, 75, 0.6);
             color: #ffffff;
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -2557,7 +2604,7 @@
             gap: 6px;
             letter-spacing: 0.5px;
             pointer-events: none;
-            box-shadow: 0 0 12px rgba(255, 46, 126, 0.5);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
             animation: fadeInRec 0.25s ease;
         }
 
@@ -2565,8 +2612,8 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: #ef4444;
-            box-shadow: 0 0 6px #ef4444;
+            background: var(--accent-red);
+            box-shadow: 0 0 8px var(--accent-red);
             animation: recBlink 1s infinite;
         }
 
@@ -2593,10 +2640,10 @@
             bottom: 30px;
             right: 30px;
             z-index: 9999;
-            background: rgba(9, 10, 15, 0.95);
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 8px 32px rgba(34, 211, 211, 0.25);
-            color: #ffffff;
+            background: rgba(13, 17, 23, 0.96);
+            border: 1px solid rgba(34, 211, 211, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(34, 211, 211, 0.2);
+            color: var(--text-main);
             font-family: var(--font-mono);
             font-size: 0.8rem;
             padding: 12px 20px;
@@ -2604,7 +2651,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
@@ -2617,8 +2664,8 @@
         }
 
         .hud-toast-banner.is-off {
-            border-color: var(--accent-amber);
-            box-shadow: 0 8px 32px rgba(255, 177, 0, 0.25);
+            border-color: rgba(255, 46, 126, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 46, 126, 0.2);
         }
 
         .play-overlay-btn {
@@ -2626,15 +2673,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 46, 126, 0.85);
-            color: #fff;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 46, 126, 0.9);
+            color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             border: none;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 46, 126, 0.6);
@@ -2657,21 +2704,22 @@
         .medium-pill {
             display: inline-block;
             font-family: var(--font-mono);
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             font-weight: 700;
             padding: 3px 8px;
-            border-radius: 3px;
+            border-radius: 4px;
             margin-bottom: 10px;
             align-self: flex-start;
         }
 
-        .pill-video { background: rgba(255, 46, 126, 0.2); color: var(--accent-pink); border: 1px solid var(--accent-pink); }
-        .pill-ai { background: rgba(34, 211, 211, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-        .pill-graphic { background: rgba(255, 177, 0, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+        .pill-video { background: rgba(255, 46, 126, 0.15); color: var(--accent-pink); border: 1px solid rgba(255, 46, 126, 0.3); }
+        .pill-ai { background: rgba(34, 211, 211, 0.15); color: var(--accent-cyan); border: 1px solid rgba(34, 211, 211, 0.3); }
+        .pill-graphic { background: rgba(255, 177, 0, 0.15); color: var(--accent-amber); border: 1px solid rgba(255, 177, 0, 0.3); }
 
         .frame-title {
             font-size: 1.2rem;
             font-weight: 700;
+            color: #ffffff;
             margin-bottom: 6px;
         }
 
@@ -2684,7 +2732,7 @@
 
         .frame-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: #d1d5db;
             line-height: 1.5;
             flex-grow: 1;
         }
@@ -2694,14 +2742,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0b0e14;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: #0d1117;
+            border: 1px solid rgba(34, 211, 211, 0.25);
             border-radius: 8px;
             padding: 12px 18px;
             margin-bottom: 24px;
             flex-wrap: wrap;
             gap: 12px;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
         }
 
         .rack-presets-group {
@@ -2713,7 +2760,7 @@
         .rack-preset-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-main);
+            color: #ffffff;
             font-family: var(--font-mono);
             font-size: 0.72rem;
             font-weight: 700;
@@ -2724,10 +2771,10 @@
         }
 
         .rack-preset-btn:hover, .rack-preset-btn.active {
-            background: rgba(16, 185, 129, 0.2);
-            border-color: #10b981;
-            color: #34d399;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+            background: rgba(34, 211, 211, 0.2);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(34, 211, 211, 0.35);
         }
 
         .channel-strips-grid {
@@ -2737,28 +2784,28 @@
         }
 
         .channel-strip-card {
-            background: #090c10;
+            background: #0d1117;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 18px;
             position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .channel-strip-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 8px 25px rgba(34, 211, 211, 0.15);
+            border-color: rgba(34, 211, 211, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .channel-strip-card.solo-active {
-            border-color: #22d3ee !important;
-            box-shadow: 0 0 30px rgba(34, 211, 211, 0.3) !important;
-            background: #0b111a;
+            border-color: var(--accent-cyan) !important;
+            box-shadow: 0 0 25px rgba(34, 211, 211, 0.35) !important;
+            background: rgba(13, 27, 42, 0.9);
         }
 
         .channel-strip-card.muted-active {
-            opacity: 0.45;
-            filter: grayscale(70%);
+            opacity: 0.4;
+            filter: grayscale(80%);
         }
 
         .strip-header {
@@ -2778,11 +2825,11 @@
             font-family: var(--font-mono);
             font-size: 0.65rem;
             font-weight: 800;
-            background: #111827;
+            background: rgba(255, 255, 255, 0.08);
             color: var(--accent-amber);
             padding: 3px 6px;
             border-radius: 3px;
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            border: 1px solid rgba(255, 177, 0, 0.3);
         }
 
         .strip-name {
@@ -2799,17 +2846,17 @@
             font-size: 0.78rem;
             font-weight: 800;
             color: var(--accent-cyan);
-            background: rgba(34, 211, 211, 0.1);
+            background: rgba(34, 211, 211, 0.12);
             padding: 2px 8px;
             border-radius: 4px;
-            border: 1px solid rgba(34, 211, 211, 0.25);
+            border: 1px solid rgba(34, 211, 211, 0.3);
         }
 
         .spectrum-canvas-wrapper {
             position: relative;
             width: 100%;
             height: 65px;
-            background: #040608;
+            background: #06090e;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 4px;
             overflow: hidden;
@@ -2828,10 +2875,10 @@
             gap: 12px;
             align-items: center;
             margin-bottom: 14px;
-            background: #0d1117;
+            background: rgba(255, 255, 255, 0.03);
             padding: 8px 12px;
             border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         /* Stereo LED VU Meter */
@@ -2839,7 +2886,7 @@
             display: flex;
             gap: 4px;
             height: 38px;
-            background: #000;
+            background: #05070b;
             padding: 3px;
             border-radius: 3px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2856,13 +2903,13 @@
             width: 100%;
             height: 3px;
             border-radius: 1px;
-            background: #1f2937;
-            transition: background 0.1s ease;
+            background: rgba(255, 255, 255, 0.08);
+            transition: opacity 0.1s ease;
         }
 
-        .vu-led-dot.led-green { background: #10b981; box-shadow: 0 0 4px #10b981; }
-        .vu-led-dot.led-yellow { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
-        .vu-led-dot.led-red { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+        .vu-led-dot.led-green { background: #10b981; box-shadow: 0 0 4px rgba(16, 185, 129, 0.6); }
+        .vu-led-dot.led-yellow { background: #f59e0b; box-shadow: 0 0 4px rgba(245, 158, 11, 0.6); }
+        .vu-led-dot.led-red { background: #ef4444; box-shadow: 0 0 5px rgba(239, 68, 68, 0.7); }
 
         /* Custom Studio Fader */
         .fader-container {
@@ -2923,7 +2970,7 @@
             background: #083344;
             color: #22d3ee;
             border-color: #22d3ee;
-            box-shadow: 0 0 10px rgba(34, 211, 211, 0.4);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
         }
 
         .btn-mute:hover, .btn-mute.active {
@@ -3094,64 +3141,578 @@
             background: #090a0f;
         }
 
-        /* ===== MODALS ===== */
+        /* ===== REUSABLE CINEMA STUDIO VIDEO MODAL COMPONENT ===== */
+        .cinema-modal-backdrop,
         .modal-backdrop {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
+            background: rgba(4, 6, 12, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 99999;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .cinema-modal-backdrop.is-open,
+        .cinema-modal-backdrop.active,
         .modal-backdrop.active {
-            display: flex;
+            display: flex !important;
+            opacity: 1;
         }
 
+        body.cinema-modal-open {
+            overflow: hidden !important;
+        }
+
+        .cinema-modal-frame,
         .modal-box {
-            background: var(--bg-card);
-            border: 1px solid var(--accent-pink);
-            border-radius: 8px;
-            max-width: 800px;
             width: 100%;
+            max-width: 1040px;
+            max-height: 94vh;
+            background: #0b0e17;
+            border: 1px solid rgba(34, 211, 211, 0.4);
+            border-radius: 10px;
+            box-shadow: 0 0 60px rgba(34, 211, 211, 0.2), 0 25px 60px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             position: relative;
-            padding: 24px;
-            box-shadow: 0 0 40px rgba(255, 46, 126, 0.3);
+            transform: scale(0.96) translateY(12px);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
 
-        .modal-close-btn {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
+        .cinema-modal-backdrop.is-open .cinema-modal-frame,
+        .modal-backdrop.active .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Vertical Aspect Mode (Reels, TikToks, YouTube Shorts) */
+        .cinema-modal-frame.aspect-vertical {
+            max-width: 440px;
+        }
+
+        /* Modal Topbar / NLE Monitor Slate */
+        .cinema-modal-topbar {
+            padding: 12px 18px;
+            background: #111522;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            user-select: none;
+        }
+
+        .cinema-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 1.5rem;
+        }
+
+        .cinema-tally-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .cinema-rec-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ef4444;
+            animation: cinemaPulse 1.2s infinite ease-in-out;
+        }
+
+        @keyframes cinemaPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.85); }
+        }
+
+        .cinema-divider {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cinema-timecode {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cinema-client-badge {
+            background: rgba(34, 211, 211, 0.1);
+            border: 1px solid rgba(34, 211, 211, 0.25);
+            color: var(--accent-cyan);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .cinema-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cinema-format-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .cinema-control-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
-        .modal-close-btn:hover {
-            color: var(--accent-pink);
+        .cinema-control-btn:hover {
+            background: var(--accent-cyan);
+            color: #0b0e17;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(34, 211, 211, 0.35);
         }
 
-        .modal-video-container {
+        .cinema-close-btn {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .cinema-close-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .cinema-esc-badge {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: inherit;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+
+        /* Media Stage */
+        .cinema-stage-container {
+            position: relative;
             width: 100%;
-            aspect-ratio: 16/9;
-            margin-top: 16px;
+            background: #000000;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .modal-video-container iframe {
+        .cinema-modal-frame.aspect-vertical .cinema-stage-container {
+            aspect-ratio: 9 / 16;
+            max-height: calc(88vh - 140px);
+        }
+
+        .cinema-media-wrapper {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+        }
+
+        .cinema-media-wrapper iframe,
+        .cinema-media-wrapper video {
+            width: 100%;
+            height: 100%;
             border: none;
+            outline: none;
+            object-fit: contain;
+            background: #000000;
+        }
+
+        /* Buffering / Loading Overlay */
+        .cinema-loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #111522 0%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            z-index: 5;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cinema-loading-overlay.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .cinema-spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(34, 211, 211, 0.2);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: cinemaSpin 0.8s linear infinite;
+        }
+
+        @keyframes cinemaSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .cinema-loading-text {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+        }
+
+        /* Cinema Corner Crop Marks */
+        .cinema-corner-mark {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+            z-index: 6;
+            opacity: 0.4;
+        }
+
+        .cinema-corner-mark.top-left {
+            top: 10px;
+            left: 10px;
+            border-top: 2px solid var(--accent-cyan);
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .cinema-corner-mark.top-right {
+            top: 10px;
+            right: 10px;
+            border-top: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        .cinema-corner-mark.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-bottom: 2px solid var(--accent-cyan);
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .cinema-corner-mark.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        /* Bottombar / Metadata Slate */
+        .cinema-modal-bottombar {
+            padding: 14px 20px;
+            background: #0d1019;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cinema-info-block {
+            flex: 1 1 300px;
+            min-width: 240px;
+        }
+
+        .cinema-project-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+
+        .cinema-project-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            max-height: 3.2em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cinema-actions-block {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .cinema-shortcuts-legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .cinema-key-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .cinema-key-hint kbd {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1px 4px;
+            border-radius: 3px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .cinema-copy-btn {
+            background: rgba(34, 211, 211, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .cinema-copy-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 15px rgba(34, 211, 211, 0.35);
+        }
+
+        /* HIGH-CONTRAST STUDIO LIGHT MODE ADAPTATION */
+        html[data-theme="light"] .cinema-modal-backdrop,
+        body.theme-light .cinema-modal-backdrop,
+        html[data-theme="light"] .modal-backdrop,
+        body.theme-light .modal-backdrop {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        html[data-theme="light"] .cinema-modal-frame,
+        body.theme-light .cinema-modal-frame,
+        html[data-theme="light"] .modal-box,
+        body.theme-light .modal-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.28);
+        }
+
+        html[data-theme="light"] .cinema-modal-topbar,
+        body.theme-light .cinema-modal-topbar {
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cinema-topbar-left,
+        body.theme-light .cinema-topbar-left {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .cinema-divider,
+        body.theme-light .cinema-divider {
+            color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .cinema-timecode,
+        body.theme-light .cinema-timecode {
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .cinema-client-badge,
+        body.theme-light .cinema-client-badge {
+            background: rgba(217, 27, 101, 0.1);
+            border-color: rgba(217, 27, 101, 0.3);
+            color: #d91b65;
+        }
+
+        html[data-theme="light"] .cinema-format-badge,
+        body.theme-light .cinema-format-badge {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cinema-control-btn,
+        body.theme-light .cinema-control-btn {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cinema-control-btn:hover,
+        body.theme-light .cinema-control-btn:hover {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .cinema-close-btn,
+        body.theme-light .cinema-close-btn {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.3);
+            color: #dc2626;
+        }
+
+        html[data-theme="light"] .cinema-close-btn:hover,
+        body.theme-light .cinema-close-btn:hover {
+            background: #dc2626;
+            color: #ffffff;
+            border-color: #dc2626;
+        }
+
+        html[data-theme="light"] .cinema-esc-badge,
+        body.theme-light .cinema-esc-badge {
+            background: rgba(220, 38, 38, 0.08);
+            border-color: rgba(220, 38, 38, 0.25);
+            color: #dc2626;
+        }
+
+        html[data-theme="light"] .cinema-modal-bottombar,
+        body.theme-light .cinema-modal-bottombar {
+            background: #f8fafc;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        html[data-theme="light"] .cinema-project-title,
+        body.theme-light .cinema-project-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cinema-project-desc,
+        body.theme-light .cinema-project-desc {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .cinema-shortcuts-legend,
+        body.theme-light .cinema-shortcuts-legend {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .cinema-key-hint,
+        body.theme-light .cinema-key-hint {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .cinema-key-hint kbd,
+        body.theme-light .cinema-key-hint kbd {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cinema-copy-btn,
+        body.theme-light .cinema-copy-btn {
+            background: rgba(2, 132, 199, 0.1);
+            border-color: rgba(2, 132, 199, 0.3);
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .cinema-copy-btn:hover,
+        body.theme-light .cinema-copy-btn:hover {
+            background: #0284c7;
+            color: #ffffff;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .cinema-modal-backdrop {
+                padding: 10px;
+            }
+            .cinema-modal-topbar {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .cinema-format-badge,
+            .cinema-btn-label {
+                display: none;
+            }
+            .cinema-shortcuts-legend {
+                display: none;
+            }
+            .cinema-modal-bottombar {
+                padding: 10px 14px;
+            }
+            .cinema-project-title {
+                font-size: 0.95rem;
+            }
+            .cinema-project-desc {
+                font-size: 0.78rem;
+            }
         }
 
         /* DIWALI REELS GRID & MOBILE STYLING */
@@ -3390,9 +3951,9 @@
                 min-height: 44px;
                 padding: 10px 16px;
                 border-radius: 6px;
-                background: linear-gradient(135deg, rgba(255, 46, 126, 0.18), rgba(34, 211, 211, 0.18));
-                border: 1px solid var(--accent-pink);
-                color: var(--text-main);
+                background: rgba(255, 46, 126, 0.14);
+                border: 1px solid rgba(255, 46, 126, 0.45);
+                color: var(--accent-pink);
                 font-family: var(--font-mono);
                 font-size: 0.8rem;
                 font-weight: 700;
@@ -3402,9 +3963,9 @@
             }
 
             .drawer-cta-btn:hover {
-                background: linear-gradient(135deg, rgba(255, 46, 126, 0.35), rgba(34, 211, 211, 0.35));
-                box-shadow: 0 0 15px rgba(255, 46, 126, 0.35);
-                color: #fff;
+                background: var(--accent-pink);
+                box-shadow: 0 0 20px rgba(255, 46, 126, 0.4);
+                color: #ffffff;
             }
         }
 
@@ -3441,13 +4002,989 @@
             }
         }
 
-        @media prefers-reduced-motion: reduce {
-            * {
-                animation: none !important;
-                transition: none !important;
+        /* ===== HIGH-CONTRAST LIGHT MODE STUDIO THEME OVERRIDES ===== */
+        html[data-theme="light"] {
+            background-color: #f8fafc;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] body {
+            background-color: #f8fafc;
+            color: #090d16;
+        }
+
+        /* Focus Ring in Light Mode */
+        html[data-theme="light"] a:focus-visible,
+        html[data-theme="light"] button:focus-visible,
+        html[data-theme="light"] input:focus-visible,
+        html[data-theme="light"] textarea:focus-visible {
+            outline: 2px solid #0284c7;
+            outline-offset: 3px;
+        }
+
+        /* Scrubber & Header */
+        html[data-theme="light"] .scrubber-header {
+            background: rgba(255, 255, 255, 0.94);
+            border-bottom: 1px solid #cbd5e1;
+            box-shadow: 0 2px 14px rgba(15, 23, 42, 0.06);
+        }
+
+        html[data-theme="light"] .scrubber-track-container {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        html[data-theme="light"] .nav-brand {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .nav-link {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .nav-link span.timecode {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .nav-link:hover,
+        html[data-theme="light"] .nav-link.active {
+            color: #d91b65;
+            background: rgba(217, 27, 101, 0.08);
+        }
+
+        html[data-theme="light"] .nav-link.active span.timecode {
+            color: #d91b65;
+        }
+
+        html[data-theme="light"] .mobile-toggle {
+            background: rgba(2, 132, 199, 0.08);
+            border-color: rgba(2, 132, 199, 0.35);
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .mobile-toggle:hover {
+            background: rgba(2, 132, 199, 0.16);
+            color: #0284c7;
+            border-color: #0284c7;
+        }
+
+        /* Hero Section & Camera Viewfinder */
+        html[data-theme="light"] .viewfinder-wrapper {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 0);
+        }
+
+        html[data-theme="light"] .corner-bracket {
+            border-color: #0284c7;
+        }
+
+        html[data-theme="light"] .viewfinder-osd {
+            color: #0284c7;
+            border-bottom: 1px dashed rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .hero-content h1 {
+            background: linear-gradient(135deg, #090d16 45%, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html[data-theme="light"] .hero-title-tag {
+            color: #d91b65;
+        }
+
+        html[data-theme="light"] .hero-bio {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .btn-secondary {
+            background: #f1f5f9;
+            color: #090d16;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .btn-secondary:hover {
+            border-color: #0284c7;
+            color: #0284c7;
+            background: #e0f2fe;
+        }
+
+        html[data-theme="light"] .profile-frame {
+            background: #ffffff;
+            border-color: rgba(217, 27, 101, 0.35);
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+        }
+
+        html[data-theme="light"] .frame-badge {
+            background: rgba(255, 255, 255, 0.92);
+            color: #0284c7;
+            border-color: rgba(2, 132, 199, 0.35);
+        }
+
+        html[data-theme="light"] .tool-rack {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        html[data-theme="light"] .tool-rack-title {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .tool-pill {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .tool-pill:hover {
+            border-color: #0284c7;
+            color: #0284c7;
+            background: #ffffff;
+        }
+
+        /* About Section & Vectorscope & Workflow Mindmap */
+        html[data-theme="light"] .about-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .about-text {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .workflow-mindmap-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .mindmap-top-bar {
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        html[data-theme="light"] .mindmap-title-tag {
+            color: #059669;
+        }
+
+        html[data-theme="light"] .mm-node-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+        }
+
+        html[data-theme="light"] .mm-node-card:hover,
+        html[data-theme="light"] .mm-node-card.active-step {
+            background: #ffffff;
+            border-color: #059669 !important;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.18) !important;
+        }
+
+        html[data-theme="light"] .mm-node-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .mm-node-sub {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .mm-step-num {
+            background: rgba(180, 83, 9, 0.12);
+            color: #b45309;
+            border-color: rgba(180, 83, 9, 0.3);
+        }
+
+        html[data-theme="light"] .mindmap-inspector-box {
+            background: #f8fafc;
+            border-color: #059669;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .inspector-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .inspector-desc {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .inspector-pill {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .vectorscope-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .vectorscope-header-bar {
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        html[data-theme="light"] .vs-hud-telemetry {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .vs-hud-item .hud-lbl {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .vs-hud-item .hud-val {
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .vs-preset-btn {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .vs-preset-btn:hover,
+        html[data-theme="light"] .vs-preset-btn.active {
+            background: rgba(2, 132, 199, 0.12);
+            border-color: #0284c7;
+            color: #0284c7;
+        }
+
+        /* Work Experience & Timeline */
+        html[data-theme="light"] .timeline-hud-control {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            border-left: 3px solid #0284c7;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .hud-status {
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .timeline-track-line {
+            background: #cbd5e1;
+        }
+
+        html[data-theme="light"] .keyframe-marker {
+            background: #ffffff;
+            border-color: #d91b65;
+            box-shadow: 0 0 10px rgba(217, 27, 101, 0.25);
+        }
+
+        html[data-theme="light"] .timeline-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .timeline-card:hover {
+            border-color: #0284c7;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.12);
+        }
+
+        html[data-theme="light"] .timeline-role {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .timeline-org {
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .timeline-timecode {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .timeline-list {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .timeline-list li::before {
+            color: #d91b65;
+        }
+
+        html[data-theme="light"] .directors-log-toggle {
+            background: rgba(180, 83, 9, 0.08);
+            border-color: #b45309;
+            color: #b45309;
+        }
+
+        html[data-theme="light"] .directors-log-toggle:hover {
+            background: rgba(180, 83, 9, 0.16);
+        }
+
+        html[data-theme="light"] .directors-log-box {
+            background: #fffbeb;
+            border-left: 3px solid #b45309;
+            color: #78350f;
+        }
+
+        html[data-theme="light"] .directors-log-box i {
+            color: #b45309;
+        }
+
+        html[data-theme="light"] .hidden-author-card {
+            background: #fffbeb;
+            border-color: #d97706;
+        }
+
+        html[data-theme="light"] .author-location {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .author-bio-quote {
+            background: #f1f5f9;
+            border-left-color: #b45309;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .author-stat-box {
+            background: #ffffff;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .author-stat-box .stat-num {
+            color: #b45309;
+        }
+
+        html[data-theme="light"] .author-stat-box .stat-lbl {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .skill-tag-pill {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .timeline-link-btn {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .timeline-link-btn:hover {
+            border-color: #0284c7;
+            color: #0284c7;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+        }
+
+        /* Projects Section, Contact Sheet & Film Cards */
+        html[data-theme="light"] .contact-sheet-container {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .sprocket-holes {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .sprocket {
+            background: #94a3b8;
+            border-color: #64748b;
+        }
+
+        html[data-theme="light"] .org-folder-bar {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .org-folder-btn {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .org-folder-btn:hover,
+        html[data-theme="light"] .org-folder-btn.active {
+            background: #d91b65;
+            border-color: #d91b65;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(217, 27, 101, 0.25);
+        }
+
+        html[data-theme="light"] .folder-path-display {
+            background: #f1f5f9;
+            color: #0284c7;
+            border-left-color: #0284c7;
+        }
+
+        html[data-theme="light"] .projects-deck-toolbar {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .filter-btn {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .filter-btn:hover,
+        html[data-theme="light"] .filter-btn.active {
+            color: #0284c7;
+            border-color: #0284c7;
+            background: rgba(2, 132, 199, 0.1);
+        }
+
+        html[data-theme="light"] .hover-autoplay-deck-control {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .autoplay-deck-label {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .master-autoplay-toggle-btn {
+            background: rgba(2, 132, 199, 0.1);
+            border-color: #0284c7;
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .master-autoplay-toggle-btn.is-disabled {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .master-autoplay-toggle-btn.is-disabled .mat-track {
+            background: #cbd5e1;
+        }
+
+        html[data-theme="light"] .master-autoplay-toggle-btn.is-disabled .mat-thumb {
+            background: #64748b;
+        }
+
+        html[data-theme="light"] .film-frame-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        html[data-theme="light"] .film-frame-card:hover {
+            border-color: #d91b65;
+            box-shadow: 0 10px 30px rgba(217, 27, 101, 0.12);
+        }
+
+        html[data-theme="light"] .frame-header {
+            background: #f1f5f9;
+            border-bottom-color: #cbd5e1;
+            color: #475569;
+        }
+
+        html[data-theme="light"] .frame-number {
+            color: #b45309;
+        }
+
+        html[data-theme="light"] .frame-org-badge {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .frame-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .frame-client {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .frame-desc {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .card-autoplay-toggle {
+            background: rgba(5, 150, 105, 0.1);
+            border-color: rgba(5, 150, 105, 0.45);
+            color: #059669;
+        }
+
+        html[data-theme="light"] .card-autoplay-toggle.is-disabled {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .card-autoplay-toggle.is-disabled .cat-switch {
+            background: #cbd5e1;
+        }
+
+        html[data-theme="light"] .card-autoplay-toggle.is-disabled .cat-thumb {
+            background: #64748b;
+        }
+
+        html[data-theme="light"] .showcase-grid-layout {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .showcase-header-text h3 {
+            color: #059669;
+        }
+
+        html[data-theme="light"] .showcase-header-text p {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .bfaf-caption-footer {
+            background: #f1f5f9;
+            border-top: 1px solid #cbd5e1;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .diwali-nostalgia-studio {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .diwali-main-title {
+            color: #059669;
+        }
+
+        html[data-theme="light"] .diwali-sub-title {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .diwali-nostalgia-card {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .diwali-nostalgia-card:hover {
+            background: #ffffff;
+            border-color: #059669;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.16);
+        }
+
+        html[data-theme="light"] .diwali-card-label {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .dual-video-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        html[data-theme="light"] .dual-card-body {
+            background: #f8fafc;
+        }
+
+        html[data-theme="light"] .dual-card-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .dual-card-desc {
+            color: #334155;
+        }
+
+        /* Studio Mixer Console & Skills */
+        html[data-theme="light"] .studio-rack-controls {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .rack-preset-btn {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .rack-preset-btn:hover,
+        html[data-theme="light"] .rack-preset-btn.active {
+            background: rgba(2, 132, 199, 0.12);
+            border-color: #0284c7;
+            color: #0284c7;
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.2);
+        }
+
+        html[data-theme="light"] .channel-strip-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .channel-strip-card:hover {
+            border-color: #0284c7;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.12);
+        }
+
+        html[data-theme="light"] .channel-strip-card.solo-active {
+            background: #f0f9ff !important;
+            border-color: #0284c7 !important;
+        }
+
+        html[data-theme="light"] .strip-number {
+            color: #b45309;
+            background: rgba(180, 83, 9, 0.1);
+            border-color: rgba(180, 83, 9, 0.3);
+        }
+
+        html[data-theme="light"] .strip-name {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .strip-controls-row {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .spectrum-canvas-wrapper {
+            background: #0f172a;
+            border-color: #cbd5e1;
+        }
+
+        html[data-theme="light"] .studio-fader {
+            background: #cbd5e1;
+            border-color: #94a3b8;
+        }
+
+        html[data-theme="light"] .strip-btn {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+
+        /* Credentials Section */
+        html[data-theme="light"] .cred-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        html[data-theme="light"] .cred-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .cred-meta {
+            color: #0284c7;
+        }
+
+        /* Contact Section & Footer */
+        html[data-theme="light"] .contact-form-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] .form-label {
+            color: #090d16;
+            font-weight: 700;
+        }
+
+        html[data-theme="light"] .form-input,
+        html[data-theme="light"] .form-textarea {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .form-input:focus,
+        html[data-theme="light"] .form-textarea:focus {
+            background: #ffffff;
+            border-color: #0284c7;
+        }
+
+        html[data-theme="light"] .social-box {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .social-box:hover {
+            border-color: #0284c7;
+            background: #f0f9ff;
+            color: #0284c7;
+        }
+
+        html[data-theme="light"] .footer {
+            background: #f1f5f9;
+            border-top: 1px solid #cbd5e1;
+            color: #334155;
+        }
+
+        /* Modals & Dialogs */
+        html[data-theme="light"] .drive-modal-container {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        html[data-theme="light"] .drive-modal-header {
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        html[data-theme="light"] .drive-modal-title {
+            color: #090d16;
+        }
+
+        html[data-theme="light"] .drive-modal-close-btn {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .drive-modal-close-btn:hover {
+            color: #d91b65;
+        }
+
+        html[data-theme="light"] .drive-modal-footer {
+            background: #f8fafc;
+            border-top: 1px solid #cbd5e1;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .modal-box {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #090d16;
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        html[data-theme="light"] .modal-close-btn {
+            color: #475569;
+        }
+
+        html[data-theme="light"] .hud-toast-banner {
+            background: #ffffff;
+            border-color: #0284c7;
+            color: #090d16;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.15);
+        }
+
+        /* Mobile Drawer in Light Mode */
+        @media (max-width: 900px) {
+            html[data-theme="light"] .nav-menu {
+                background: #ffffff !important;
+                border-left: 1px solid #cbd5e1 !important;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15) !important;
             }
-            .letterbox-overlay {
-                display: none !important;
+
+            html[data-theme="light"] .nav-drawer-backdrop {
+                background: rgba(15, 23, 42, 0.45);
+            }
+
+            html[data-theme="light"] .drawer-header {
+                border-bottom: 1px solid #cbd5e1 !important;
+            }
+
+            html[data-theme="light"] .drawer-brand {
+                color: #090d16 !important;
+            }
+
+            html[data-theme="light"] .drawer-close {
+                background: #f1f5f9 !important;
+                border: 1px solid #cbd5e1 !important;
+                color: #090d16 !important;
+            }
+
+            html[data-theme="light"] .drawer-close:hover {
+                border-color: #d91b65 !important;
+                color: #d91b65 !important;
+            }
+
+            html[data-theme="light"] .drawer-meta-tag {
+                background: rgba(2, 132, 199, 0.08) !important;
+                color: #0284c7 !important;
+                border-left-color: #0284c7 !important;
+            }
+
+            html[data-theme="light"] .nav-menu .nav-link {
+                background: #f8fafc;
+                border: 1px solid #cbd5e1;
+                color: #090d16;
+            }
+
+            html[data-theme="light"] .nav-menu .nav-link:hover,
+            html[data-theme="light"] .nav-menu .nav-link.active {
+                background: rgba(217, 27, 101, 0.08);
+                border-color: #d91b65;
+                color: #d91b65;
+            }
+
+            html[data-theme="light"] .nav-menu .nav-link .timecode {
+                background: #f1f5f9;
+                color: #475569;
+            }
+
+            html[data-theme="light"] .nav-menu .nav-link.active .timecode {
+                background: rgba(217, 27, 101, 0.12);
+                color: #d91b65;
+            }
+
+            html[data-theme="light"] .drawer-footer {
+                border-top: 1px solid #cbd5e1 !important;
+            }
+
+            html[data-theme="light"] .drawer-specs {
+                color: #475569;
+            }
+
+            html[data-theme="light"] .drawer-specs .spec-badge {
+                background: #f1f5f9;
+                border: 1px solid #cbd5e1;
+            }
+
+            html[data-theme="light"] .drawer-cta-btn {
+                background: #d91b65;
+                border-color: #d91b65;
+                color: #ffffff;
+            }
+
+            html[data-theme="light"] .drawer-cta-btn:hover {
+                background: #be123c;
+                color: #ffffff;
+            }
+        }
+
+        /* ===== FLOATING BALLOON THEME TOGGLE (NO BACKGROUND, NO BUTTON, PURE FLOATING CELESTIAL ICON) ===== */
+        .floating-balloon-theme-toggle {
+            position: fixed;
+            bottom: 40px;
+            right: 32px;
+            z-index: 99998;
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            padding: 6px !important;
+            margin: 0 !important;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: balloonFloat 6s ease-in-out infinite;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+        }
+
+        .floating-balloon-theme-toggle:focus-visible {
+            outline: 2px dashed var(--accent-cyan) !important;
+            outline-offset: 8px;
+            border-radius: 50%;
+        }
+
+        /* Balloon Floating Drift Animation */
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            20% {
+                transform: translateY(-16px) translateX(6px) rotate(4deg);
+            }
+            45% {
+                transform: translateY(-8px) translateX(-5px) rotate(-3deg);
+            }
+            70% {
+                transform: translateY(-22px) translateX(7px) rotate(3deg);
+            }
+            85% {
+                transform: translateY(-10px) translateX(-2px) rotate(-1deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* Hover & Tap bouncy balloon physics */
+        .floating-balloon-theme-toggle:hover {
+            animation-play-state: paused;
+            transform: scale(1.18) translateY(-8px);
+        }
+
+        .floating-balloon-theme-toggle:active {
+            transform: scale(0.92) translateY(2px);
+        }
+
+        .balloon-celestial-wrapper {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .floating-balloon-theme-toggle:hover .balloon-celestial-wrapper {
+            transform: rotate(12deg) scale(1.05);
+        }
+
+        .balloon-celestial-wrapper.balloon-spin {
+            animation: celestialSpin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes celestialSpin {
+            0% { transform: scale(0.8) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        .balloon-icon {
+            display: block;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Moon styling (Edit Suite Dark Mode) - Warm Golden Crescent with Moonlight Glow */
+        .balloon-icon.moon-icon {
+            filter: drop-shadow(0 0 14px rgba(255, 177, 0, 0.85)) drop-shadow(0 0 28px rgba(255, 177, 0, 0.4));
+        }
+
+        /* Sun styling (Studio Light Mode) - Azure Blue Star with Solar Glow */
+        .balloon-icon.sun-icon {
+            filter: drop-shadow(0 0 14px rgba(2, 132, 199, 0.7)) drop-shadow(0 0 24px rgba(56, 189, 248, 0.35));
+        }
+
+        /* Balloon Tether String */
+        .balloon-string-svg {
+            display: block;
+            margin-top: -3px;
+            pointer-events: none;
+            opacity: 0.75;
+            animation: stringSway 6s ease-in-out infinite;
+            transform-origin: top center;
+            transition: stroke 0.3s ease;
+        }
+
+        @keyframes stringSway {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-7deg) translateX(-1px);
+            }
+            70% {
+                transform: rotate(7deg) translateX(1px);
+            }
+        }
+
+        /* Responsive positioning */
+        @media (max-width: 600px) {
+            .floating-balloon-theme-toggle {
+                bottom: 24px;
+                right: 18px;
+            }
+            .balloon-celestial-wrapper {
+                width: 42px;
+                height: 42px;
+            }
+            .balloon-icon {
+                width: 38px !important;
+                height: 38px !important;
+            }
+            .balloon-string-svg {
+                height: 20px;
             }
         }
     </style>
@@ -3476,9 +5013,11 @@
                 <span>SEMON_JACOB // CUTS</span>
             </a>
 
-            <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
-                <i class="fas fa-bars"></i> <span>MENU</span>
-            </button>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                    <i class="fas fa-bars"></i> <span>MENU</span>
+                </button>
+            </div>
 
             <!-- Backdrop Scrim for Mobile Drawer -->
             <div class="nav-drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
@@ -3533,6 +5072,9 @@
                     <div class="osd-status">
                         <span class="rec-indicator"><i class="fas fa-circle"></i> REC</span>
                         <span id="liveTimecode">TC 00:00:12:04</span>
+                        <!-- Seasonal OSD Badges (Automatic: Diwali in Nov, Christmas in Dec) -->
+                        <span class="seasonal-osd-badge diwali-osd" title="November Diwali Festive Season Active"><span class="diya-flame-icon"></span> FESTIVE GRADE // DIWALI SPECIAL</span>
+                        <span class="seasonal-osd-badge christmas-osd" title="December Holiday Christmas Season Active"><span class="snowflake-micro-icon"></span> HOLIDAY CUT // DECEMBER SPECIAL</span>
                     </div>
                     <div class="osd-status">
                         <span>RAW 4K 60FPS</span>
@@ -3568,7 +5110,7 @@
                                 <img id="profileImg" src="assets/images/semon_profile.png" alt="Semon Jacob - Multimedia Creator" onerror="this.src='assets/images/profile.jpg'">
                             </picture>
                             <div class="autofocus-reticle"></div>
-                            <div class="frame-badge" id="profileBadge"><i class="fas fa-camera"></i> RAW 4K // LOG-C</div>
+                            <div class="frame-badge" id="profileBadge"><i class="fas fa-expand-alt"></i> 1:1 SQUARE // UNCROPPED</div>
                         </div>
                     </div>
                 </div>
@@ -4651,7 +6193,7 @@
                     <div class="strip-header">
                         <div class="strip-title-group">
                             <span class="strip-number">CH 04</span>
-                            <span class="strip-name"><i class="fas fa-camera" style="color:var(--accent-pink);"></i> Videography & Camera Ops</span>
+                            <span class="strip-name"><i class="fas fa-camera" style="color:#10b981;"></i> Videography & Camera Ops</span>
                         </div>
                         <div class="strip-gain-badge" id="gainReadout_3">88% [ +3.0 dB ]</div>
                     </div>
@@ -4691,7 +6233,7 @@
                     <div class="strip-header">
                         <div class="strip-title-group">
                             <span class="strip-number">CH 05</span>
-                            <span class="strip-name"><i class="fas fa-sliders-h" style="color:var(--accent-cyan);"></i> Audio Editing & Sound FX</span>
+                            <span class="strip-name"><i class="fas fa-sliders-h" style="color:#a855f7;"></i> Audio Editing & Sound FX</span>
                         </div>
                         <div class="strip-gain-badge" id="gainReadout_4">85% [ +2.0 dB ]</div>
                     </div>
@@ -4731,7 +6273,7 @@
                     <div class="strip-header">
                         <div class="strip-title-group">
                             <span class="strip-number">CH 06</span>
-                            <span class="strip-name"><i class="fas fa-compress" style="color:var(--accent-amber);"></i> Post-Production & Workflows</span>
+                            <span class="strip-name"><i class="fas fa-compress" style="color:#3b82f6;"></i> Post-Production & Workflows</span>
                         </div>
                         <div class="strip-gain-badge" id="gainReadout_5">90% [ +4.0 dB ]</div>
                     </div>
@@ -4877,13 +6419,93 @@
         <p>© 2026 SEMON JACOB. EDIT SUITE PORTFOLIO // ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <!-- VIDEO POPUP MODAL -->
-    <div class="modal-backdrop" id="videoModal">
-        <div class="modal-box">
-            <button class="modal-close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
-            <h3 id="modalVideoTitle" style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 1.1rem;"></h3>
-            <div class="modal-video-container">
-                <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- ============================================================ -->
+    <!-- REUSABLE CINEMA STUDIO VIDEO MODAL COMPONENT -->
+    <!-- ============================================================ -->
+    <div class="cinema-modal-backdrop modal-backdrop" id="cinemaVideoModal" role="dialog" aria-modal="true" aria-labelledby="cinemaModalTitle" style="display: none;">
+        <div class="cinema-modal-frame modal-box" id="cinemaModalFrame">
+            <!-- Modal NLE Monitor Topbar -->
+            <div class="cinema-modal-topbar">
+                <div class="cinema-topbar-left">
+                    <span class="cinema-tally-indicator">
+                        <span class="cinema-rec-dot"></span>
+                        <span class="cinema-rec-text">REC 24 FPS</span>
+                    </span>
+                    <span class="cinema-divider">/</span>
+                    <span class="cinema-timecode" id="cinemaModalTimecode">00:00:00:00</span>
+                    <span class="cinema-divider">/</span>
+                    <span class="cinema-client-badge" id="cinemaModalClient">PINE LABS</span>
+                </div>
+                <div class="cinema-topbar-right">
+                    <span class="cinema-format-badge" id="cinemaModalFormat">4K DCI // PRORES</span>
+                    <button class="cinema-control-btn" id="cinemaFullscreenBtn" type="button" title="Toggle Fullscreen (F)" aria-label="Toggle Fullscreen">
+                        <i class="fas fa-expand"></i>
+                        <span class="cinema-btn-label">FULLSCREEN</span>
+                    </button>
+                    <a class="cinema-control-btn cinema-ext-link" id="cinemaExternalBtn" href="#" target="_blank" rel="noopener noreferrer" title="Open source media in new tab" aria-label="Open source media">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="cinema-btn-label">SOURCE</span>
+                    </a>
+                    <button class="cinema-close-btn modal-close-btn" id="cinemaCloseBtn" type="button" title="Close playback (Esc)" aria-label="Close playback modal">
+                        <kbd class="cinema-esc-badge">ESC</kbd>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Media Stage Container (Auto switches 16:9 or 9:16) -->
+            <div class="cinema-stage-container modal-video-container" id="cinemaStageContainer">
+                <!-- Loading State / Raster HUD -->
+                <div class="cinema-loading-overlay" id="cinemaLoadingOverlay">
+                    <div class="cinema-spinner"></div>
+                    <div class="cinema-loading-text"><i class="fas fa-satellite-dish"></i> BUFFERING CINEMA FEED...</div>
+                </div>
+
+                <!-- Video Elements Container -->
+                <div class="cinema-media-wrapper" id="cinemaMediaWrapper">
+                    <!-- Dynamic Iframe for YouTube / Google Drive / Web Streams -->
+                    <iframe id="cinemaIframe" 
+                            src="" 
+                            title="Cinema Video Player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen 
+                            style="display: none;">
+                    </iframe>
+
+                    <!-- HTML5 Direct Video Element for MP4/WebM files -->
+                    <video id="cinemaVideoElement" 
+                           playsinline 
+                           controls 
+                           preload="metadata" 
+                           style="display: none;">
+                    </video>
+                </div>
+
+                <!-- Aspect Ratio Overlay Guides (subtle corner marks) -->
+                <div class="cinema-corner-mark top-left"></div>
+                <div class="cinema-corner-mark top-right"></div>
+                <div class="cinema-corner-mark bottom-left"></div>
+                <div class="cinema-corner-mark bottom-right"></div>
+            </div>
+
+            <!-- Modal Bottom Control & Info Bar -->
+            <div class="cinema-modal-bottombar">
+                <div class="cinema-info-block">
+                    <h3 class="cinema-project-title" id="cinemaModalTitle">PROJECT TITLE</h3>
+                    <p class="cinema-project-desc" id="cinemaModalDesc">Project synopsis, production role, and color grading details.</p>
+                </div>
+                <div class="cinema-actions-block">
+                    <div class="cinema-shortcuts-legend">
+                        <span class="cinema-key-hint"><kbd>SPACE</kbd> Play/Pause</span>
+                        <span class="cinema-key-hint"><kbd>F</kbd> Fullscreen</span>
+                        <span class="cinema-key-hint"><kbd>M</kbd> Mute</span>
+                        <span class="cinema-key-hint"><kbd>ESC</kbd> Exit</span>
+                    </div>
+                    <button class="cinema-copy-btn" id="cinemaCopyLinkBtn" type="button" title="Copy shareable link to this project">
+                        <i class="fas fa-share-alt"></i>
+                        <span>SHARE</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -5153,6 +6775,7 @@
                     toast.classList.remove('show');
                 }, 2600);
             }
+            window.showHudToast = showHudToast;
 
             // Stop all active hover video previews across all cards
             function stopAllHoverPreviews() {
@@ -5273,11 +6896,11 @@
 
                 if (filtered.length === 0) {
                     projectGrid.innerHTML = `
-                        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: 6px;">
+                        <div style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); border-radius: 6px;">
                             <i class="fas fa-folder-open" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 12px;"></i>
-                            <h4 style="font-family: var(--font-mono); color: var(--accent-amber); font-size: 1rem;">NO MEDIA FRAMES IN THIS FOLDER</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-                                Add files or video links inside <code>/assets/projects/${currentSelectedOrg}/${currentSelectedTrack}/</code> or edit <code>/data/projects.json</code> to display project items here.
+                            <h4 style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 1rem;">EMPTY FOLDER // NO PROJECTS YET</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; max-width: 480px; margin-left: auto; margin-right: auto;">
+                                Add files inside /assets/projects/${currentSelectedOrg.toLowerCase()}/ or edit /data/projects.json to populate this directory automatically.
                             </p>
                         </div>
                     `;
@@ -5426,16 +7049,26 @@
                 newPlayBtns.forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        const videoUrl = btn.getAttribute('data-video');
-                        const title = btn.getAttribute('data-title');
-                        const videoModal = document.getElementById('videoModal');
-                        const modalIframe = document.getElementById('modalIframe');
-                        const modalVideoTitle = document.getElementById('modalVideoTitle');
+                        const card = btn.closest('.film-frame-card');
+                        const videoUrl = btn.getAttribute('data-video') || (card && card.getAttribute('data-video-url'));
+                        const title = btn.getAttribute('data-title') || (card && card.querySelector('.frame-title') ? card.querySelector('.frame-title').textContent : 'PROJECT VIDEO');
+                        const client = card && card.querySelector('.frame-client') ? card.querySelector('.frame-client').textContent.replace(/^.*DIR:\s*/i, '').trim() : '';
+                        const desc = card && card.querySelector('.frame-desc') ? card.querySelector('.frame-desc').textContent : '';
+                        const track = card && card.querySelector('.medium-pill') ? card.querySelector('.medium-pill').textContent : '';
+                        const extUrl = card && card.querySelector('.frame-ext-wrapper a') ? card.querySelector('.frame-ext-wrapper a').getAttribute('href') : '';
+                        const thumbImg = card && card.querySelector('.frame-thumbnail-wrapper img') ? card.querySelector('.frame-thumbnail-wrapper img').getAttribute('src') : '';
 
-                        if (videoUrl && videoModal && modalIframe) {
-                            modalIframe.src = videoUrl + (videoUrl.includes('?') ? '&autoplay=1' : '?autoplay=1');
-                            if (modalVideoTitle) modalVideoTitle.textContent = title || 'VIDEO PLAYER';
-                            videoModal.classList.add('active');
+                        if (typeof window.openVideoModal === 'function') {
+                            window.openVideoModal({
+                                videoUrl: videoUrl,
+                                title: title,
+                                client: client,
+                                description: desc,
+                                track: track,
+                                externalUrl: extUrl,
+                                thumbnail: thumbImg,
+                                triggerEl: btn
+                            });
                         }
                     });
                 });
@@ -5505,39 +7138,418 @@
                 });
             }
 
-            // Video Modal
-            const videoModal = document.getElementById('videoModal');
-            const modalIframe = document.getElementById('modalIframe');
-            const modalVideoTitle = document.getElementById('modalVideoTitle');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const playBtns = document.querySelectorAll('.play-overlay-btn');
+            // ============================================================
+            // REUSABLE CINEMA STUDIO VIDEO MODAL CONTROLLER
+            // ============================================================
+            const cinemaModal = document.getElementById('cinemaVideoModal');
+            const cinemaFrame = document.getElementById('cinemaModalFrame');
+            const cinemaIframe = document.getElementById('cinemaIframe');
+            const cinemaVideo = document.getElementById('cinemaVideoElement');
+            const cinemaLoading = document.getElementById('cinemaLoadingOverlay');
+            const cinemaTimecodeEl = document.getElementById('cinemaModalTimecode');
+            const cinemaClientEl = document.getElementById('cinemaModalClient');
+            const cinemaFormatEl = document.getElementById('cinemaModalFormat');
+            const cinemaTitleEl = document.getElementById('cinemaModalTitle');
+            const cinemaDescEl = document.getElementById('cinemaModalDesc');
+            const cinemaExtBtn = document.getElementById('cinemaExternalBtn');
+            const cinemaFullscreenBtn = document.getElementById('cinemaFullscreenBtn');
+            const cinemaCloseBtn = document.getElementById('cinemaCloseBtn');
+            const cinemaCopyBtn = document.getElementById('cinemaCopyLinkBtn');
 
-            playBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const videoUrl = btn.getAttribute('data-video');
-                    const title = btn.getAttribute('data-title');
+            let cinemaTimecodeInterval = null;
+            let cinemaSimulatedSecs = 0;
+            let cinemaLastFocusEl = null;
 
-                    if (videoUrl && videoModal && modalIframe) {
-                        modalIframe.src = videoUrl + (videoUrl.includes('?') ? '&autoplay=1' : '?autoplay=1');
-                        modalVideoTitle.textContent = title || 'VIDEO PLAYER';
-                        videoModal.classList.add('active');
+            function formatSMPTETimecode(totalSeconds) {
+                const hrs = Math.floor(totalSeconds / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = Math.floor(totalSeconds % 60);
+                const frames = Math.floor((totalSeconds % 1) * 24);
+                return (
+                    String(hrs).padStart(2, '0') + ':' +
+                    String(mins).padStart(2, '0') + ':' +
+                    String(secs).padStart(2, '0') + ':' +
+                    String(frames).padStart(2, '0')
+                );
+            }
+
+            function startCinemaTimecode(isHtml5Video) {
+                stopCinemaTimecode();
+                cinemaSimulatedSecs = 0;
+                if (cinemaTimecodeEl) cinemaTimecodeEl.textContent = '00:00:00:00';
+
+                cinemaTimecodeInterval = setInterval(() => {
+                    if (isHtml5Video && cinemaVideo && !cinemaVideo.paused) {
+                        if (cinemaTimecodeEl) cinemaTimecodeEl.textContent = formatSMPTETimecode(cinemaVideo.currentTime || 0);
+                    } else {
+                        cinemaSimulatedSecs += 1 / 24;
+                        if (cinemaTimecodeEl) cinemaTimecodeEl.textContent = formatSMPTETimecode(cinemaSimulatedSecs);
                     }
-                });
-            });
+                }, 1000 / 24);
+            }
 
-            if (closeModalBtn && videoModal) {
-                closeModalBtn.addEventListener('click', () => {
-                    videoModal.classList.remove('active');
-                    if (modalIframe) modalIframe.src = '';
-                });
+            function stopCinemaTimecode() {
+                if (cinemaTimecodeInterval) {
+                    clearInterval(cinemaTimecodeInterval);
+                    cinemaTimecodeInterval = null;
+                }
+            }
 
-                videoModal.addEventListener('click', (e) => {
-                    if (e.target === videoModal) {
-                        videoModal.classList.remove('active');
-                        if (modalIframe) modalIframe.src = '';
+            function resolveVideoSource(rawUrl) {
+                if (!rawUrl) return { type: 'none', url: '', isVertical: false };
+                const trimmed = rawUrl.trim();
+
+                // Direct HTML5 video formats
+                if (/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(trimmed)) {
+                    return { type: 'html5', url: trimmed, isVertical: false };
+                }
+
+                // YouTube Shorts (Vertical 9:16)
+                const ytShortMatch = trimmed.match(/(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]+)/i);
+                if (ytShortMatch && ytShortMatch[1]) {
+                    return {
+                        type: 'iframe',
+                        url: `https://www.youtube-nocookie.com/embed/${ytShortMatch[1]}?autoplay=1&rel=0&modestbranding=1&playsinline=1`,
+                        rawUrl: trimmed,
+                        isVertical: true
+                    };
+                }
+
+                // YouTube Standard / Embed
+                let ytId = null;
+                if (trimmed.includes('youtube.com/embed/')) {
+                    const m = trimmed.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
+                    if (m) ytId = m[1];
+                } else if (trimmed.includes('youtu.be/')) {
+                    const m = trimmed.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+                    if (m) ytId = m[1];
+                } else if (trimmed.includes('youtube.com/watch')) {
+                    const m = trimmed.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+                    if (m) ytId = m[1];
+                }
+
+                if (ytId) {
+                    return {
+                        type: 'iframe',
+                        url: `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`,
+                        rawUrl: `https://www.youtube.com/watch?v=${ytId}`,
+                        isVertical: false
+                    };
+                }
+
+                // Google Drive video preview
+                if (trimmed.includes('drive.google.com') || /^[a-zA-Z0-9_-]{25,}$/.test(trimmed)) {
+                    let driveId = trimmed;
+                    if (trimmed.includes('/file/d/')) {
+                        const m = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                        if (m) driveId = m[1];
+                    } else if (trimmed.includes('id=')) {
+                        const m = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+                        if (m) driveId = m[1];
+                    }
+                    return {
+                        type: 'iframe',
+                        url: `https://drive.google.com/file/d/${driveId}/preview`,
+                        rawUrl: `https://drive.google.com/file/d/${driveId}/view`,
+                        isVertical: false
+                    };
+                }
+
+                return {
+                    type: 'iframe',
+                    url: trimmed,
+                    rawUrl: trimmed,
+                    isVertical: false
+                };
+            }
+
+            // Expose Reusable Global Open Method
+            window.openVideoModal = function (opts) {
+                if (!opts || !cinemaModal) return;
+                cinemaLastFocusEl = opts.triggerEl || document.activeElement;
+
+                const resolved = resolveVideoSource(opts.videoUrl || opts.url || opts.driveId || '');
+                const title = opts.title || 'PROJECT SHOWREEL';
+                const client = opts.client || opts.organization || 'SEMON JACOB EDIT SUITE';
+                const desc = opts.description || opts.desc || 'High-fidelity cinema and multimedia production master by Semon Jacob.';
+                const track = opts.track || '';
+                const extUrl = opts.externalUrl || resolved.rawUrl || opts.videoUrl || '#';
+                const isVertical = opts.aspect === '9:16' || resolved.isVertical || (opts.title && opts.title.toLowerCase().includes('reel'));
+
+                // Populate Metadata Labels
+                if (cinemaTitleEl) cinemaTitleEl.textContent = title;
+                if (cinemaClientEl) cinemaClientEl.textContent = client.toUpperCase();
+                if (cinemaDescEl) cinemaDescEl.textContent = desc;
+
+                if (cinemaFormatEl) {
+                    if (isVertical) {
+                        cinemaFormatEl.textContent = '9:16 VERTICAL // DCI 4K';
+                    } else if (track.toLowerCase().includes('ai')) {
+                        cinemaFormatEl.textContent = 'AI GENERATIVE // 60 FPS';
+                    } else {
+                        cinemaFormatEl.textContent = '4K DCI // PRORES 422 HQ';
+                    }
+                }
+
+                // External Source Link
+                if (cinemaExtBtn) {
+                    if (extUrl && extUrl !== '#') {
+                        cinemaExtBtn.href = extUrl;
+                        cinemaExtBtn.style.display = 'inline-flex';
+                    } else {
+                        cinemaExtBtn.style.display = 'none';
+                    }
+                }
+
+                // Frame Aspect Ratio
+                if (cinemaFrame) {
+                    if (isVertical) {
+                        cinemaFrame.classList.add('aspect-vertical');
+                    } else {
+                        cinemaFrame.classList.remove('aspect-vertical');
+                    }
+                }
+
+                // Buffering Overlay Animation
+                if (cinemaLoading) {
+                    cinemaLoading.classList.remove('is-hidden');
+                    setTimeout(() => {
+                        cinemaLoading.classList.add('is-hidden');
+                    }, 500);
+                }
+
+                // Render Media Stream
+                if (resolved.type === 'html5') {
+                    if (cinemaIframe) {
+                        cinemaIframe.src = 'about:blank';
+                        cinemaIframe.style.display = 'none';
+                    }
+                    if (cinemaVideo) {
+                        cinemaVideo.style.display = 'block';
+                        cinemaVideo.src = resolved.url;
+                        if (opts.thumbnail) cinemaVideo.poster = opts.thumbnail;
+                        cinemaVideo.currentTime = 0;
+                        cinemaVideo.play().catch(() => {});
+                        startCinemaTimecode(true);
+                    }
+                } else {
+                    if (cinemaVideo) {
+                        cinemaVideo.pause();
+                        cinemaVideo.src = '';
+                        cinemaVideo.style.display = 'none';
+                    }
+                    if (cinemaIframe) {
+                        cinemaIframe.style.display = 'block';
+                        cinemaIframe.src = resolved.url;
+                        startCinemaTimecode(false);
+                    }
+                }
+
+                // Display Modal
+                cinemaModal.style.display = 'flex';
+                void cinemaModal.offsetWidth;
+                cinemaModal.classList.add('is-open');
+                cinemaModal.classList.add('active');
+                document.body.classList.add('cinema-modal-open');
+
+                if (cinemaCloseBtn) cinemaCloseBtn.focus();
+            };
+
+            // Expose Reusable Global Close Method
+            window.closeVideoModal = function () {
+                stopCinemaTimecode();
+
+                if (cinemaIframe) {
+                    cinemaIframe.src = 'about:blank';
+                    cinemaIframe.style.display = 'none';
+                }
+                if (cinemaVideo) {
+                    cinemaVideo.pause();
+                    cinemaVideo.src = '';
+                    cinemaVideo.style.display = 'none';
+                }
+
+                if (cinemaModal) {
+                    cinemaModal.classList.remove('is-open');
+                    cinemaModal.classList.remove('active');
+                    document.body.classList.remove('cinema-modal-open');
+
+                    setTimeout(() => {
+                        if (cinemaModal && !cinemaModal.classList.contains('is-open')) {
+                            cinemaModal.style.display = 'none';
+                        }
+                    }, 260);
+                }
+
+                if (cinemaLastFocusEl && typeof cinemaLastFocusEl.focus === 'function') {
+                    cinemaLastFocusEl.focus();
+                }
+            };
+
+            // Close button and Backdrop listeners
+            if (cinemaCloseBtn) {
+                cinemaCloseBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    window.closeVideoModal();
+                });
+            }
+
+            if (cinemaModal) {
+                cinemaModal.addEventListener('click', (e) => {
+                    if (e.target === cinemaModal) {
+                        window.closeVideoModal();
                     }
                 });
             }
+
+            // Keyboard navigation (Esc, Space, F, M)
+            window.addEventListener('keydown', (e) => {
+                if (!cinemaModal || !cinemaModal.classList.contains('is-open')) return;
+
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    window.closeVideoModal();
+                } else if (e.key === 'f' || e.key === 'F') {
+                    if (cinemaFullscreenBtn) {
+                        e.preventDefault();
+                        cinemaFullscreenBtn.click();
+                    }
+                } else if (e.key === ' ' || e.code === 'Space') {
+                    if (cinemaVideo && cinemaVideo.style.display !== 'none') {
+                        e.preventDefault();
+                        if (cinemaVideo.paused) cinemaVideo.play();
+                        else cinemaVideo.pause();
+                    }
+                } else if (e.key === 'm' || e.key === 'M') {
+                    if (cinemaVideo && cinemaVideo.style.display !== 'none') {
+                        e.preventDefault();
+                        cinemaVideo.muted = !cinemaVideo.muted;
+                        if (typeof window.showHudToast === 'function') {
+                            window.showHudToast(cinemaVideo.muted ? 'AUDIO MUTED' : 'AUDIO UNMUTED', true);
+                        }
+                    }
+                }
+            });
+
+            // Fullscreen toggle
+            if (cinemaFullscreenBtn && cinemaFrame) {
+                cinemaFullscreenBtn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        if (cinemaFrame.requestFullscreen) cinemaFrame.requestFullscreen();
+                        else if (cinemaFrame.webkitRequestFullscreen) cinemaFrame.webkitRequestFullscreen();
+                    } else {
+                        if (document.exitFullscreen) document.exitFullscreen();
+                    }
+                });
+            }
+
+            // Copy Link button
+            if (cinemaCopyBtn) {
+                cinemaCopyBtn.addEventListener('click', () => {
+                    const extUrl = cinemaExtBtn ? cinemaExtBtn.href : window.location.href;
+                    if (navigator.clipboard && extUrl) {
+                        navigator.clipboard.writeText(extUrl).then(() => {
+                            if (typeof window.showHudToast === 'function') {
+                                window.showHudToast('LINK COPIED TO CLIPBOARD', true);
+                            } else {
+                                cinemaCopyBtn.innerHTML = '<i class="fas fa-check"></i> <span>COPIED!</span>';
+                                setTimeout(() => {
+                                    cinemaCopyBtn.innerHTML = '<i class="fas fa-share-alt"></i> <span>SHARE</span>';
+                                }, 2000);
+                            }
+                        }).catch(() => {});
+                    }
+                });
+            }
+
+            // Initial Play button hooks
+            const initialPlayBtns = document.querySelectorAll('.play-overlay-btn');
+            initialPlayBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = btn.closest('.film-frame-card');
+                    const videoUrl = btn.getAttribute('data-video') || (card && card.getAttribute('data-video-url'));
+                    const title = btn.getAttribute('data-title') || (card && card.querySelector('.frame-title') ? card.querySelector('.frame-title').textContent : 'PROJECT VIDEO');
+                    const client = card && card.querySelector('.frame-client') ? card.querySelector('.frame-client').textContent.replace(/^.*DIR:\s*/i, '').trim() : '';
+                    const desc = card && card.querySelector('.frame-desc') ? card.querySelector('.frame-desc').textContent : '';
+                    const track = card && card.querySelector('.medium-pill') ? card.querySelector('.medium-pill').textContent : '';
+                    const extUrl = card && card.querySelector('.frame-ext-wrapper a') ? card.querySelector('.frame-ext-wrapper a').getAttribute('href') : '';
+                    const thumbImg = card && card.querySelector('.frame-thumbnail-wrapper img') ? card.querySelector('.frame-thumbnail-wrapper img').getAttribute('src') : '';
+
+                    window.openVideoModal({
+                        videoUrl: videoUrl,
+                        title: title,
+                        client: client,
+                        description: desc,
+                        track: track,
+                        externalUrl: extUrl,
+                        thumbnail: thumbImg,
+                        triggerEl: btn
+                    });
+                });
+            });
+
+            // Global Project Thumbnail Click Delegation
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.card-autoplay-toggle') || e.target.closest('.frame-ext-wrapper a') || e.target.closest('.cinema-modal-frame')) return;
+
+                // 1. Play overlay button fallback
+                const playBtn = e.target.closest('.play-overlay-btn');
+                if (playBtn) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const card = playBtn.closest('.film-frame-card');
+                    const videoUrl = playBtn.getAttribute('data-video') || (card && card.getAttribute('data-video-url'));
+                    if (videoUrl) {
+                        const title = playBtn.getAttribute('data-title') || (card && card.querySelector('.frame-title') ? card.querySelector('.frame-title').textContent : 'PROJECT VIDEO');
+                        const client = card && card.querySelector('.frame-client') ? card.querySelector('.frame-client').textContent.replace(/^.*DIR:\s*/i, '').trim() : '';
+                        const desc = card && card.querySelector('.frame-desc') ? card.querySelector('.frame-desc').textContent : '';
+                        const track = card && card.querySelector('.medium-pill') ? card.querySelector('.medium-pill').textContent : '';
+                        const extUrl = card && card.querySelector('.frame-ext-wrapper a') ? card.querySelector('.frame-ext-wrapper a').getAttribute('href') : '';
+                        const thumbImg = card && card.querySelector('.frame-thumbnail-wrapper img') ? card.querySelector('.frame-thumbnail-wrapper img').getAttribute('src') : '';
+
+                        window.openVideoModal({
+                            videoUrl: videoUrl,
+                            title: title,
+                            client: client,
+                            description: desc,
+                            track: track,
+                            externalUrl: extUrl,
+                            thumbnail: thumbImg,
+                            triggerEl: playBtn
+                        });
+                    }
+                    return;
+                }
+
+                // 2. Project Card Thumbnail Wrapper
+                const thumbWrapper = e.target.closest('.frame-thumbnail-wrapper');
+                if (thumbWrapper) {
+                    const card = thumbWrapper.closest('.film-frame-card');
+                    const videoUrl = thumbWrapper.getAttribute('data-video-url') || (card && card.getAttribute('data-video-url'));
+                    if (videoUrl) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const title = (card && card.querySelector('.frame-title') ? card.querySelector('.frame-title').textContent : 'PROJECT VIDEO');
+                        const client = card && card.querySelector('.frame-client') ? card.querySelector('.frame-client').textContent.replace(/^.*DIR:\s*/i, '').trim() : '';
+                        const desc = card && card.querySelector('.frame-desc') ? card.querySelector('.frame-desc').textContent : '';
+                        const track = card && card.querySelector('.medium-pill') ? card.querySelector('.medium-pill').textContent : '';
+                        const extUrl = card && card.querySelector('.frame-ext-wrapper a') ? card.querySelector('.frame-ext-wrapper a').getAttribute('href') : '';
+                        const thumbImg = thumbWrapper.querySelector('img') ? thumbWrapper.querySelector('img').getAttribute('src') : '';
+
+                        window.openVideoModal({
+                            videoUrl: videoUrl,
+                            title: title,
+                            client: client,
+                            description: desc,
+                            track: track,
+                            externalUrl: extUrl,
+                            thumbnail: thumbImg,
+                            triggerEl: thumbWrapper
+                        });
+                    }
+                }
+            });
 
             // Contact Form Ajax Submission with Email Delivery to semonjeyakumar@gmail.com
             const contactForm = document.getElementById('contactForm');
@@ -5720,8 +7732,22 @@
             }
         }
 
-        // Global Google Drive Video Stream Player Modal
+        // Global Video Stream Player Modal (Unified Cinema Component)
         function openDriveVideoModal(driveIdOrUrl, videoTitle) {
+            const isReel = (videoTitle && videoTitle.toLowerCase().includes('reel')) || 
+                           (typeof driveIdOrUrl === 'string' && driveIdOrUrl.includes('AiMEFfgYvx8LgkpqkFhEJefKMP3F9Sdw'));
+            if (typeof window.openVideoModal === 'function') {
+                window.openVideoModal({
+                    videoUrl: driveIdOrUrl,
+                    title: videoTitle || 'Pine Labs Corporate Showcase',
+                    client: 'Pine Labs',
+                    track: isReel ? 'Vertical Reel' : 'Corporate Production',
+                    description: 'Direct 4K adaptive video stream from Pine Labs production archives.',
+                    aspect: isReel ? '9:16' : '16:9'
+                });
+                return;
+            }
+
             const modal = document.getElementById('driveStreamModal');
             const iframe = document.getElementById('driveStreamIframe');
             const titleEl = document.getElementById('driveStreamTitle');
@@ -5749,15 +7775,21 @@
         }
 
         function closeDriveVideoModal() {
+            if (typeof window.closeVideoModal === 'function') {
+                window.closeVideoModal();
+            }
             const modal = document.getElementById('driveStreamModal');
             const iframe = document.getElementById('driveStreamIframe');
             if (iframe) iframe.src = 'about:blank';
             if (modal) modal.style.display = 'none';
         }
 
-        // Close Drive Modal on Escape key
+        // Close Modal on Escape key
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeDriveVideoModal();
+            if (e.key === 'Escape') {
+                closeDriveVideoModal();
+                if (typeof window.closeVideoModal === 'function') window.closeVideoModal();
+            }
         });
 
         // ==========================================
@@ -6015,7 +8047,7 @@
                 ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
                 ctx.fillStyle = '#05080c';
                 ctx.fill();
-                ctx.strokeStyle = 'rgba(34, 211, 211, 0.3)';
+                ctx.strokeStyle = 'rgba(34, 211, 238, 0.35)';
                 ctx.lineWidth = 1.5;
                 ctx.stroke();
 
@@ -6084,7 +8116,7 @@
                 ctx.beginPath();
                 ctx.moveTo(center.x, center.y);
                 ctx.lineTo(targetX, targetY);
-                ctx.strokeStyle = mouse.active ? '#22d3ee' : 'rgba(34, 211, 211, 0.4)';
+                ctx.strokeStyle = mouse.active ? '#ff2e7e' : 'rgba(34, 211, 238, 0.5)';
                 ctx.lineWidth = mouse.active ? 2 : 1;
                 ctx.stroke();
 
@@ -6147,7 +8179,7 @@
                 { name: 'Post-Production', gain: 90, solo: false, mute: false, fx: true }
             ];
 
-            // Build VU meter LEDs
+            // Build VU meter LEDs (Green -> Yellow -> Red)
             trackData.forEach((_, trkIdx) => {
                 const vuContainer = document.getElementById(`vuMeter_${trkIdx}`);
                 if (!vuContainer) return;
@@ -6156,10 +8188,8 @@
                     ch.innerHTML = '';
                     for (let i = 7; i >= 0; i--) {
                         const led = document.createElement('div');
-                        let colorClass = 'led-green';
-                        if (i >= 5) colorClass = 'led-yellow';
-                        if (i >= 7) colorClass = 'led-red';
-                        led.className = `vu-led-dot ${colorClass}`;
+                        const colorCls = i >= 6 ? 'led-red' : (i >= 4 ? 'led-yellow' : 'led-green');
+                        led.className = `vu-led-dot ${colorCls}`;
                         led.id = `vuLed_${trkIdx}_${i}`;
                         ch.appendChild(led);
                     }
@@ -6263,16 +8293,10 @@
                         const y = h - barHeight;
 
                         const grad = ctx.createLinearGradient(0, h, 0, 0);
-                        if (b < 12) {
-                            grad.addColorStop(0, '#10b981');
-                            grad.addColorStop(1, '#22d3ee');
-                        } else if (b < 15) {
-                            grad.addColorStop(0, '#22d3ee');
-                            grad.addColorStop(1, '#f59e0b');
-                        } else {
-                            grad.addColorStop(0, '#f59e0b');
-                            grad.addColorStop(1, '#ff2e7e');
-                        }
+                        grad.addColorStop(0, '#10b981');
+                        grad.addColorStop(0.4, '#22d3ee');
+                        grad.addColorStop(0.75, '#f59e0b');
+                        grad.addColorStop(1, '#ff2e7e');
 
                         ctx.fillStyle = grad;
                         ctx.fillRect(x, y, barWidth, barHeight);
@@ -6289,7 +8313,7 @@
                         const waveY = (h / 2) + Math.sin((x * 0.05) + (time * 4) + idx) * (14 * effGain);
                         ctx.lineTo(x, waveY);
                     }
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+                    ctx.strokeStyle = 'rgba(34, 211, 238, 0.45)';
                     ctx.lineWidth = 1.2;
                     ctx.stroke();
 
@@ -6471,5 +8495,174 @@
             </div>
         </div>
     </div>
+
+    <!-- FLOATING BALLOON THEME TOGGLE (NO BACKGROUND, NO BUTTON, PURE FLOATING CELESTIAL ICON) -->
+    <div class="floating-balloon-theme-toggle" 
+         id="floatingThemeToggleBtn" 
+         role="button"
+         tabindex="0"
+         aria-label="Toggle theme: Edit Suite dark or Studio Light"
+         title="Click or touch to toggle theme">
+        <div class="balloon-celestial-wrapper" id="balloonCelestialWrapper">
+            <!-- Moon Icon (Matching Screenshot 2: Golden Warm Crescent Moon) -->
+            <svg class="balloon-icon moon-icon" id="balloonMoonIcon" viewBox="0 0 40 40" width="46" height="46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M26.5 6C17.5 6 10.2 13.2 10.2 22.2C10.2 31.2 17.5 38.5 26.5 38.5C29.6 38.5 32.5 37.6 35 35.8C27.8 34.6 22.2 28.5 22.2 21.2C22.2 13.9 27.8 7.8 35 6.6C32.5 6.1 29.6 6 26.5 6Z" fill="#ffb100"/>
+            </svg>
+            <!-- Sun Icon (Matching Screenshot 1: Azure 8-Point Star with Ring Center) -->
+            <svg class="balloon-icon sun-icon" id="balloonSunIcon" viewBox="0 0 40 40" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: none;">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 2L24.2 8.5L31.8 5.4L30.2 13.4L38 18.2L31.8 23L33.4 31L25.8 28.8L20 35.5L14.2 28.8L6.6 31L8.2 23L2 18.2L9.8 13.4L8.2 5.4L15.8 8.5L20 2ZM20 11.2C15.7 11.2 12.2 14.7 12.2 19C12.2 23.3 15.7 26.8 20 26.8C24.3 26.8 27.8 23.3 27.8 19C27.8 14.7 24.3 11.2 20 11.2ZM20 14C22.76 14 25 16.24 25 19C25 21.76 22.76 24 20 24C17.24 24 15 21.76 15 19C15 16.24 17.24 14 20 14Z" fill="#0284c7"/>
+            </svg>
+        </div>
+        <!-- Whimsical Balloon Tether String -->
+        <svg class="balloon-string-svg" width="12" height="26" viewBox="0 0 12 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path class="balloon-string-path" d="M6 1C6 7 10 11 6 16C2 21 6 23 6 25" stroke="#ffb100" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="2.5 2" />
+        </svg>
+    </div>
+
+    <!-- THEME CONTROLLER SCRIPT -->
+    <script>
+        (function initThemeController() {
+            const floatingBtn = document.getElementById('floatingThemeToggleBtn');
+            const balloonWrapper = document.getElementById('balloonCelestialWrapper');
+            const moonIcon = document.getElementById('balloonMoonIcon');
+            const sunIcon = document.getElementById('balloonSunIcon');
+            const stringPath = document.querySelector('.balloon-string-path');
+
+            function getActiveTheme() {
+                return document.documentElement.getAttribute('data-theme') || 'dark';
+            }
+
+            function applyTheme(theme, showFeedback) {
+                const isLight = theme === 'light';
+                document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+                if (isLight) {
+                    document.body.classList.add('theme-light');
+                } else {
+                    document.body.classList.remove('theme-light');
+                }
+
+                // Update Floating Balloon Icon (Moon for Dark, Sun for Light)
+                if (moonIcon && sunIcon) {
+                    if (isLight) {
+                        moonIcon.style.display = 'none';
+                        sunIcon.style.display = 'block';
+                        if (stringPath) stringPath.setAttribute('stroke', '#0284c7');
+                    } else {
+                        moonIcon.style.display = 'block';
+                        sunIcon.style.display = 'none';
+                        if (stringPath) stringPath.setAttribute('stroke', '#ffb100');
+                    }
+                }
+
+                if (floatingBtn) {
+                    floatingBtn.setAttribute('aria-checked', isLight ? 'true' : 'false');
+                    floatingBtn.title = isLight 
+                        ? 'Current: Studio Light (Click or touch to switch to Edit Suite Dark)' 
+                        : 'Current: Edit Suite Dark (Click or touch to switch to Studio Light)';
+                }
+
+                // Save to localStorage
+                try {
+                    localStorage.setItem('portfolio_theme', theme);
+                } catch (e) {
+                    console.warn('LocalStorage unavailable for theme:', e);
+                }
+
+                // Dispatch HUD feedback toast if requested
+                if (showFeedback && typeof window.showHudToast === 'function') {
+                    window.showHudToast(
+                        isLight ? 'THEME: HIGH-CONTRAST STUDIO LIGHT ENGAGED' : 'THEME: EDIT SUITE DARK MODE ENGAGED', 
+                        !isLight
+                    );
+                }
+            }
+
+            function toggleTheme() {
+                // Balloon spin animation trigger
+                if (balloonWrapper) {
+                    balloonWrapper.classList.remove('balloon-spin');
+                    void balloonWrapper.offsetWidth; // trigger reflow
+                    balloonWrapper.classList.add('balloon-spin');
+                }
+
+                const current = getActiveTheme();
+                const next = current === 'light' ? 'dark' : 'light';
+                applyTheme(next, true);
+            }
+
+            if (floatingBtn) {
+                // Support both Click and Touch with gentle drag detection so it doesn't accidentally toggle when dragged
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let isDragging = false;
+                let hasMoved = false;
+
+                floatingBtn.addEventListener('click', function(e) {
+                    if (!hasMoved) {
+                        toggleTheme();
+                    }
+                    hasMoved = false;
+                });
+
+                floatingBtn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleTheme();
+                    }
+                });
+
+                // Subtle drag physics so user can float the balloon anywhere around the page!
+                function onPointerDown(e) {
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    touchStartX = clientX;
+                    touchStartY = clientY;
+                    isDragging = true;
+                    hasMoved = false;
+                }
+
+                function onPointerMove(e) {
+                    if (!isDragging) return;
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    const dx = clientX - touchStartX;
+                    const dy = clientY - touchStartY;
+                    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+                        hasMoved = true;
+                        floatingBtn.style.right = 'auto';
+                        floatingBtn.style.bottom = 'auto';
+                        floatingBtn.style.left = (clientX - 24) + 'px';
+                        floatingBtn.style.top = (clientY - 24) + 'px';
+                    }
+                }
+
+                function onPointerUp() {
+                    isDragging = false;
+                }
+
+                floatingBtn.addEventListener('touchstart', onPointerDown, { passive: true });
+                window.addEventListener('touchmove', onPointerMove, { passive: true });
+                window.addEventListener('touchend', onPointerUp, { passive: true });
+
+                floatingBtn.addEventListener('mousedown', onPointerDown);
+                window.addEventListener('mousemove', onPointerMove);
+                window.addEventListener('mouseup', onPointerUp);
+            }
+
+            // Sync initial state on load
+            var initialTheme = 'dark';
+            try {
+                var stored = localStorage.getItem('portfolio_theme');
+                if (stored === 'light' || stored === 'dark') {
+                    initialTheme = stored;
+                }
+            } catch (e) {}
+
+            applyTheme(initialTheme, false);
+        })();
+    </script>
+
+    <!-- AUTOMATIC SEASONAL THEME SYSTEM (DIWALI / CHRISTMAS / NORMAL) -->
+    <script src="assets/scripts/seasonal-themes.js"></script>
 </body>
 </html>
